@@ -1,0 +1,15 @@
+{% load static %}
+{% load contact_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+    <h1>Приветос</h1>
+    {% block content %}
+    {% endblock %}
+    {% contact_form %}
+</body>
+</html>
