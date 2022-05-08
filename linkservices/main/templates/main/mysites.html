@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Мои сайты</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Мои сайты</a></li>
+                                <li class="breadcrumb-item active">Список сайтов</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title mb-3">Сайты</h4>
+                            <div class="row mb-2">
+                                <a href="{% url 'add-site' %}">
+                                    <div class="btn btn-secondary">
+                                        Добавить сайт
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Вебсайт</th>
+                                        <th>В каталоге</th>
+                                        <th>Тематика</th>
+                                        <th>Яндекс ИКС</th>
+                                        <th>Статистика</th>
+                                        <th>Стоимость</th>
+                                        <th>Ссылок продано</th>
+                                        <th>Действие</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+                                        <td>www.domensite.com</td>
+                                        <td>
+                                            <span class="text-success">Отображается</span>
+                                        </td>
+
+                                        <td>Эротика 18+</td>
+                                        <td>80</td>
+                                        <td><a href="https://metrika.yandex.ru/dashboard?id=82937383" target="_blank">Яндекс
+                                            статистика</a></td>
+                                        <td>2 000,00 RUB / Месяц</td>
+                                        <td><span
+                                                class="badge bg-success font-size-14 count-links-in-catalog">12 из 15</span>
+                                        </td>
+                                        <td>
+                                            <form name="deletesite" id="del_429" action="deletesite/index.php"
+                                                  method="POST" enctype="multipart/form-data" style="display: inline;">
+                                                <input name="ELEMENT_ID" value="429" hidden="">
+                                                <input name="IBLOCK_ID" value="16" hidden="">
+                                                <a href="#" class="btn btn-primary btn-sm w-md"
+                                                   style="margin-bottom: 15px; margin-top: -7px;" data-bs-toggle="modal"
+                                                   data-bs-target="#staticBackdrop"">Удалить</a>
+                                            </form>
+                                            <a href="/mysites/429/" class="btn btn-primary btn-sm w-md"
+                                               style="margin-bottom: 15px; margin-top: -7px;">Редактировать</a>
+                                        </td>
+
+
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                        <i class="mdi mdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <!-- Static Backdrop Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Требуется подтверждение</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы точно хотите удалить ваш из сайт из нашего сервиса ? :(</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Нет</button>
+                    <button type="button" class="btn btn-primary">Да, хочу удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

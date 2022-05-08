@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'main',
     'users',
     'send_mailing',
+    'telegram',
 
 ]
 

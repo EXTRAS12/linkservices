@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="main-content" id="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- Далее идёт контент -->
+
+
+            <!-- Title -->
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Помощь</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"></li>
+                            </ol>
+                        </div>
+
+                        <div>Помощь / Часто задаваемые вопросы</div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="vertical-nav">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-4">
+                                <div class="nav flex-column nav-pills" role="tablist">
+                                    <a class="nav-link active" id="v-pills-gen-ques-tab" data-bs-toggle="pill"
+                                       href="#v-pills-gen-ques" role="tab">
+                                        <i class="bx bx-help-circle nav-icon d-block mb-2"></i>
+                                        <p class="fw-bold mb-0">Общие вопросы</p>
+                                    </a>
+                                    <a class="nav-link" id="v-pills-token-sale-tab" data-bs-toggle="pill"
+                                       href="#v-pills-token-sale" role="tab">
+                                        <i class="bx bx-receipt nav-icon d-block mb-2"></i>
+                                        <p class="fw-bold mb-0">Вебмастерам</p>
+                                    </a>
+                                    <a class="nav-link" id="v-pills-roadmap-tab" data-bs-toggle="pill"
+                                       href="#v-pills-roadmap" role="tab">
+                                        <i class="bx bx-timer d-block nav-icon mb-2"></i>
+                                        <p class="fw-bold mb-0">Seo специалистам</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-10 col-sm-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="v-pills-gen-ques"
+                                                 role="tabpanel">
+                                                <h4 class="card-title mb-4">Общие вопросы</h4>
+
+                                                <div>
+                                                    <div id="gen-ques-accordion" class="accordion custom-accordion">
+                                                        <div class="mb-3">
+                                                            <a href="#general-collapseOne" class="accordion-list"
+                                                               data-bs-toggle="collapse" aria-expanded="true"
+                                                               aria-controls="general-collapseOne">
+
+                                                                <div>Каким способом сервис передает ссылку на сайт ?
+                                                                </div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+
+                                                            </a>
+
+                                                            <div id="general-collapseOne" class="collapse show"
+                                                                 data-bs-parent="#gen-ques-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">Мы передаем ссылку из нашего сервиса
+                                                                        к сайту с помощью метода SOAP (Simple Object
+                                                                        Access Protocol), он представляет из себя
+                                                                        основанный на XML протокол, предназначенный для
+                                                                        обмена структурированной информацией между
+                                                                        распределенными приложениями поверх существующих
+                                                                        веб протоколов</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#general-collapseTwo"
+                                                               class="accordion-list collapsed"
+                                                               data-bs-toggle="collapse" aria-expanded="false"
+                                                               aria-controls="general-collapseTwo">
+                                                                <div>Какие ссылки можно купить на сайте ?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="general-collapseTwo" class="collapse"
+                                                                 data-bs-parent="#gen-ques-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">Вы можете купить только сквозную
+                                                                        ссылку (сквозная ссылка находится на всех
+                                                                        страницах сайта, а поисковик считает такую
+                                                                        ссылку другом сайта) Ссылку можно купить сроком
+                                                                        от 1 до 12 месяцев</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#general-collapseThree"
+                                                               class="accordion-list collapsed"
+                                                               data-bs-toggle="collapse" aria-expanded="false"
+                                                               aria-controls="general-collapseThree">
+                                                                <div>Как давно мы работаем ?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="general-collapseThree" class="collapse"
+                                                                 data-bs-parent="#gen-ques-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">С момента запуска платформы </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="v-pills-token-sale" role="tabpanel">
+                                                <h4 class="card-title mb-4">Вебмастерам</h4>
+
+                                                <div>
+                                                    <div id="token-accordion" class="accordion custom-accordion">
+                                                        <div class="mb-3">
+                                                            <a href="#token-collapseOne"
+                                                               class="accordion-list collapsed"
+                                                               data-bs-toggle="collapse" aria-expanded="false"
+                                                               aria-controls="token-collapseOne">
+                                                                <div>Как начать работу с биржей ссылок?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="token-collapseOne" class="collapse"
+                                                                 data-bs-parent="#token-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">Для начала работы добавьте свой сайт
+                                                                        в каталог, и установите не обходимый модуль для
+                                                                        работу с сервисом.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#token-collapseTwo" class="accordion-list"
+                                                               data-bs-toggle="collapse" aria-expanded="true"
+                                                               aria-controls="token-collapseTwo">
+
+                                                                <div>Какие комиссии при выводе средств?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+
+                                                            </a>
+
+                                                            <div id="token-collapseTwo" class="collapse show"
+                                                                 data-bs-parent="#token-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">Сервис не взимает комиссий при
+                                                                        выводе средств, средства выводятся в течении 24
+                                                                        часов на вебмани или яндекс деньги.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#token-collapseThree"
+                                                               class="accordion-list collapsed"
+                                                               data-bs-toggle="collapse" aria-expanded="false"
+                                                               aria-controls="token-collapseThree">
+                                                                <div>Какие гарантии?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="token-collapseThree" class="collapse"
+                                                                 data-bs-parent="#token-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">Перед размещением ссылки на вашем
+                                                                        сайте, мы взимаем полную стоимость и покупателя
+                                                                        за нее, эти средства резервируются и будут
+                                                                        выплачены вам в конце месяца при соблюдении
+                                                                        условий.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="v-pills-roadmap" role="tabpanel">
+                                                <h4 class="card-title mb-4">Seo специалистам</h4>
+
+                                                <div>
+                                                    <div id="roadmap-accordion" class="accordion custom-accordion">
+
+                                                        <div class="mb-3">
+                                                            <a href="#roadmap-collapseOne" class="accordion-list"
+                                                               data-bs-toggle="collapse" aria-expanded="true"
+                                                               aria-controls="roadmap-collapseOne">
+
+
+                                                                <div>Как купить сквозную ссылку на сайте?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+
+                                                            </a>
+
+                                                            <div id="roadmap-collapseOne" class="collapse show"
+                                                                 data-bs-parent="#roadmap-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">Зарегистрируйтесь на платформе,
+                                                                        после перейдите в раздел каталог сайтов выберите
+                                                                        сайт подходящей тематики, нажмите кнопку купить
+                                                                        вставьте Вашу ссылку и выберите кол-во месяцев
+                                                                        на которую желаете приобрести размещение.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#roadmap-collapseTwo"
+                                                               class="accordion-list collapsed"
+                                                               data-bs-toggle="collapse" aria-expanded="false"
+                                                               aria-controls="roadmap-collapseTwo">
+                                                                <div>Как продлить ссылку?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="roadmap-collapseTwo" class="collapse"
+                                                                 data-bs-parent="#roadmap-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">Продлить ссылку можно до истечения
+                                                                        срока оплаты, если Вы не успели этого сделать,
+                                                                        то Вам нужно будет заново купить ссылку, в том
+                                                                        случае если на выбранном Вами сайте останется
+                                                                        свободное место. (Кто-то другой может купить
+                                                                        ссылку на сайте, по этому лучше продлить
+                                                                        заранее).</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#roadmap-collapseThree"
+                                                               class="accordion-list collapsed"
+                                                               data-bs-toggle="collapse" aria-expanded="false"
+                                                               aria-controls="roadmap-collapseThree">
+                                                                <div>Как пополнить баланс на сайте?</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="roadmap-collapseThree" class="collapse"
+                                                                 data-bs-parent="#roadmap-accordion">
+                                                                <div class="card-body">
+                                                                    <p class="mb-0">В данный момент автоматическое
+                                                                        пополнение баланса недоступно по техническим
+                                                                        причинам, мы принимаем оплату в ручном
+                                                                        режиме.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end vertical nav -->
+                </div>
+            </div>
+            <!-- end row -->
+
+            <!-- Футер для авторизованного пользователя -->
+
+            <!-- Завершаем контент перед футером -->
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script>
+                    © linkservices.ru
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Все права защищены
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+{% endblock %}

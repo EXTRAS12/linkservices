@@ -1,15 +1,50 @@
 {% load static %}
-{% load contact_tags %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} Linkservices {% endblock title %}</title>
+    <link rel="shortcut icon" href="{% static '/images/favicon.ico' %}">
+
+
+    <!-- Bootstrap Css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css"/>
+    <!-- Icons Css -->
+    <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- App Css-->
+    <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css"/>
 </head>
-<body>
-    <h1>Приветос</h1>
-    {% block content %}
-    {% endblock %}
-    {% contact_form %}
+
+
+<body data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
+
+<div id="layout-wrapper">
+
+{% include 'inc/_header.html' %}
+
+{% block content %}
+
+{% endblock %}
+{% include 'inc/_footer.html' %}
+
+</div>
+
+<script src="{% static '/libs/jquery/jquery.min.js' %}"></script>
+<script src="{% static '/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static '/libs/metismenu/metisMenu.min.js' %}"></script>
+<script src="{% static '/libs/simplebar/simplebar.min.js' %}"></script>
+<script src="{% static '/libs/node-waves/waves.min.js' %}"></script>
+
+<!-- apexcharts -->
+<script src="{% static '/libs/apexcharts/apexcharts.min.js' %}"></script>
+
+<script src="{% static '/js/pages/dashboard.init.js' %}"></script>
+
+<script src="{% static '/js/app.js' %}"></script>
+
 </body>
+
 </html>

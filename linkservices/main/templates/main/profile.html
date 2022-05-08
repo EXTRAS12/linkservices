@@ -1,0 +1,344 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Главная панель</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Главная</a></li>
+                                <li class="breadcrumb-item active">Панель управления</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary bg-soft">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="text-primary p-3">
+                                        <h5 class="text-primary">Добро пожаловать в Linkservices.ru</h5>
+                                    </div>
+                                </div>
+                                <div class="col-5 align-self-end">
+                                    <img src="{% static '/images/profile-img.png' %}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <img src="{% static '/images/users/avatar-1.jpg' %}" alt=""
+                                             class="img-thumbnail rounded-circle">
+                                    </div>
+                                    <h5 class="font-size-15 text-truncate">Ваш ID: 68</h5>
+                                    <p class="text-muted mb-0 text-truncate">@netdurov</p>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <div class="pt-4">
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h5 class="font-size-15">0</h5>
+                                                <p class="text-muted mb-0">Сайты</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5 class="font-size-15">5</h5>
+                                                <p class="text-muted mb-0">Ссылки</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <a href="javascript: void(0);"
+                                               class="btn btn-primary waves-effect waves-light btn-sm">Вывести средства
+                                                <i class="mdi mdi-arrow-right ms-1"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Персональная информация</h4>
+
+
+                            <div class="table-responsive">
+                                <table class="table table-nowrap mb-0">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Ваш email:</th>
+                                        <td>netnet@yandex.ru</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">WMZ-кошелек:</th>
+                                        <td>Z4343477474747</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">ЮMoney-кошелек:</th>
+                                        <td>4100748484838839</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Пароль:</th>
+                                        <td>*********</td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                                </br> <a href="javascript: void(0);"
+                                         class="btn btn-primary waves-effect waves-light btn-sm">Редактировать <i
+                                    class="mdi mdi-arrow-right ms-1"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-8">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card mini-stats-wid">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <p class="text-muted fw-medium">Текущий баланс</p>
+                                            <h4 class="mb-0">1235 RUB</h4>
+                                        </div>
+
+                                        <div class="flex-shrink-0 align-self-center">
+                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                                                            <span class="avatar-title">
+                                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mini-stats-wid">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <p class="text-muted fw-medium">На удержании</p>
+                                            <h4 class="mb-0">2700 RUB</h4>
+                                        </div>
+
+                                        <div class="flex-shrink-0 align-self-center">
+                                            <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
+                                                            <span class="avatar-title rounded-circle bg-primary">
+                                                                <i class="bx bx-archive-in font-size-24"></i>
+                                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mini-stats-wid">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <p class="text-muted fw-medium">Ожидает вывода</p>
+                                            <h4 class="mb-0">17500 RUB</h4>
+                                        </div>
+
+                                        <div class="flex-shrink-0 align-self-center">
+                                            <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
+                                                            <span class="avatar-title rounded-circle bg-primary">
+                                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex flex-wrap">
+                                <h4 class="card-title mb-4">Статистика по счету</h4>
+                                <div class="ms-auto">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Week</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Month</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#">Year</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="stacked-column-chart" class="apex-charts" dir="ltr"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">История операций</h4>
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap mb-0">
+                                    <thead class="table-light">
+                                    <tr>
+
+                                        <th class="align-middle">ID платежа</th>
+                                        <th class="align-middle">Тип платежа</th>
+                                        <th class="align-middle">Дата платежа</th>
+                                        <th class="align-middle">Сумма</th>
+                                        <th class="align-middle">Статус</th>
+                                        <th class="align-middle">Детали платежа</th>
+                                        <th class="align-middle">Действия</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+                                        <td><a href="javascript: void(0);" class="text-body fw-bold">ID 521</a></td>
+                                        <td>На удержании</td>
+                                        <td>
+                                            07 Oct, 2019
+                                        </td>
+                                        <td>
+                                            $400
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>
+                                        </td>
+                                        <td>Куплена ссылка на сайте: http://ero-storitop.com/</td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td><a href="javascript: void(0);" class="text-body fw-bold">ID 520</a></td>
+                                        <td>Попоплнение</td>
+                                        <td>
+                                            07 Oct, 2019
+                                        </td>
+                                        <td>
+                                            $380
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-pill badge-soft-danger font-size-11">Отменен</span>
+                                        </td>
+                                        <td>Платежная система Enot</td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button"
+                                                    class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
+                                                    data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
+                                                Отменить заявку
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td><a href="javascript: void(0);" class="text-body fw-bold">ID 519</a></td>
+                                        <td>Вывод</td>
+                                        <td>
+                                            06 Oct, 2019
+                                        </td>
+                                        <td>
+                                            $384
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>
+                                        </td>
+                                        <td>Webmoney:Z4343477474747</td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td><a href="javascript: void(0);" class="text-body fw-bold">ID 518</a></td>
+                                        <td>Зачисление на баланс</td>
+                                        <td>
+                                            05 Oct, 2019
+                                        </td>
+                                        <td>
+                                            $412
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>
+                                        </td>
+                                        <td>Заказ по ссылке полностью обработан</td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- end table-responsive -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script>
+                    © linkservices.ru
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Все права защищены
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+{% endblock %}
