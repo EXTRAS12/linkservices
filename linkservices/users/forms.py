@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.forms import (UserCreationForm,
                                        AuthenticationForm as DjangoAuthenticationForm, )
 from django.core.exceptions import ValidationError
+from captcha.fields import CaptchaField
+
 
 from users.utils import send_email_for_verify
 
@@ -10,6 +12,8 @@ User = get_user_model()
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
+    captcha = CaptchaField()
+
     def clean(self):
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
@@ -38,6 +42,7 @@ class UserRegisterForm(UserCreationForm):
     password2 = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput(
         attrs={'class': 'form-control'}))
     email = forms.EmailField(label='E-mail', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    captcha = CaptchaField()
 
     class Meta(UserCreationForm.Meta):
         model = User

@@ -26,7 +26,7 @@ class EmailVerify(View):
             user.email_verify = True
             user.save()
             login(request, user)
-            return redirect('home')
+            return redirect('profile')
         return redirect('invalid_verify')
 
     @staticmethod

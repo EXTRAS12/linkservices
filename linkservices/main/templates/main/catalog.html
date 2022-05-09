@@ -3,7 +3,7 @@
 {% block title %}{{ title }} :: {{ block.super }}{% endblock %}
 
 {% block content %}
-
+<div id="layout-wrapper">
 <div class="main-content">
 
 <div class="page-content">
@@ -116,11 +116,12 @@
                                             <span class="badge bg-success font-size-10">{{ item.sold_link }} из {{ item.total_link }}</span>
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-primary btn-sm w-md">Купить</a>
-                                            <a href="#" class="btn btn-outline-info btn-sm"><i
+                                            <a href="{{ item.get_absolute_url }}" class="btn btn-primary btn-sm w-md">Купить</a>
+                                            <a href="{{ item.get_absolute_url }}" class="btn btn-outline-info btn-sm"><i
                                                     class="mdi mdi-web"></i></a>
                                         </td>
                                     </tr>
+
                                     {% endfor %}
 
 
@@ -143,6 +144,6 @@
 <!-- End Page-content -->
 
 </div>
-
+</div>
 
 {% endblock %}

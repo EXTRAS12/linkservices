@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from users.models import User
 
 
@@ -52,3 +53,6 @@ class WebSite(models.Model):
         verbose_name = 'Сайт'
         verbose_name_plural = 'Сайты'
         ordering = ('-created',)
+
+    def get_absolute_url(self):
+        return reverse('buy-link', kwargs={"pk": self.pk})

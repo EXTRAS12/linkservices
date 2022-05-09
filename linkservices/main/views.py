@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView
-from .models import Category, WebSite
+from django.views.generic import TemplateView, ListView, CreateView, DetailView
+from .models import WebSite
 from .forms import AddSiteForm
 
 
@@ -32,9 +32,11 @@ class MyLinks(LoginRequiredMixin, TemplateView):
     template_name = 'main/mylinks.html'
 
 
-class AddLink(LoginRequiredMixin, TemplateView):
-    """Страница добавления ссылок"""
+class BuyLink(LoginRequiredMixin, DetailView):
+    """Страница покупки ссылки"""
+    model = WebSite
     template_name = 'main/add-links.html'
+    context_object_name = 'link'
 
 
 class Help(LoginRequiredMixin, TemplateView):
