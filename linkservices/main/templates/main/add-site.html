@@ -33,16 +33,17 @@
                                         <h4 class="card-title">Добавления сайта</h4>
                                         <p class="card-title-desc">Правильно заполните каждое поле и установите плагин на ваш сайт</p>
 
-                                        <form>
+                                        <form action="" method="post">
+                                            {% csrf_token %}
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
-                                                        <label for="productname">Введите url вашего сайта</label>
-                                                        <input id="productname" name="productname" type="text" class="form-control" placeholder="https://site.com/">
+                                                        <label for="url">Введите url вашего сайта</label>
+                                                        <input id="url" name="url" type="text" class="form-control" placeholder="https://site.com/">
                                                     </div>
 													 <div class="mb-3">
                                                         <label class="control-label">Стоимость ссылки за месяц</label>
-                                                        <input id="manufacturerbrand" name="manufacturerbrand" type="text" class="form-control" placeholder="Введите сумму в рублях">
+                                                        <input id="price" name="price" type="number" class="form-control" placeholder="Введите сумму в рублях">
 
                                                     </div>
                                                  <div class="alert alert-secondary" role="alert">
@@ -55,8 +56,8 @@
                                                         <label class="control-label">Выберите тематику вашего сайта</label>
                                                         <select class="form-control select2">
                                                             <option>Выбрать</option>
-                                                            <option value="FA">Fashion</option>
-                                                            <option value="EL">Electronic</option>
+                                                            <option value="FA">{{ website.category.name }}</option>
+                                                            <option value="FA">Вторая</option>
                                                         </select>
                                                     </div>
 													<div class="mb-3">
