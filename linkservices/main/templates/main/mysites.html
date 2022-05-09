@@ -55,20 +55,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    {% for item in website %}
                                     <tr>
 
-                                        <td>www.domensite.com</td>
+                                        <td>{{ item.url }}</td>
                                         <td>
+                                            {% if item.status_id == 1 %}
                                             <span class="text-success">Отображается</span>
+                                            {% else %}
+                                            <span class="text-success">Не отображается</span>
+                                            {% endif %}
                                         </td>
 
-                                        <td>Эротика 18+</td>
-                                        <td>80</td>
-                                        <td><a href="https://metrika.yandex.ru/dashboard?id=82937383" target="_blank">Яндекс
+                                        <td>{{ item.category }}</td>
+                                        <td>{{ item.yandex_x }}</td>
+                                        <td><a href="{{ item.yandex_stat }}" target="_blank">Яндекс
                                             статистика</a></td>
-                                        <td>2 000,00 RUB / Месяц</td>
+                                        <td>{{ item.price }} RUB / Месяц</td>
                                         <td><span
-                                                class="badge bg-success font-size-14 count-links-in-catalog">12 из 15</span>
+                                                class="badge bg-success font-size-14 count-links-in-catalog">{{ item.sold_link }} из {{ item.total_link }}</span>
                                         </td>
                                         <td>
                                             <form name="deletesite" id="del_429" action="deletesite/index.php"
@@ -77,7 +82,7 @@
                                                 <input name="IBLOCK_ID" value="16" hidden="">
                                                 <a href="#" class="btn btn-primary btn-sm w-md"
                                                    style="margin-bottom: 15px; margin-top: -7px;" data-bs-toggle="modal"
-                                                   data-bs-target="#staticBackdrop"">Удалить</a>
+                                                   data-bs-target="#staticBackdrop">Удалить</a>
                                             </form>
                                             <a href="/mysites/429/" class="btn btn-primary btn-sm w-md"
                                                style="margin-bottom: 15px; margin-top: -7px;">Редактировать</a>
@@ -85,6 +90,7 @@
 
 
                                     </tr>
+                                    {% endfor %}
 
 
                                     </tbody>

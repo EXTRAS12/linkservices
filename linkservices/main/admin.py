@@ -17,7 +17,7 @@ class StatusAdmin(admin.ModelAdmin):
 
 class WebsiteAdmin(admin.ModelAdmin):
     """Сайты"""
-    fields = ('url', 'category', 'status', 'price', 'total_link', 'sold_link', 'yandex_x',
+    fields = ('url', 'user_email', 'category', 'status', 'price', 'total_link', 'sold_link', 'yandex_x',
               'yandex_stat', 'password_yandex', 'created', 'update')
     list_display = ('url', 'category', 'status', 'total_link', 'sold_link', 'yandex_x',
                     'created', 'update')
