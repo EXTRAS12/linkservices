@@ -9,14 +9,14 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'date_joined', 'is_staff')
-    search_fields = ('username', 'email', 'is_staff')
+    list_display = ('username', 'name_telegram', 'email', 'date_joined', 'is_staff',  'email_verify')
+    search_fields = ('username', 'email', 'date_joined', 'is_staff')
     add_fieldsets = (
         (
             None,
             {
                 "classes": ("wide",),
-                "fields": ("username", "email", "password1", "password2"),
+                "fields": ("username",  "email", "password1", "password2"),
             },
         ),
     )

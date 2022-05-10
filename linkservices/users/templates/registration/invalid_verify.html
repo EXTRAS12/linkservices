@@ -1,7 +1,66 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+{% block header %}
+{% endblock %}
 
 {% block content %}
-<h2>Ваша ссылка не корректна, залогиньтесь снова</h2>
-<a href="{% url 'login' %}">Кнопка</a>
+  <body>
+        <div class="account-pages my-5 pt-sm-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mb-5 text-muted">
+                            <p class="mt-3">Ошибка подтверждения</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card">
+
+                            <div class="card-body">
+
+                                <div class="p-2">
+                                    <div class="text-center">
+
+                                        <div class="avatar-md mx-auto">
+                                            <div class="avatar-title rounded-circle bg-light">
+                                                <i class="bx bx-mail-send h1 mb-0 text-primary"></i>
+                                            </div>
+                                        </div>
+                                        <div class="p-2 mt-4">
+                                            <h4>Ошибка</h4>
+                                            <p class="text-muted">Ошибка подтверждения email</p>
+                                            <div class="mt-4">
+                                                <a href="/" class="btn btn-success">Вернуться назад</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center">
+
+                            <p>© <script>document.write(new Date().getFullYear())</script> С любовью <i class="mdi mdi-heart text-danger"></i> Linkservices.ru</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
 
 {% endblock %}

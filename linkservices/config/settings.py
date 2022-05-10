@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-(34vj8s2am*(4ds^jaeg@&*^jrj*asq6#xlk(5ef1&ih3hiev0
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -71,20 +71,20 @@ DATABASES = {
 }
 
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+#     },
+# ]
 
 INTERNAL_IPS = [
     # ...
@@ -116,6 +116,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'frontpage'
+LOGIN_URL = '/login/'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'profile'
 
 # Captcha
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
@@ -124,5 +126,14 @@ CAPTCHA_NOISE_FUNCTIONS = None
 AUTH_USER_MODEL = "users.User"
 
 # Отправка токенов на восстановление пароля в консоль
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'info.moonshine@yandex.ru'
+EMAIL_HOST_PASSWORD = 'makemoney12'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'info.moonshine@yandex.ru'

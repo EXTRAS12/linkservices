@@ -22,6 +22,7 @@ def send_email_for_verify(request, user):
     email = EmailMessage(
         'Verify email',
         message,
-        to=[user.email],
+        'info.moonshine@yandex.ru',
+        [user.email],
     )
     email.send()

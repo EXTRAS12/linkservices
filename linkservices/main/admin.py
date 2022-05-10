@@ -30,3 +30,6 @@ class WebsiteAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Status, StatusAdmin)
 admin.site.register(WebSite, WebsiteAdmin)
+
+admin.site.site_title = 'Вас приветствует linkservices.ru'
+admin.site.site_header = 'Вас приветствует Linkservices.ru'

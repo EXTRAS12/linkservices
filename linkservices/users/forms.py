@@ -12,7 +12,7 @@ User = get_user_model()
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
-    captcha = CaptchaField()
+    captcha = CaptchaField(label='Введите капчу')
 
     def clean(self):
         username = self.cleaned_data.get("username")
@@ -42,8 +42,9 @@ class UserRegisterForm(UserCreationForm):
     password2 = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput(
         attrs={'class': 'form-control'}))
     email = forms.EmailField(label='E-mail', widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    captcha = CaptchaField()
+    captcha = CaptchaField(label='Введите капчу')
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'name_telegram', 'password1', 'password2')
+
