@@ -18,7 +18,7 @@ class MyLoginView(LoginView):
 
 
 class EmailVerify(View):
-    """Подверждения e-mail"""
+    """Подтверждения e-mail"""
     def get(self, request, uidb64, token):
         user = self.get_user(uidb64)
 

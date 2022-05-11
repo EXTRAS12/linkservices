@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="layout-wrapper">
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Мои ссылки</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Мои ссылки</a></li>
+                                <li class="breadcrumb-item active">Список ссылок</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Вебсайт</th>
+                                        <th>Ссылка</th>
+                                        <th>Действует до</th>
+                                        <th>Статус проверки</th>
+                                        <th>Статус модерации</th>
+                                        <th>Стоимость</th>
+                                        <th>Отображается</th>
+                                        <th>Действие</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in link %}
+                                    <tr>
+
+                                        <td>{{ item.url }}</td>
+                                        <td>
+                                            <p class="mb-1"><a href="https://feikiev.com/" target="_blank"
+                                                               style="text-decoration: underline;">{{ item.link }}</a></p>
+                                        </td>
+
+                                        <td>{{ item.valid_date }}</td>
+                                        <td><span class="text-success">{{ item.status_verify }}</span></td>
+                                        <td><span class="text-danger">{{ item.moderation }}</span></td>
+                                        <td>{{ item.price }}</td>
+                                        <td>Новая ссылка</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm w-md"
+                                                    data-bs-toggle="modal" data-bs-target="#withdrawModal"
+                                                    style="margin-left: auto;">Редактировать / Продлить
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                        <i class="mdi mdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+
+
+</div>
+</div>
+
+{% endblock %}

@@ -1,10 +1,6 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, DetailView
-from .models import WebSite
-from .forms import AddSiteForm
+from django.views.generic import TemplateView, ListView, DetailView
+from site_app.models import WebSite
 
 
 class FrontPage(TemplateView):
@@ -15,28 +11,6 @@ class FrontPage(TemplateView):
 class Profile(LoginRequiredMixin, TemplateView):
     """Профиль"""
     template_name = 'main/profile.html'
-
-
-class MySites(LoginRequiredMixin, ListView):
-    """Страница мои сайты"""
-    template_name = 'main/mysites.html'
-    model = WebSite
-    context_object_name = 'website'
-
-    def get_queryset(self):
-        return WebSite.objects.filter(user_email=self.request.user)
-
-
-class MyLinks(LoginRequiredMixin, TemplateView):
-    """Страница мои ссылки"""
-    template_name = 'main/mylinks.html'
-
-
-class BuyLink(LoginRequiredMixin, DetailView):
-    """Страница покупки ссылки"""
-    model = WebSite
-    template_name = 'main/add-links.html'
-    context_object_name = 'link'
 
 
 class Help(LoginRequiredMixin, TemplateView):
@@ -62,15 +36,3 @@ class Plugins(LoginRequiredMixin, TemplateView):
     """Каталог сайтов"""
     template_name = 'main/plugins.html'
 
-
-@login_required
-def add_site(request):
-    """Добавления сайта"""
-    form = AddSiteForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            new_site = form.save(commit=False)
-            new_site.user_email = request.user
-            new_site.save()
-            return redirect('my-sites')
-    return render(request, 'main/add-site.html', locals())

@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66b8436a-f19f-44d9-b808-3fb33211cdf8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/linkservices/templates/admin/base_site.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/main/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/main/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/migrations/0002_user_email_verify.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/templates/registration/confirm_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/templates/registration/confirm_email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/templates/registration/invalid_verify.html" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/templates/registration/invalid_verify.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/templates/registration/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/templates/registration/password_reset_form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/templates/registration/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/templates/registration/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/templates/registration/verify_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/templates/registration/verify_email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkservices/users/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/linkservices/users/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +35,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/extra/Project/linkservices/linkservices/templates/admin",
+    "last_opened_file_path": "/home/extra/Project/TestDomClick",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors"
   }
 }]]></component>

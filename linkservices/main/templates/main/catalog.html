@@ -106,21 +106,8 @@
 
                                     <tbody>
                                     {% for item in website %}
-                                    <tr>
-                                        <td>{{ item.url }}</td>
-                                        <td>{{ item.category }}</td>
-                                        <td>{{ item.yandex_x }}</td>
-                                        <td><a href="{{ item.yandex_stat }}"> Ссылка на яндекс статистику</a></td>
-                                        <td>{{ item.price }} RUB / Месяц</td>
-                                        <td>
-                                            <span class="badge bg-success font-size-10">{{ item.sold_link }} из {{ item.total_link }}</span>
-                                        </td>
-                                        <td>
-                                            <a href="{{ item.get_absolute_url }}" class="btn btn-primary btn-sm w-md">Купить</a>
-                                            <a href="{{ item.get_absolute_url }}" class="btn btn-outline-info btn-sm"><i
-                                                    class="mdi mdi-web"></i></a>
-                                        </td>
-                                    </tr>
+
+                                    {% include 'main/partials/itemSites.html' %}
 
                                     {% endfor %}
 
@@ -137,11 +124,10 @@
             </div>
         </div>
     </div>
-    <!-- end row -->
 
-</div> <!-- container-fluid -->
 </div>
-<!-- End Page-content -->
+</div>
+
 
 </div>
 </div>

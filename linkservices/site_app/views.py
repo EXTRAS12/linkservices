@@ -1,0 +1,59 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, UpdateView
+
+from .forms import AddSiteForm
+from .models import WebSite
+
+
+class MySites(LoginRequiredMixin, ListView):
+    """Страница мои сайты"""
+    template_name = 'site_app/mysites.html'
+    model = WebSite
+    context_object_name = 'website'
+
+    def get_queryset(self):
+        return WebSite.objects.filter(user_email=self.request.user)
+
+
+class UpdateSite(LoginRequiredMixin, UpdateView):
+    """Редактирование сайта"""
+    model = WebSite
+    form_class = AddSiteForm
+    template_name = 'site_app/add-site.html'
+    success_url = '/my-sites/'
+
+    def dispatch(self, request, *args, **kwargs):
+        """ Пользователь может редактировать только свои сайты """
+        obj = self.get_object()
+        if obj.user_email != self.request.user:
+            return redirect(obj)
+        return super(UpdateSite, self).dispatch(request, *args, **kwargs)
+
+
+class DeleteSite(LoginRequiredMixin, UpdateView):
+    """Удаление сайта"""
+    model = WebSite
+    template_name = 'site_app/delete-site.html'
+    success_url = '/my-sites/'
+
+    def dispatch(self, request, *args, **kwargs):
+        """ Пользователь может удалять только свои сайты """
+        obj = self.get_object()
+        if obj.user_email != self.request.user:
+            return redirect(obj)
+        return super(DeleteSite, self).dispatch(request, *args, **kwargs)
+
+
+@login_required
+def add_site(request):
+    """Добавления сайта"""
+    form = AddSiteForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            new_site = form.save(commit=False)
+            new_site.user_email = request.user
+            new_site.save()
+            return redirect('my-sites')
+    return render(request, 'site_app/add-site.html', locals())

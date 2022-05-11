@@ -22,8 +22,9 @@ INSTALLED_APPS = [
     'captcha',
 
     'main',
+    'site_app',
+    'link_app',
     'users',
-    'telegram',
 
 ]
 
