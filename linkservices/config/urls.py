@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('my-sites/', include('site_app.urls')),
     path('my-links/', include('link_app.urls')),
+    path('telega/', include('telegram.urls')),
 
 ]
 

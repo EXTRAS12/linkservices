@@ -49,6 +49,9 @@ class Link(models.Model):
     update = models.DateTimeField(auto_now=True, verbose_name='Изменено')
     user_email = models.ForeignKey(User, on_delete=models.CASCADE,
                                    max_length=100, blank=True, null=True, verbose_name='email заказчика')
+    price_per_item = models.IntegerField(default=0, verbose_name='Цена за 1 месяц')
+    total_price = models.IntegerField(default=0, verbose_name='Общая стоимость')
+    count_month = models.IntegerField(default=1, verbose_name='Количество месяцев')
 
     def __str__(self):
         return self.link
@@ -57,3 +60,10 @@ class Link(models.Model):
         verbose_name = 'Ссылка'
         verbose_name_plural = 'Ссылки'
         ordering = ('-created',)
+
+    def save(self, *args, **kwargs):
+        price_per_item = self.url.price
+        self.price_per_item = price_per_item
+        self.total_price = self.count_month * price_per_item
+        # self.valid_date = int(self.count_month) * timezone.timedelta(days=30) + self.valid_date
+        super(Link, self).save(*args, **kwargs)

@@ -1,4 +1,5 @@
 {% load static %}
+{% load main_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -115,7 +116,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <p class="text-muted">ЗАРЕГИСТРИРОВАНО САЙТОВ:</p>
-                                    <h5>6</h5>
+                                    <h5>{% show_count_site %}</h5>
 
                                 </div>
                             </div>
@@ -135,7 +136,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <p class="text-muted">АРЕНДОВАНО ССЫЛОК:</p>
-                                    <h5>24</h5>
+                                     <h5>{% show_count_link %}</h5>
 
                                 </div>
                             </div>
@@ -155,7 +156,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <p class="text-muted">ЗАРЕГИСТРИРОВАНО ПОЛЬЗОВАТЕЛЕЙ</p>
-                                    <h5>17</h5>
+                                    <h5>{% show_count_user %}</h5>
 
                                 </div>
                             </div>

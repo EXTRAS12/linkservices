@@ -24,13 +24,22 @@ class StatusAdmin(admin.ModelAdmin):
 class WebsiteAdmin(admin.ModelAdmin):
     """Сайты"""
     fields = ('url', 'user_email', 'category', 'status', 'price', 'total_link', 'sold_link', 'yandex_x',
-              'yandex_stat', 'password_yandex', 'created', 'update')
+              'yandex_stat', 'password_yandex', 'bot_id', 'created', 'update')
     list_display = ('url', 'category', 'status', 'total_link', 'sold_link', 'yandex_x',
                     'created', 'update')
     search_fields = ('url', 'category', 'status')
+    list_editable = ['status', ]
     list_filter = ('status', 'category', )
     readonly_fields = ('created', 'update')
     inlines = [LinkOrderAdmin]
+
+    def save_model(self, request, obj, form, change):
+        """Отслеживаем изменение статуса для уведомления пользователя"""
+        update_fields = []
+        if form.has_changed():
+            update_fields = form.changed_data
+        super(WebsiteAdmin, self).save_model(request, obj, form, change)
+        obj.save(update_fields=update_fields)
 
 
 admin.site.register(Category, CategoryAdmin)

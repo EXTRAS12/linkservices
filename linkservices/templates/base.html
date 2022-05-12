@@ -16,6 +16,14 @@
     <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
     <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+
+        <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- IonRange JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 </head>
 
 {% block body %}
@@ -32,7 +40,7 @@
  {% block footer %}
 {% include 'inc/_footer.html' %}
  {% endblock %}
-</body>
+
 {% endblock %}
 
 <script src="{% static '/libs/jquery/jquery.min.js' %}"></script>
@@ -45,6 +53,8 @@
 
 <!-- apexcharts -->
 <script src="{% static '/libs/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static '/js/pages/apexcharts.init.js' %}"></script>
+
 
 <script src="{% static '/js/pages/dashboard.init.js' %}"></script>
 

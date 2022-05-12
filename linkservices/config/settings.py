@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'captcha',
 
     'main',
+    'telegram',
     'site_app',
     'link_app',
     'users',
@@ -138,3 +139,6 @@ EMAIL_HOST_PASSWORD = 'makemoney12'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'info.moonshine@yandex.ru'
+
+#  Телеграм
+API = '2128307617:AAGQMrJuSLNESiIwTfxUsC0Uv2U7MttGwIA'

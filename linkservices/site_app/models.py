@@ -43,6 +43,7 @@ class WebSite(models.Model):
     yandex_x = models.IntegerField(verbose_name='Яндекс Икс', blank=True, null=True)
     yandex_stat = models.CharField(max_length=255, verbose_name='Яндекс статистика')
     password_yandex = models.CharField(max_length=250, verbose_name='Пароль от статистики', blank=True, null=True)
+    bot_id = models.CharField(max_length=100, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено')
     update = models.DateTimeField(auto_now=True, verbose_name='Изменено')
 
@@ -56,3 +57,10 @@ class WebSite(models.Model):
 
     def get_absolute_url(self):
         return reverse('buy-link', kwargs={"pk": self.pk})
+
+    # def save(self, *args, **kwargs):
+    #     price_per_item = self.url.price
+    #     self.price_per_item = price_per_item
+    #     self.total_price = self.count_month * price_per_item
+    #
+    #     super(WebSite, self).save(*args, **kwargs)
