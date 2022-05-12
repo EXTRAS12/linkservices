@@ -52,6 +52,7 @@ class Link(models.Model):
     price_per_item = models.IntegerField(default=0, verbose_name='Цена за 1 месяц')
     total_price = models.IntegerField(default=0, verbose_name='Общая стоимость')
     count_month = models.IntegerField(default=1, verbose_name='Количество месяцев')
+    bot_id = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.link

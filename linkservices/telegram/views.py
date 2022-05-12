@@ -1,35 +1,8 @@
 from django.conf import settings
-from django.shortcuts import render, redirect
-from django.db import IntegrityError
-from uuid import uuid4
 from django.db.models.signals import post_save
 import requests
+
 from site_app.models import WebSite
-from .forms import *
-
-
-# def main(request):
-#     if request.method == 'POST':
-#         form = Request(request.POST)
-#         if form.is_valid():
-#             TOKEN = str(uuid4())
-#             cd = form.cleaned_data
-#             r = Requests(name=cd['name'],
-#                          type=cd['type'],
-#                          request=cd['request'],
-#                          email=cd['email'],
-#                          TOKEN=TOKEN)
-#             r.save()
-#             Requests.objects.update()
-#             try:
-#                 UserRequest.objects.create(name=cd['name'], email=cd['email'])
-#             except IntegrityError:
-#                 pass
-#             return redirect(f'https://t.me/bot_broken_bot?start={TOKEN}')
-#
-#     else:
-#         form = Request()
-#     return render(request, 'main.html', {'form': form})
 
 
 def send_updates_status(sender, update_fields, instance, **kwargs):
@@ -53,3 +26,4 @@ def send_updates_status(sender, update_fields, instance, **kwargs):
 
 # Соединяем с сигналом
 post_save.connect(send_updates_status, sender=WebSite)
+
