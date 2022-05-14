@@ -55,95 +55,42 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for item in website %}
-                                    <tr>
+                                    {% for item in website  %}
 
-                                        <td><a href="{{ item.url }}">{{ item.url }}</a></td>
-                                        <td>
-                                            {% if item.status_id == 1 %}
-                                            <span class="text-success">Отображается</span>
-                                            {% else %}
-                                            <span class="text-danger">Не отображается</span>
-                                            {% endif %}
-                                        </td>
-
-                                        <td>{{ item.category }}</td>
-                                        <td>{{ item.yandex_x }}</td>
-                                        <td><a href="{{ item.yandex_stat }}" target="_blank">Яндекс
-                                            статистика</a></td>
-                                        <td>{{ item.price }} RUB / Месяц</td>
-                                        <td><span
-                                                class="badge bg-success font-size-14 count-links-in-catalog">{{ item.sold_link }} из {{ item.total_link }}</span>
-                                        </td>
-                                        <td>
-                                            <form  action="" method="POST" style="display: inline;">
-                                                {% csrf_token %}
-<!--                                                <input name="ELEMENT_ID" value="429" hidden="">-->
-<!--                                                <input name="IBLOCK_ID" value="16" hidden="">-->
-                                                <a href="{% url 'delete-site' item.pk %}" class="btn btn-primary btn-sm w-md"
-                                                   style="margin-bottom: 15px; margin-top: -7px;" >Удалить</a>
-                                            </form>
-                                            <a href="{% url 'update-site' item.pk %}" class="btn btn-primary btn-sm w-md"
-                                               style="margin-bottom: 15px; margin-top: -7px;">Редактировать</a>
-                                        </td>
-
-
-                                    </tr>
+                                    {% include 'site_app/partials/itemsite.html' %}
                                     {% endfor %}
-
-
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                            <i class="mdi mdi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                            <i class="mdi mdi-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="pagination pagination-rounded justify-content-end mb-2">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                        <i class="mdi mdi-chevron-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                        <i class="mdi mdi-chevron-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- end row -->
+                <!-- end row -->
 
-        </div> <!-- container-fluid -->
-    </div>
-    <!-- End Page-content -->
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
 
-    <!-- Static Backdrop Modal -->
-<!--    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
-<!--         role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title" id="staticBackdropLabel">Требуется подтверждение</h5>-->
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <p>Вы точно хотите удалить ваш из сайт из нашего сервиса ? :(</p>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Нет</button>-->
-<!--                    <form action="{% url 'my-sites'  %}" method="post">-->
-<!--                        {% csrf_token %}-->
-<!--                    <button type="submit"  class="btn btn-primary">Да, хочу удалить</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+        <!-- Static Backdrop Modal -->
 
 
 </div>

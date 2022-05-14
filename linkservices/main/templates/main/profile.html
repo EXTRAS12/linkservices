@@ -52,16 +52,17 @@
                                             <img src="{% static '/images/users/avatar-1.jpg' %}" alt=""
                                                  class="img-thumbnail rounded-circle">
                                         </div>
-                                        <h5 class="font-size-15 text-truncate">Ваш ID: 68</h5>
-                                        <p class="text-muted mb-0 text-truncate">@netdurov</p>
+                                        <h5 class="font-size-15 text-truncate">Ваш ID: {{ user.id }} </h5>
+                                        <p class="text-muted mb-0 text-truncate">{{ user.name_telegram }}</p>
                                     </div>
-
                                     <div class="col-sm-8">
                                         <div class="pt-4">
 
                                             <div class="row">
                                                 <div class="col-6">
+
                                                     <h5 class="font-size-15">0</h5>
+
                                                     <p class="text-muted mb-0">Сайты</p>
                                                 </div>
                                                 <div class="col-6">
@@ -92,20 +93,25 @@
                                         <tbody>
                                         <tr>
                                             <th scope="row">Ваш email:</th>
-                                            <td>netnet@yandex.ru</td>
+                                            <td>{{ user.email }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">WMZ-кошелек:</th>
-                                            <td>Z4343477474747</td>
+
+                                            <td>{{ user.profile.wmz }}</td>
+
                                         </tr>
                                         <tr>
                                             <th scope="row">ЮMoney-кошелек:</th>
-                                            <td>4100748484838839</td>
+
+                                            <td>{{ user.profile.ymoney }}</td>
+
+
                                         </tr>
-                                        <tr>
-                                            <th scope="row">Пароль:</th>
-                                            <td>*********</td>
-                                        </tr>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <th scope="row">Пароль:</th>-->
+                                        <!--                                            <td>*********</td>-->
+                                        <!--                                        </tr>-->
 
                                         </tbody>
 
@@ -130,7 +136,8 @@
                                                     <div class="text-center mb-4">
                                                         <div class="avatar-md mx-auto mb-4">
                                                             <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                                                <img src="{% static '/images/users/avatar-1.jpg' %}" alt=""
+                                                                <img src="{% static '/images/users/avatar-1.jpg' %}"
+                                                                     alt=""
                                                                      class="img-thumbnail rounded-circle">
                                                             </div>
                                                         </div>
@@ -252,7 +259,7 @@
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <p class="text-muted fw-medium">Текущий баланс</p>
-                                                <h4 class="mb-0">1235 RUB</h4>
+                                                <h4 class="mb-0">{{ user.profile.current_balance }} RUB</h4>
                                             </div>
 
                                             <div class="flex-shrink-0 align-self-center">
@@ -272,7 +279,7 @@
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <p class="text-muted fw-medium">На удержании</p>
-                                                <h4 class="mb-0">2700 RUB</h4>
+                                                <h4 class="mb-0">{{ user.profile.hold_balance }}</h4>
                                             </div>
 
                                             <div class="flex-shrink-0 align-self-center">
@@ -292,7 +299,7 @@
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <p class="text-muted fw-medium">Ожидает вывода</p>
-                                                <h4 class="mb-0">17500 RUB</h4>
+                                                <h4 class="mb-0">{{ user.profile.output_balance }}</h4>
                                             </div>
 
                                             <div class="flex-shrink-0 align-self-center">

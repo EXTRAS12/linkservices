@@ -33,7 +33,7 @@ class Status(models.Model):
 class WebSite(models.Model):
     """Модель добавления сайта"""
     url = models.CharField(max_length=255, verbose_name='url сайта')
-    user_email = models.ForeignKey(User, on_delete=models.CASCADE,
+    user_email = models.ForeignKey(User, related_name='user_website', on_delete=models.CASCADE,
                                    max_length=100, blank=True, null=True, verbose_name='email заказчика')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Тематика')
     price = models.IntegerField(verbose_name='Цена')

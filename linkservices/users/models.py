@@ -1,11 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class User(AbstractUser):
-    email = models.EmailField(_("email address"), unique=True,)
-    name_telegram = models.CharField(max_length=100, verbose_name='Телеграмм')
+    """Основной юзер"""
+    email = models.EmailField(_("email address"), unique=True, )
+    name_telegram = models.CharField(max_length=100, blank=True, null=True, verbose_name='Телеграмм')
 
     email_verify = models.BooleanField(default=False)
 
@@ -17,3 +21,32 @@ class User(AbstractUser):
         verbose_name_plural = _("Пользователи")
         ordering = ('-date_joined',)
 
+
+class Profile(models.Model):
+    """Профиль пользователя"""
+    user = models.OneToOneField(User, verbose_name="Пользователь",
+                                related_name='profile', null=True, on_delete=models.CASCADE)
+    wmz = models.CharField(max_length=200, blank=True, null=True, verbose_name='WMZ-кошелёк')
+    ymoney = models.CharField(max_length=200, blank=True, null=True, verbose_name='ЮMoney-кошелёк')
+    current_balance = models.PositiveIntegerField(default=0, blank=True, null=True, verbose_name="Текущий баланс")
+    hold_balance = models.PositiveIntegerField(default=0, blank=True, null=True, verbose_name='На удержании')
+    output_balance = models.PositiveIntegerField(default=0, blank=True, null=True, verbose_name='Ожидает вывода')
+    name_telegram = models.CharField(blank=True, null=True, max_length=100, verbose_name='Телеграмм')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
+    update = models.DateTimeField(auto_now=True, verbose_name='Обновлён')
+
+    class Meta:
+        verbose_name = 'Профиль пользователя'
+        verbose_name_plural = 'Профили пользователей'
+
+
+@receiver(post_save, sender=User)
+def save_or_create_profile(sender, instance, created, **kwargs):
+    """При регистрации создаётся профиль пользователя"""
+    if created:
+        Profile.objects.create(user=instance)
+    else:
+        try:
+            instance.profile.save()
+        except ObjectDoesNotExist:
+            Profile.objects.create(user=instance)

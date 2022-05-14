@@ -1,15 +1,20 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 from site_app.models import WebSite
+
+from users.models import Profile
 
 
 class FrontPage(TemplateView):
     """Страница перед входом в аккаунт"""
     template_name = 'main/frontpage.html'
+    context_object_name = 'website'
 
 
-class Profile(LoginRequiredMixin, TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
     """Профиль"""
+    model = Profile
     template_name = 'main/profile.html'
 
 

@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, UpdateView
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import ListView, UpdateView, DeleteView
 
 from .forms import AddSiteForm
 from .models import WebSite
@@ -21,6 +23,7 @@ class UpdateSite(LoginRequiredMixin, UpdateView):
     """Редактирование сайта"""
     model = WebSite
     form_class = AddSiteForm
+    context_object_name = 'website'
     template_name = 'site_app/add-site.html'
     success_url = '/my-sites/'
 
@@ -32,11 +35,10 @@ class UpdateSite(LoginRequiredMixin, UpdateView):
         return super(UpdateSite, self).dispatch(request, *args, **kwargs)
 
 
-class DeleteSite(LoginRequiredMixin, UpdateView):
+class DeleteSite(LoginRequiredMixin, DeleteView):
     """Удаление сайта"""
     model = WebSite
-    template_name = 'site_app/delete-site.html'
-    success_url = '/my-sites/'
+    success_url = reverse_lazy('my-sites')
 
     def dispatch(self, request, *args, **kwargs):
         """ Пользователь может удалять только свои сайты """
@@ -44,6 +46,13 @@ class DeleteSite(LoginRequiredMixin, UpdateView):
         if obj.user_email != self.request.user:
             return redirect(obj)
         return super(DeleteSite, self).dispatch(request, *args, **kwargs)
+
+
+# class DeleteSite(View):
+#     """Удаление сайта"""
+#     def get(self, request, pk):
+#         WebSite.objects.get(id=pk, cart__user=request.user).delete()
+#         return redirect("my-sites")
 
 
 @login_required

@@ -47,7 +47,7 @@ class Link(models.Model):
     valid_date = models.DateTimeField(default=one_week_hence, verbose_name='В работе до')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено')
     update = models.DateTimeField(auto_now=True, verbose_name='Изменено')
-    user_email = models.ForeignKey(User, on_delete=models.CASCADE,
+    user_email = models.ForeignKey(User, related_name='user_link', on_delete=models.CASCADE,
                                    max_length=100, blank=True, null=True, verbose_name='email заказчика')
     price_per_item = models.IntegerField(default=0, verbose_name='Цена за 1 месяц')
     total_price = models.IntegerField(default=0, verbose_name='Общая стоимость')
@@ -63,6 +63,7 @@ class Link(models.Model):
         ordering = ('-created',)
 
     def save(self, *args, **kwargs):
+        """При сохранении считается общая сумма"""
         price_per_item = self.url.price
         self.price_per_item = price_per_item
         self.total_price = self.count_month * price_per_item

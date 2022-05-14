@@ -1,0 +1,55 @@
+<tr>
+
+    <td><a href="{{ item.url }}">{{ item.url }}</a></td>
+    <td>
+        {% if item.status_id == 1 %}
+        <span class="text-success">Отображается</span>
+        {% else %}
+        <span class="text-danger">Не отображается</span>
+        {% endif %}
+    </td>
+
+    <td>{{ item.category }}</td>
+    <td>{{ item.yandex_x }}</td>
+    <td><a href="{{ item.yandex_stat }}" target="_blank">Яндекс
+        статистика</a></td>
+    <td>{{ item.price }} RUB / Месяц</td>
+    <td><span
+            class="badge bg-success font-size-14 count-links-in-catalog">{{ item.sold_link }} из {{ item.total_link }}</span>
+    </td>
+    <td>
+
+<!--            <input name="ELEMENT_ID" value="429" hidden="">-->
+<!--            <input name="IBLOCK_ID" value="16" hidden="">-->
+
+        <a href="{% url 'delete-site' pk=item.id %}" class="btn btn-primary btn-sm w-md">Удалить</a>
+
+        <a href="{% url 'update-site' item.id %}" class="btn btn-primary btn-sm w-md">Редактировать</a>
+    </td>
+
+
+</tr>
+
+
+<!--<div class="modal fade" data-bs-toggle="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
+<!--             role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+<!--            <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title" id="staticBackdropLabel">Требуется подтверждение</h5>-->
+<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <p>Вы точно хотите удалить ваш из сайт из нашего сервиса ? :(</p>-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Нет</button>-->
+<!--                        <form action="" method="post">-->
+<!--                            {% csrf_token %}-->
+<!--                        <a href="{% url 'delete-site' pk=item.id %}"><button type="submit" class="btn btn-primary">Да, хочу удалить</button></a>-->
+<!--                            </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+

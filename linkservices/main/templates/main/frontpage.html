@@ -54,10 +54,16 @@
                 </li>
 
             </ul>
-
+            {% if request.user.is_authenticated %}
+            <div class="my-2 ms-lg-2">
+                <a href="{% url 'profile' %}" class="btn btn-outline-success w-xs">Войти</a>
+            </div>
+            {% else %}
             <div class="my-2 ms-lg-2">
                 <a href="{% url 'login' %}" class="btn btn-outline-success w-xs">Войти</a>
             </div>
+            {% endif %}
+
         </div>
     </div>
 </nav>
@@ -75,7 +81,13 @@
 
                     <div class="d-flex flex-wrap gap-2 mt-4">
                         <a href="{% url 'register' %}" class="btn btn-success">Зарегистрироваться</a>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'profile' %}" class="btn btn-light">Войти</a>
+                        {% else %}
                         <a href="{% url 'login' %}" class="btn btn-light">Войти</a>
+                        {% endif %}
+
+
                     </div>
                 </div>
             </div>
@@ -194,7 +206,7 @@
                         зарегистрировать его в каталоге.</p>
 
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="javascript: void(0);" class="btn btn-success">Зарегистрировать сайт</a>
+                        <a href="{% url 'register' %}" class="btn btn-success">Зарегистрировать сайт</a>
                     </div>
 
 
@@ -336,7 +348,7 @@
                         сможете в любой момент изменить купленную ссылку на сайте на другую. </p>
                     <div class="text-muted mt-4">
 
-                        <a href="javascript: void(0);" class="btn btn-success">Зарегистрироваться </a>
+                        <a href="{% url 'register' %}" class="btn btn-success">Зарегистрироваться </a>
 
                     </div>
                 </div>

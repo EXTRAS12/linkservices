@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
 from users.forms import UserRegisterForm
+from .models import Profile
 
 User = get_user_model()
 
@@ -40,3 +41,9 @@ class UserAdmin(UserAdmin):
         ),
     )
     add_form = UserRegisterForm
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    """Профили пользователей"""
+    list_display = ('user', 'current_balance', 'hold_balance', 'output_balance', 'created' ,'update')

@@ -1,0 +1,20 @@
+<tr>
+
+    <td>{{ item.url }}</td>
+    <td>
+        <p class="mb-1"><a href="https://feikiev.com/" target="_blank"
+                           style="text-decoration: underline;">{{ item.link }}</a></p>
+    </td>
+
+    <td>{{ item.valid_date }}</td>
+    <td><span class="text-success">{{ item.status_verify }}</span></td>
+    <td><span class="text-danger">{{ item.moderation }}</span></td>
+    <td>{{ item.url.price }}  RUB / Месяц</td>
+    <td>Новая ссылка</td>
+    <td>
+        <button type="button" class="btn btn-primary btn-sm w-md"
+                data-bs-toggle="modal" data-bs-target="#withdrawModal"
+                style="margin-left: auto;">Редактировать / Продлить
+        </button>
+    </td>
+</tr>

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Begin page -->
+<div id="layout-wrapper">
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="pt-3">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-8">
+                                            <div>
+                                                <div class="text-center">
+
+                                                    <h4>{{ flatpage.title }}</h4>
+                                                    <p class="text-muted mb-4"><i class="mdi mdi-calendar me-1"></i> 10
+                                                        Apr, 2020</p>
+                                                </div>
+
+                                                <hr>
+
+
+                                                <div class="my-5">
+                                                    <img src="{% static '/images/small/img-2.jpg' %}" alt=""
+                                                         class="img-thumbnail mx-auto d-block">
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="mt-4">
+                                                    <div class="text-muted font-size-14">
+                                                        <p>{{flatpage.newflatpage.description|safe}}</p>
+
+                                                        <p class="mb-4">{{flatpage.newflatpage.text_block|safe}}</p>
+
+                                                        <blockquote class="p-4 border-light border rounded mb-4">
+                                                            <div class="d-flex">
+                                                                <div class="me-3">
+                                                                    <i class="bx bxs-quote-alt-left text-dark font-size-24"></i>
+                                                                </div>
+                                                                <div>
+                                                                    <p class="mb-0"> At vero eos et accusamus et iusto
+                                                                        odio dignissimos ducimus qui blanditiis
+                                                                        praesentium deleniti atque corrupti quos dolores
+                                                                        et quas molestias excepturi sint quidem rerum
+                                                                        facilis est</p>
+                                                                </div>
+                                                            </div>
+
+                                                        </blockquote>
+
+                                                        <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+                                                            reiciendis voluptatibus maiores alias consequatur aut
+                                                            perferendis doloribus asperiores repellat. Sed ut
+                                                            perspiciatis unde omnis iste natus error sit</p>
+
+
+                                                        <div class="mt-4">
+                                                            <h5 class="mb-3">Title: </h5>
+
+                                                            <div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-4 col-sm-6">
+                                                                        <div>
+                                                                            <ul class="ps-4">
+                                                                                <li class="py-1">Donec sodales
+                                                                                    sagittis
+                                                                                </li>
+                                                                                <li class="py-1">Sed consequat leo
+                                                                                    eget
+                                                                                </li>
+                                                                                <li class="py-1">Aliquam lorem ante</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 col-sm-6">
+                                                                        <div>
+                                                                            <ul class="ps-4">
+                                                                                <li class="py-1">Aenean ligula eget</li>
+                                                                                <li class="py-1">Cum sociis natoque</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <hr>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script>
+                        © linkservices.ru
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Все права защищены
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- End Page-content -->
+
+
+</div>
+
+{% endblock %}
