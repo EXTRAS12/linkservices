@@ -4,11 +4,13 @@ from .models import *
 
 
 class NewFlatpageInline(admin.StackedInline):
+    """Для статических страниц"""
     model = NewFlatpage
     verbose_name = "Содержание"
 
 
 class FlatPageNewAdmin(FlatPageAdmin):
+    """Для статических страниц"""
     inlines = [NewFlatpageInline]
     fieldsets = (
         (None, {'fields': ('url', 'title', 'sites')}),

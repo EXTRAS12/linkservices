@@ -31,7 +31,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">Покупка ссылки</h4>
+                                <h4 class="card-title">Покупка ссылки </h4>
                                 <p class="card-title-desc">Арендуйте ссылку на сайте сроком от 1 до 12 месяцев</p>
 
                                 <form>
@@ -39,7 +39,7 @@
                                         <div class="col-sm-6">
                                             <div class="mb-3">
                                                 <label class="control-label">Выберите кол-во месяцев аренды которые вы
-                                                    хотите оплатить</label>
+                                                    хотите оплатить </label>
                                                 <input type="range" id="link_term_range">
 
                                                 <script>
@@ -53,18 +53,18 @@
                                                                     var range_val = $('#link_term_range').val();
                                                                     var price_val = $('#term_price').html(range_val);
                                                                     $('#term_months').html(range_val);
-                                                                    $('#term_price').html((range_val * 3000).toFixed(2).replace(/\./g,',') + " RUB");
+                                                                    $('#term_price').html((range_val * {{ link.price }}).toFixed(2).replace(/\./g,',') + " RUB");
                                                                 },
                                                             });
                                                             var range_val = $('#link_term_range').val();
-                                                            $('#term_price').html((range_val * 3000).toFixed(2).replace(/\./g,',') + " RUB");
+                                                            $('#term_price').html((range_val * {{ link.price }}).toFixed(2).replace(/\./g,',') + " RUB");
 
                                                 </script>
 
                                             </div>
                                             <div class="alert alert-secondary" role="alert">
                                                 Вы собираетесь оплатить ссылку на сайте <b>www.site.ru</b> сроком на <b
-                                                    id="term_months">1 месяц</b> за <b id="term_price">3000 RUB</b>
+                                                    id="term_months">1 месяц</b> за <b id="term_price">{{ link.price }}</b>
                                             </div>
                                         </div>
 

@@ -4,9 +4,10 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class NewFlatpage(models.Model):
+    """Модель для статических страниц"""
     flatpage = models.OneToOneField(FlatPage, on_delete=models.CASCADE)
-    description = RichTextUploadingField(verbose_name = 'Основной текстовый контент страницы',default='')
-    text_block = RichTextUploadingField(verbose_name='Дополнительный блок текста',default='')
+    description = RichTextUploadingField(verbose_name='Основной текстовый контент страницы', default='')
+    text_block = RichTextUploadingField(verbose_name='Дополнительный блок текста', default='')
 
     def __str__(self):
         return self.flatpage.title
