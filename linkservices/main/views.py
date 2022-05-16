@@ -5,6 +5,8 @@ from site_app.models import WebSite
 
 from users.models import Profile
 
+from .models import Plugin
+
 
 class FrontPage(TemplateView):
     """Страница перед входом в аккаунт"""
@@ -37,7 +39,9 @@ class Catalog(LoginRequiredMixin, ListView):
         return context
 
 
-class Plugins(LoginRequiredMixin, TemplateView):
-    """Каталог сайтов"""
+class Plugins(LoginRequiredMixin, ListView):
+    """Каталог плагинов"""
+    model = Plugin
     template_name = 'main/plugins.html'
+    context_object_name = 'plugins'
 

@@ -148,6 +148,10 @@ DEFAULT_FROM_EMAIL = 'info.moonshine@yandex.ru'
 
 #  Телеграм
 API = '2128307617:AAGQMrJuSLNESiIwTfxUsC0Uv2U7MttGwIA'
+# TELEGRAM = {
+#     'bot_token': '2128307617:AAGQMrJuSLNESiIwTfxUsC0Uv2U7MttGwIA',
+#     'channel_name': 'channelfomybotik',
+# }
 
 #  Для статических страниц
 SITE_ID = 1

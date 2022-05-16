@@ -25,6 +25,7 @@ class FlatPageNewAdmin(FlatPageAdmin):
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageNewAdmin)
+admin.site.register(Plugin)
 
 admin.site.site_title = 'Вас приветствует linkservices.ru'
 admin.site.site_header = 'Вас приветствует Linkservices.ru'

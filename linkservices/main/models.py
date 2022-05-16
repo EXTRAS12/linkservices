@@ -15,3 +15,22 @@ class NewFlatpage(models.Model):
     class Meta:
         verbose_name = "Содержание страницы"
         verbose_name_plural = "Содержание страницы"
+
+
+class Plugin(models.Model):
+    """Модель для плагинов"""
+    title = models.CharField(max_length=100, verbose_name='Наименование')
+    description = models.CharField(max_length=250, verbose_name='Описание')
+    version = models.DecimalField(max_digits=5, decimal_places=1, default=0, verbose_name='Версия')
+    instruction = models.TextField(verbose_name='Инструкция', blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено')
+    update = models.DateTimeField(auto_now=True, verbose_name='Изменено')
+    photo = models.ImageField(upload_to='icon_plugins/%Y/%m/%d/', verbose_name='Иконка плагина', blank=True)
+    file = models.FileField(upload_to='plugins/%Y/%m/%d/', verbose_name='Плагин')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Плагин"
+        verbose_name_plural = "Плагины"

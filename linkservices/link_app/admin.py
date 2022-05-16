@@ -22,6 +22,14 @@ class LinkAdmin(admin.ModelAdmin):
     list_filter = ('url', 'status_verify', 'moderation', 'valid_date', 'created', 'update')
     readonly_fields = ('created', 'update')
 
+    def save_model(self, request, obj, form, change):
+        """Отслеживаем изменение статуса для уведомления пользователя"""
+        update_fields = []
+        if form.has_changed():
+            update_fields = form.changed_data
+        super(LinkAdmin, self).save_model(request, obj, form, change)
+        obj.save(update_fields=update_fields)
+
 
 admin.site.register(Moderation, ModerationAdmin)
 admin.site.register(VerifyStatus, VerifyStatusAdmin)

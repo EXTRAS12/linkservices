@@ -42,57 +42,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {% for item in plugins %}
                                 <tr>
-                                    <td><img src="{% static '/images/companies/img-1.png' %}" alt="" class="avatar-sm"></td>
-                                    <td>
-                                        <h5 class="text-truncate font-size-14"><a href="javascript: void(0);"
-                                                                                  class="text-dark">Wordpress</a></h5>
-                                        <p class="text-muted mb-0">Плагин для системы управления Wordpress</p>
-                                    </td>
-                                    <td>2.3</td>
-                                    <td><a href="/catalog">Инструкция по установке</a></td>
-
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm w-md" data-bs-toggle="modal"
-                                                data-bs-target="#withdrawModal" style="margin-left: auto;">Скачать
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
+                                        {% if item.photo %}
+                                    <td><img src="{{ item.photo.url }}" alt="" class="avatar-sm"></td>
+                                    {% else %}
                                     <td><img src="{% static '/images/companies/img-2.png' %}" alt="" class="avatar-sm"></td>
+                                    {% endif %}
                                     <td>
                                         <h5 class="text-truncate font-size-14"><a href="javascript: void(0);"
-                                                                                  class="text-dark">Datalife Engine</a>
-                                        </h5>
-                                        <p class="text-muted mb-0">Плагин для системы управления Datalife engine</p>
+                                                                                  class="text-dark">{{ item.title }}</a></h5>
+                                        <p class="text-muted mb-0">{{ item.description }}</p>
                                     </td>
-                                    <td>1.0</td>
-                                    <td><a href="/catalog">Инструкция по установке</a></td>
+                                    <td>{{ item.version }}</td>
+                                    <td><a href="#">Инструкция по установке</a></td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm w-md" data-bs-toggle="modal"
+                                       <a href="{{ item.file.url }}"> <button type="button" class="btn btn-primary btn-sm w-md" data-bs-toggle="modal"
                                                 data-bs-target="#withdrawModal" style="margin-left: auto;">Скачать
-                                        </button>
+                                       </button></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><img src="{% static '/images/companies/img-3.png' %}" alt="" class="avatar-sm"></td>
-                                    <td>
-                                        <h5 class="text-truncate font-size-14"><a href="javascript: void(0);"
-                                                                                  class="text-dark">Для уникальный
-                                            систем на php</a></h5>
-                                        <p class="text-muted mb-0">Подойдет для любой системой управления написаной на
-                                            php</p>
-                                    </td>
-                                    <td>3.2</td>
-                                    <td><a href="/catalog">Инструкция по установке</a></td>
-
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm w-md" data-bs-toggle="modal"
-                                                data-bs-target="#withdrawModal" style="margin-left: auto;">Скачать
-                                        </button>
-                                    </td>
-                                </tr>
+                                {% endfor %}
 
 
                                 </tbody>
