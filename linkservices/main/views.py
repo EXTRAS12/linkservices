@@ -44,4 +44,3 @@ class Plugins(LoginRequiredMixin, ListView):
     model = Plugin
     template_name = 'main/plugins.html'
     context_object_name = 'plugins'
-

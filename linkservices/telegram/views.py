@@ -1,9 +1,12 @@
 from django.conf import settings
 from django.db.models.signals import post_save
 import requests
+from django.dispatch import receiver
 
 from site_app.models import WebSite
 from link_app.models import Link
+
+from users.models import Profile
 
 
 def send_updates_status(sender, update_fields, instance, **kwargs):
@@ -43,6 +46,39 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
                 'text': text,
             }
             return requests.get(url, params=params).json()
+
+
+@receiver(post_save, sender=Profile)
+def register_new_user(sender, instance, created, *args, **kwargs):
+    """Уведомление при регистрации нового пользователя"""
+    if created:
+        user = instance.user.email
+        chat_id = '318722671'  # надо указать айди админ чата
+        api_key = settings.API
+        text = f'Зарегистрирован новый пользователь: ' + str(user)
+        url = f'https://api.telegram.org/bot{api_key}/sendMessage'
+        params = {
+            'chat_id': chat_id,
+            'text': text,
+        }
+        return requests.get(url, params=params).json()
+
+
+@receiver(post_save, sender=WebSite)
+def add_new_site(sender, instance, created, *args, **kwargs):
+    """Уведомление при добавлении нового сайта"""
+    if created:
+        website = instance.url
+        id = instance.id
+        chat_id = '318722671'  # надо указать айди админ чата
+        api_key = settings.API
+        text = f'Добавлен новый сайт: id({id}) ' + str(website)
+        url = f'https://api.telegram.org/bot{api_key}/sendMessage'
+        params = {
+            'chat_id': chat_id,
+            'text': text,
+        }
+        return requests.get(url, params=params).json()
 
 
 # Соединяем с сигналом
