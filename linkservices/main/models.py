@@ -34,3 +34,29 @@ class Plugin(models.Model):
     class Meta:
         verbose_name = "Плагин"
         verbose_name_plural = "Плагины"
+
+
+class HelpCategory(models.Model):
+    """Модель категорий в разделе помощь"""
+    title = models.CharField(max_length=100, verbose_name='Категория вопроса')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Категория вопроса"
+        verbose_name_plural = "Категории вопросов"
+
+
+class GeneralHelp(models.Model):
+    """Раздел помощи"""
+    question = models.CharField(max_length=250, verbose_name="Вопрос")
+    description = models.TextField(verbose_name="Ответ на вопрос")
+    category = models.ForeignKey(HelpCategory, on_delete=models.CASCADE, verbose_name='Категория вопроса')
+
+    def __str__(self):
+        return self.question
+
+    class Meta:
+        verbose_name = "Вопрос"
+        verbose_name_plural = "Вопросы"

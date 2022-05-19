@@ -5,7 +5,7 @@ from site_app.models import WebSite
 from users.models import Profile
 
 from .forms import ProfileForm
-from .models import Plugin
+from .models import Plugin, GeneralHelp
 
 
 class FrontPage(TemplateView):
@@ -35,9 +35,11 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
         return super().form_invalid(form)
 
 
-class Help(LoginRequiredMixin, TemplateView):
+class Help(LoginRequiredMixin, ListView):
     """Страница помощи"""
+    model = GeneralHelp
     template_name = 'main/help.html'
+    context_object_name = 'help'
 
 
 class Catalog(LoginRequiredMixin, ListView):

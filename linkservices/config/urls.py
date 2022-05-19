@@ -11,6 +11,7 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
+    path('api/v1/', include('api.urls')),
 
     path('', include('main.urls')),
     path('', include('users.urls')),

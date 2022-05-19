@@ -25,12 +25,14 @@ INSTALLED_APPS = [
     'captcha',
     'ckeditor',
     'ckeditor_uploader',
+    'rest_framework',
 
     'main',
     'telegram',
     'site_app',
     'link_app',
     'users',
+    'api',
 
 ]
 
@@ -102,7 +104,7 @@ INTERNAL_IPS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -152,6 +154,12 @@ MY_BOT_ID = '318722671'
 
 #  Для статических страниц
 SITE_ID = 1
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 15,
+}
 
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
