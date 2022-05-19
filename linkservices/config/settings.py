@@ -122,10 +122,10 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = 'catalog'
 LOGOUT_REDIRECT_URL = 'frontpage'
 LOGIN_URL = '/login/'
-ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'profile'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'catalog'
 
 # Captcha
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
@@ -148,10 +148,7 @@ DEFAULT_FROM_EMAIL = 'info.moonshine@yandex.ru'
 
 #  Телеграм
 API = '2128307617:AAGQMrJuSLNESiIwTfxUsC0Uv2U7MttGwIA'
-# TELEGRAM = {
-#     'bot_token': '2128307617:AAGQMrJuSLNESiIwTfxUsC0Uv2U7MttGwIA',
-#     'channel_name': 'channelfomybotik',
-# }
+MY_BOT_ID = '318722671'
 
 #  Для статических страниц
 SITE_ID = 1

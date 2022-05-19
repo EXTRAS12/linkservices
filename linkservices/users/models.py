@@ -26,6 +26,12 @@ class Profile(models.Model):
     """Профиль пользователя"""
     user = models.OneToOneField(User, verbose_name="Пользователь",
                                 related_name='profile', null=True, on_delete=models.CASCADE)
+    # link = models.ForeignKey(Link, on_delete=models.CASCADE, verbose_name='Ссылка',
+    #                          related_name='profile_link')
+    # website = models.ForeignKey(WebSite, on_delete=models.CASCADE, verbose_name='Сайт',
+    #                             related_name='profile_website')
+    chat_id = models.CharField(max_length=100, blank=True, null=True, verbose_name='Чат ID телеграмм')
+    TOKEN = models.CharField(max_length=100, blank=True, null=True)
     wmz = models.CharField(max_length=200, blank=True, null=True, verbose_name='WMZ-кошелёк')
     ymoney = models.CharField(max_length=200, blank=True, null=True, verbose_name='ЮMoney-кошелёк')
     current_balance = models.PositiveIntegerField(default=0, blank=True, null=True, verbose_name="Текущий баланс")
@@ -34,6 +40,9 @@ class Profile(models.Model):
     name_telegram = models.CharField(blank=True, null=True, max_length=100, verbose_name='Телеграмм')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлён')
+
+    def __str__(self):
+        return self.user.email
 
     class Meta:
         verbose_name = 'Профиль пользователя'

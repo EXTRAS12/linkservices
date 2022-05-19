@@ -15,12 +15,12 @@ class VerifyStatusAdmin(admin.ModelAdmin):
 class LinkAdmin(admin.ModelAdmin):
     """Ссылки"""
     fields = ('url', 'user_email', 'link', 'status_verify', 'moderation', 'total_price',
-              'price_per_item', 'count_month', 'valid_date', 'bot_id', 'created', 'update')
+              'price_per_item', 'count_month', 'valid_date', 'created', 'update')
     list_display = ('url', 'user_email', 'valid_date', 'status_verify', 'moderation',  'created',
                     'update')
     search_fields = ('url', 'user_email', 'link')
     list_filter = ('url', 'status_verify', 'moderation', 'valid_date', 'created', 'update')
-    readonly_fields = ('created', 'update')
+    readonly_fields = ('created', 'update', 'valid_date')
 
     def save_model(self, request, obj, form, change):
         """Отслеживаем изменение статуса для уведомления пользователя"""

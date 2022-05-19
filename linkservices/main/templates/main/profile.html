@@ -61,12 +61,12 @@
                                             <div class="row">
                                                 <div class="col-6">
 
-                                                    <h5 class="font-size-15">0</h5>
+                                                    <h5 class="font-size-15">{{ user.profile.user_website.count }}</h5>
 
                                                     <p class="text-muted mb-0">Сайты</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <h5 class="font-size-15">5</h5>
+                                                    <h5 class="font-size-15">{{ user.profile.user_link.count }}</h5>
                                                     <p class="text-muted mb-0">Ссылки</p>
                                                 </div>
                                             </div>
@@ -145,9 +145,9 @@
                                                         <div class="row justify-content-center">
                                                             <div class="col-xl-10">
                                                                 <h4 class="text-primary mb-5">Редактирование данных</h4>
-
                                                                 <div class="input-group bg-light rounded mb-3">
                                                                     <input type="email"
+                                                                           name="user"
                                                                            class="form-control bg-transparent border-0"
                                                                            placeholder="Ваш Email"
                                                                            aria-label="Recipient's username"
@@ -188,21 +188,20 @@
                                                                     </button>
                                                                 </div>
 
-                                                                <div class="input-group bg-light rounded mb-3">
-                                                                    <input type="email"
-                                                                           class="form-control bg-transparent border-0"
-                                                                           placeholder="Пароль"
-                                                                           aria-label="Recipient's username"
-                                                                           aria-describedby="button-addon2">
+<!--                                                                <div class="input-group bg-light rounded mb-3">-->
+<!--                                                                    <input type="email"-->
+<!--                                                                           class="form-control bg-transparent border-0"-->
+<!--                                                                           placeholder="Пароль"-->
+<!--                                                                           aria-label="Recipient's username"-->
+<!--                                                                           aria-describedby="button-addon2">-->
 
-                                                                    <button class="btn btn-primary" type="button"
-                                                                            id="button-addon2">
-                                                                        <i class="bx bx-save"
-                                                                           style="font-size: 18px;"></i>
-                                                                    </button>
-                                                                </div>
-
-
+<!--                                                                    <button class="btn btn-primary" type="button"-->
+<!--                                                                            id="button-addon2">-->
+<!--                                                                        <i class="bx bx-save"-->
+<!--                                                                           style="font-size: 18px;"></i>-->
+<!--                                                                    </button>-->
+<!--                                                                </div>-->
+                                                                <button type="submit" class="btn btn-primary">Сохранить</button>
                                                             </div>
                                                         </div>
                                                     </div>

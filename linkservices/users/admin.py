@@ -46,4 +46,6 @@ class UserAdmin(UserAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     """Профили пользователей"""
-    list_display = ('user', 'current_balance', 'hold_balance', 'output_balance', 'created', 'update')
+    list_display = ('user', 'current_balance', 'hold_balance', 'output_balance', 'chat_id', 'TOKEN',
+                    'created', 'update')
+

@@ -16,7 +16,7 @@ def send_updates_status(sender, update_fields, instance, **kwargs):
         if sta in update_fields:
             status = instance.status
             url = instance.url
-            chat_id = instance.bot_id
+            chat_id = instance.user_email.chat_id
             # status = instance.status
             api_key = settings.API
             # chat_id = str(instance.bot_id)
@@ -35,7 +35,7 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
         sta = 'status_verify'
         if sta in update_fields:
             status = instance.status_verify
-            chat_id = instance.bot_id
+            chat_id = instance.user_email.chat_id
             # status = instance.status
             api_key = settings.API
             # chat_id = str(instance.bot_id)
@@ -53,7 +53,7 @@ def register_new_user(sender, instance, created, *args, **kwargs):
     """Уведомление при регистрации нового пользователя"""
     if created:
         user = instance.user.email
-        chat_id = '318722671'  # надо указать айди админ чата
+        chat_id = settings.MY_BOT_ID
         api_key = settings.API
         text = f'Зарегистрирован новый пользователь: ' + str(user)
         url = f'https://api.telegram.org/bot{api_key}/sendMessage'
@@ -69,10 +69,10 @@ def add_new_site(sender, instance, created, *args, **kwargs):
     """Уведомление при добавлении нового сайта"""
     if created:
         website = instance.url
-        id = instance.id
-        chat_id = '318722671'  # надо указать айди админ чата
+        site_id = instance.id
+        chat_id = settings.MY_BOT_ID  # надо указать айди админ чата
         api_key = settings.API
-        text = f'Добавлен новый сайт: id({id}) ' + str(website)
+        text = f'Добавлен новый сайт: id({site_id}) ' + str(website)
         url = f'https://api.telegram.org/bot{api_key}/sendMessage'
         params = {
             'chat_id': chat_id,
