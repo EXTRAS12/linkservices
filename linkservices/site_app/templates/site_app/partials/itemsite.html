@@ -2,7 +2,7 @@
 
     <td><a href="{{ item.url }}">{{ item.url }}</a></td>
     <td>
-        {% if item.status_id == 1 %}
+        {% if item.status.name == 'Опубликовано' %}
         <span class="text-success">Отображается</span>
         {% else %}
         <span class="text-danger">Не отображается</span>

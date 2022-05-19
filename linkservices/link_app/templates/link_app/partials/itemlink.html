@@ -7,8 +7,18 @@
     </td>
 
     <td>{{ item.valid_date }}</td>
-    <td><span class="text-success">{{ item.status_verify }}</span></td>
-    <td><span class="text-danger">{{ item.moderation }}</span></td>
+    {% if item.status_verify.name == 'Опубликовано' %}
+    <td><span class="text-success">Проверено</span></td>
+    {% else %}
+    <td><span class="text-danger">На проверке</span></td>
+
+    {% endif %}
+        {% if item.moderation.name == 'Проверено' %}
+    <td><span class="text-success">Проверено</span></td>
+    {% else %}
+    <td><span class="text-danger">На модерации</span></td>
+
+    {% endif %}
     <td>{{ item.url.price }}  RUB / Месяц</td>
     <td>Новая ссылка</td>
     <td>
