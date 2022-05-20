@@ -7,7 +7,7 @@ from users.models import Profile
 
 
 class VerifyStatus(models.Model):
-    """Статус проверки для json """
+    """Статус проверки"""
     name = models.CharField(max_length=255, verbose_name='Статус проверки')
 
     def __str__(self):
@@ -64,6 +64,11 @@ class Link(models.Model):
         self.price_per_item = price_per_item
         self.total_price = self.count_month * price_per_item
         self.valid_date = timezone.now() + timezone.timedelta(days=30) * int(count_month)
+        # if self.total_price >= self.user_email.current_balance:
+        #     print('ошибочка')
+        # else:
+        #     self.user_email.current_balance = self.user_email.current_balance - self.total_price
+
         super(Link, self).save(*args, **kwargs)
 
 

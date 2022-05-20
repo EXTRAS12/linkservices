@@ -5,7 +5,7 @@ from site_app.models import WebSite
 from users.models import Profile
 
 from .forms import ProfileForm
-from .models import Plugin, GeneralHelp
+from .models import Plugin, GeneralHelp, HelpCategory
 
 
 class FrontPage(TemplateView):
@@ -41,7 +41,7 @@ class Help(LoginRequiredMixin, ListView):
     template_name = 'main/help.html'
     context_object_name = 'help'
 
-
+  
 class Catalog(LoginRequiredMixin, ListView):
     """Каталог сайтов"""
     template_name = 'main/catalog.html'
@@ -49,7 +49,8 @@ class Catalog(LoginRequiredMixin, ListView):
     paginate_by = 15
 
     def get_queryset(self):
-        return WebSite.objects.filter(status__name='Опубликовано')
+        return WebSite.objects.filter(status__name='Опубликовано').select_related('category')\
+            .exclude(user_email=self.request.user.profile)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Catalog, self).get_context_data(**kwargs)

@@ -26,10 +26,6 @@ class Profile(models.Model):
     """Профиль пользователя"""
     user = models.OneToOneField(User, verbose_name="Пользователь",
                                 related_name='profile', null=True, on_delete=models.CASCADE)
-    # link = models.ForeignKey(Link, on_delete=models.CASCADE, verbose_name='Ссылка',
-    #                          related_name='profile_link')
-    # website = models.ForeignKey(WebSite, on_delete=models.CASCADE, verbose_name='Сайт',
-    #                             related_name='profile_website')
     chat_id = models.CharField(max_length=100, blank=True, null=True, verbose_name='Чат ID телеграмм')
     TOKEN = models.CharField(max_length=100, blank=True, null=True)
     wmz = models.CharField(max_length=200, blank=True, null=True, verbose_name='WMZ-кошелёк')

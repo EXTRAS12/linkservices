@@ -57,10 +57,3 @@ class WebSite(models.Model):
 
     def get_absolute_url(self):
         return reverse('buy-link', kwargs={"pk": self.pk})
-
-    # def save(self, *args, **kwargs):
-    #     price_per_item = self.url.price
-    #     self.price_per_item = price_per_item
-    #     self.total_price = self.count_month * price_per_item
-    #
-    #     super(WebSite, self).save(*args, **kwargs)

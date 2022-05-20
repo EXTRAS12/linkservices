@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Добавить сайт :: {{ block.super }}{% endblock %}
+
 
 {% block content %}
 <div id="layout-wrapper">
@@ -47,6 +49,11 @@
                                                         <input id="price" name="price" type="number" class="form-control" placeholder="Введите сумму в рублях">
 
                                                     </div>
+                                                     <div class="mb-3">
+                                                        <label class="control-label">Количество возможных ссылок</label>
+                                                        <input id="id_total_link" name="total_link" type="number" class="form-control" placeholder="Введите количество доступных ссылок">
+
+                                                    </div>
                                                  <div class="alert alert-secondary" role="alert">
                                                 Перед тем как добавить сайт обязательно сначала установите плагин на ваш сайт, и проверьте доступность вашей статистики для других, если статистика закрыта, то пришлите пароль.
                                             </div>
@@ -56,12 +63,7 @@
                                                     <div class="mb-3">
                                                         <label class="control-label">Выберите тематику вашего сайта</label>
                                                         {{ form.category }}
-<!--                                                        <select class="form-control select2">-->
-<!--                                                            <option>Выбрать</option>-->
 
-<!--                                                            <option value="FA">первая</option>-->
-
-<!--                                                        </select>-->
 
                                                     </div>
 													<div class="mb-3">
@@ -73,50 +75,50 @@
                                                         <input id="password_yandex" name="password_yandex" type="text" class="form-control" placeholder="Введите пароль">
                                                     </div>
 
-                                                   <div class="table-responsive"><p class="control-label">Установить плагин на ваш сайт:</p>
-                                            <table class="table table-nowrap align-middle table-hover mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="width: 45px;">
-                                                            <div class="avatar-sm">
-                                                                <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-24">
-                                                                    <i class="bx bxs-file-doc"></i>
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">Wordpress.Zip</a></h5>
-                                                            <small>Size : 3.25 MB</small>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <a href="javascript: void(0);" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="avatar-sm">
-                                                                <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-24">
-                                                                    <i class="bx bxs-file-doc"></i>
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">PHP.Zip</a></h5>
-                                                            <small>Size : 3.15 MB</small>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <a href="javascript: void(0);" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+<!--                                                   <div class="table-responsive"><p class="control-label">Установить плагин на ваш сайт:</p>-->
+<!--                                            <table class="table table-nowrap align-middle table-hover mb-0">-->
+<!--                                                <tbody>-->
+<!--                                                    <tr>-->
+<!--                                                        <td style="width: 45px;">-->
+<!--                                                            <div class="avatar-sm">-->
+<!--                                                                <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-24">-->
+<!--                                                                    <i class="bx bxs-file-doc"></i>-->
+<!--                                                                </span>-->
+<!--                                                            </div>-->
+<!--                                                        </td>-->
+<!--                                                        <td>-->
+<!--                                                            <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">Wordpress.Zip</a></h5>-->
+<!--                                                            <small>Size : 3.25 MB</small>-->
+<!--                                                        </td>-->
+<!--                                                        <td>-->
+<!--                                                            <div class="text-center">-->
+<!--                                                                <a href="javascript: void(0);" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>-->
+<!--                                                            </div>-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+<!--                                                    <tr>-->
+<!--                                                        <td>-->
+<!--                                                            <div class="avatar-sm">-->
+<!--                                                                <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-24">-->
+<!--                                                                    <i class="bx bxs-file-doc"></i>-->
+<!--                                                                </span>-->
+<!--                                                            </div>-->
+<!--                                                        </td>-->
+<!--                                                        <td>-->
+<!--                                                            <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">PHP.Zip</a></h5>-->
+<!--                                                            <small>Size : 3.15 MB</small>-->
+<!--                                                        </td>-->
+<!--                                                        <td>-->
+<!--                                                            <div class="text-center">-->
+<!--                                                                <a href="javascript: void(0);" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>-->
+<!--                                                            </div>-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
 
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+<!--                                                </tbody>-->
+<!--                                            </table>-->
+<!--                                        </div>-->
 
                                                 </div>
                                             </div>

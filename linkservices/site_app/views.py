@@ -16,7 +16,8 @@ class MySites(LoginRequiredMixin, ListView):
     paginate_by = 15
 
     def get_queryset(self):
-        return WebSite.objects.filter(user_email=self.request.user.profile)
+        return WebSite.objects.filter(user_email=self.request.user.profile).\
+            select_related('category', 'status')
 
 
 class UpdateSite(LoginRequiredMixin, UpdateView):
