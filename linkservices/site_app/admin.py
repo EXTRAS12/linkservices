@@ -25,7 +25,7 @@ class WebsiteAdmin(admin.ModelAdmin):
     """Сайты"""
     fields = ('url', 'user_email', 'category', 'status', 'price', 'total_link', 'sold_link', 'yandex_x',
               'yandex_stat', 'password_yandex', 'created', 'update')
-    list_display = ('url', 'category', 'status', 'total_link', 'sold_link', 'yandex_x',
+    list_display = ('url', 'category', 'status', 'price', 'user_email', 'total_link', 'sold_link', 'yandex_x',
                     'created', 'update')
     search_fields = ('url', 'category', 'status')
     list_editable = ['status', ]

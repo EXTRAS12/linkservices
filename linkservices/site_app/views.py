@@ -25,7 +25,7 @@ class UpdateSite(LoginRequiredMixin, UpdateView):
     model = WebSite
     form_class = AddSiteForm
     context_object_name = 'website'
-    template_name = 'site_app/add-site.html'
+    template_name = 'site_app/update-site.html'
     success_url = '/my-sites/'
 
     def dispatch(self, request, *args, **kwargs):

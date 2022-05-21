@@ -5,7 +5,7 @@ from site_app.models import WebSite
 from users.models import Profile
 
 from .forms import ProfileForm
-from .models import Plugin, GeneralHelp, HelpCategory
+from .models import Plugin, GeneralHelp
 
 
 class FrontPage(TemplateView):
@@ -41,7 +41,7 @@ class Help(LoginRequiredMixin, ListView):
     template_name = 'main/help.html'
     context_object_name = 'help'
 
-  
+
 class Catalog(LoginRequiredMixin, ListView):
     """Каталог сайтов"""
     template_name = 'main/catalog.html'

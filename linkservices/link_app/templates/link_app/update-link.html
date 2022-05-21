@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Купить ссылку :: {{ block.super }}{% endblock %}
+{% block title %}Редактировать ссылку :: {{ block.super }}{% endblock %}
 
 
 {% block content %}
@@ -14,12 +14,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Купить ссылку</h4>
+                            <h4 class="mb-sm-0 font-size-18">Редактировать ссылку</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Каталог сайтов</a></li>
-                                    <li class="breadcrumb-item active">Купить ссылку</li>
+                                    <li class="breadcrumb-item"><a href="{% url 'catalog' %}">Каталог сайтов</a></li>
+                                    <li class="breadcrumb-item active">Редактировать ссылку</li>
                                 </ol>
                             </div>
 
@@ -32,16 +32,16 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Покупка ссылки </h4>
+                                <h4 class="card-title">Редактировать ссылку </h4>
                                 <p class="card-title-desc">Арендуйте ссылку на сайте сроком от 1 до 12 месяцев </p>
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input class="form-control" name="user_email" id="id_user_email"
                                            value="{{ user.profile.id }}" hidden="" type="text" readonly>
                                     <input class="form-control" name="price_per_item" id="id_price_per_item"
-                                           value="{{ website.price }}" hidden="" required="" type="number" readonly>
+                                           value="{{ link.price_per_item}}" hidden="" required="" type="number" readonly>
                                     <input class="form-control" name="url" id="id_url" required="" hidden=""
-                                           value="{{ website.id }}" readonly>
+                                           value="{{ link.url.id }}" readonly>
 
 
                                     <div class="row">
@@ -62,11 +62,11 @@
                                                         var range_val = $('#link_term_range').val();
                                                         var price_val = $('#term_price').html(range_val);
                                                         $('#term_months').html(range_val);
-                                                        $('#term_price').html((range_val * {{ website.price }}).toFixed(2).replace(/\./g,',') + " RUB");
+                                                        $('#term_price').html((range_val * {{ link.price_per_item }}).toFixed(2).replace(/\./g,',') + " RUB");
                                                     },
                                                 });
                                                 var range_val = $('#link_term_range').val();
-                                                $('#term_price').html((range_val * {{ website.price }}).toFixed(2).replace(/\./g,',') + " RUB");
+                                                $('#term_price').html((range_val * {{ link.price_per_item }}).toFixed(2).replace(/\./g,',') + " RUB");
 
 
                                                 </script>
@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="alert alert-secondary" role="alert">
                                                 Вы собираетесь оплатить ссылку на сайте <b>www.site.ru</b> сроком на <b
-                                                    id="term_months">1 месяц</b> за <b id="term_price">{{ website.price }}</b>
+                                                    id="term_months">1 месяц</b> за <b id="term_price">{{ link.price_per_item }}</b>
                                             </div>
                                         </div>
 
@@ -83,8 +83,9 @@
                                             <div class="mb-3">
                                                 <div class="col-lg-10">
                                                     <label for="id_link">Вставьте Html код ссылки</label>
-                                                    <textarea class="form-control" name='link' id="id_link" rows="4"
-                                                              placeholder="Вставьте полноценный код вашей ссылки с анкором или без"></textarea>
+                                                    {{ form.link }}
+<!--                                                    <textarea class="form-control" name='link' id="id_link" rows="4"-->
+<!--                                                              placeholder="Вставьте полноценный код вашей ссылки с анкором или без"></textarea>-->
                                                 </div>
                                             </div>
 
@@ -100,7 +101,7 @@
                                     </div>
                                     <div class="d-flex flex-wrap gap-2">
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                            Оплатить
+                                            Редактировать
                                         </button>
                                     </div>
                                 </form>

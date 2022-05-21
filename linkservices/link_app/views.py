@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, UpdateView
 
 from .forms import AddLinkForm
 from .models import Link
@@ -35,3 +36,19 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
     def form_valid(self, form):
         form.save()
         return super(BuyLink, self).form_valid(form)
+
+
+class UpdateLink(LoginRequiredMixin, UpdateView):
+    """Редактирование ссылки"""
+    form_class = AddLinkForm
+    model = Link
+    template_name = 'link_app/update-link.html'
+    success_url = '/catalog/'
+    context_object_name = 'link'
+
+    def dispatch(self, request, *args, **kwargs):
+        """ Пользователь может редактировать только свои ссылки """
+        obj = self.get_object()
+        if obj.user_email != self.request.user.profile:
+            return redirect(obj)
+        return super(UpdateLink, self).dispatch(request, *args, **kwargs)

@@ -22,9 +22,6 @@
     <td>{{ item.url.price }}  RUB / Месяц</td>
     <td>Новая ссылка</td>
     <td>
-        <button type="button" class="btn btn-primary btn-sm w-md"
-                data-bs-toggle="modal" data-bs-target="#withdrawModal"
-                style="margin-left: auto;">Редактировать / Продлить
-        </button>
+        <a href="{% url 'update-link' item.id %}" class="btn btn-primary btn-sm w-md">Редактировать / Продлить</a>
     </td>
 </tr>
