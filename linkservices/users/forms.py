@@ -5,10 +5,18 @@ from django.contrib.auth.forms import (UserCreationForm,
 from django.core.exceptions import ValidationError
 from captcha.fields import CaptchaField
 
-
 from users.utils import send_email_for_verify
+from users.models import Profile
 
 User = get_user_model()
+
+
+class ProfileForm(forms.ModelForm):
+    """Форма профиля"""
+
+    class Meta:
+        model = Profile
+        fields = ('wmz', 'ymoney', 'user')
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
@@ -57,4 +65,3 @@ class UserRegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email', 'name_telegram', 'password1', 'password2')
-

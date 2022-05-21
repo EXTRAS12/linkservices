@@ -5,7 +5,7 @@
     <td><a href="{{ item.yandex_stat }}"> Ссылка на яндекс статистику</a></td>
     <td>{{ item.price }} RUB / Месяц</td>
     <td>
-        <span class="badge bg-success font-size-10">{{ item.sold_link }} из {{ item.total_link }}</span>
+        <span class="badge bg-success font-size-10">{{ item.link_set.count }} из {{ item.total_link }}</span>
     </td>
     <td>
         <a href="{{ item.get_absolute_url }}" class="btn btn-primary btn-sm w-md">Купить</a>

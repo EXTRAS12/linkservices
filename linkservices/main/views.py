@@ -1,10 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView, DetailView, UpdateView
+from django.views.generic import TemplateView, ListView
 from site_app.models import WebSite
 
-from users.models import Profile
-
-from .forms import ProfileForm
 from .models import Plugin, GeneralHelp
 
 
@@ -12,27 +9,6 @@ class FrontPage(TemplateView):
     """Страница перед входом в аккаунт"""
     template_name = 'main/frontpage.html'
     context_object_name = 'website'
-
-
-class ProfileView(LoginRequiredMixin, DetailView):
-    """Профиль"""
-    model = Profile
-    template_name = 'main/profile.html'
-
-
-class ProfileUpdate(LoginRequiredMixin, UpdateView):
-    """Редактирование профиля"""
-    form_class = ProfileForm
-    model = Profile
-    template_name = "main/profile.html"
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        print(form.instance.wmz)
-        print(form.instance.ymoney)
-        return super().form_invalid(form)
 
 
 class Help(LoginRequiredMixin, ListView):

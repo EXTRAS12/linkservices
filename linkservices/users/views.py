@@ -1,16 +1,48 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.contrib.auth import login, authenticate, get_user_model
+from django.views.generic import DetailView, UpdateView
 
-from .forms import UserRegisterForm, AuthenticationForm
+from .forms import UserRegisterForm, AuthenticationForm, ProfileForm
+from .models import Profile
 from .utils import send_email_for_verify
 from django.contrib.auth.tokens import default_token_generator as token_generator
 
 
 User = get_user_model()
+
+
+class ProfileView(LoginRequiredMixin, DetailView):
+    """Профиль"""
+    model = Profile
+    template_name = 'users/profile.html'
+
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+    """Редактирование профиля"""
+    form_class = ProfileForm
+    model = Profile
+    template_name = 'users/edit_profile.html'
+    success_url = '/profile/id={user_id}'
+
+    def dispatch(self, request, *args, **kwargs):
+        """ Пользователь может редактировать только свои сайты """
+        obj = self.get_object()
+        if obj.user != self.request.user:
+            return redirect(obj)
+        return super(ProfileUpdate, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.instance.wmz)
+        print(form.instance.ymoney)
+        return super().form_invalid(form)
 
 
 class MyLoginView(LoginView):
