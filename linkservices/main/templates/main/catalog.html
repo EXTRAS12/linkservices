@@ -36,64 +36,55 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3">
                                     <div class="tab-pane active" id="all-order" role="tabpanel">
-                                        <form>
+                                        <form method="get">
+
                                             <div class="row">
 
                                                 <div class="col-xl col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Тематика:</label>
-                                                        <select class="form-control select2-search-disable">
-                                                            <option value="BTC" selected>Bitcoin</option>
-                                                            <option value="ETH">Ethereum</option>
-                                                            <option value="LTC">litecoin</option>
-                                                        </select>
+                                                        {{ filter.form.category }}
+
                                                     </div>
                                                 </div>
 
                                                 <div class="col-xl col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Стоимость, от:</label>
-                                                        <input type="text" class="form-control" id="orderid-input"
-                                                               placeholder="Select date" data-date-format="dd M, yyyy"
-                                                               data-date-orientation="bottom auto"
-                                                               data-provide="datepicker" data-date-autoclose="true">
+                                                        <input type="number" class="form-control" id="id_price__gt"
+                                                               placeholder="Стоимость от" name="price__gt" step="any">
+
                                                         <label class="form-label mt-2">Стоимость, до:</label>
-                                                        <input type="text" class="form-control" id="orderid-input"
-                                                               placeholder="Select date" data-date-format="dd M, yyyy"
-                                                               data-date-orientation="bottom auto"
-                                                               data-provide="datepicker" data-date-autoclose="true">
+                                                        <input type="number" class="form-control" id="id_price__lt"
+                                                               placeholder="Стоимость до" name="price__lt" step="any">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-xl col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">ИКС, от:</label>
-                                                        <select class="form-control select2-search-disable">
-                                                            <option value="BU" selected>Buy</option>
-                                                            <option value="SE">Sell</option>
-                                                        </select>
+                                                       <input type="number" class="form-control" id="id_yandex_x__gt"
+                                                               placeholder="Икс от" name="yandex_x__gt" step="any">
                                                         <label class="form-label mt-2">ИКС, до:</label>
-                                                        <select class="form-control select2-search-disable">
-                                                            <option value="BU" selected>Buy</option>
-                                                            <option value="SE">Sell</option>
-                                                        </select>
+                                                         <input type="number" class="form-control" id="id_yandex_x__lt"
+                                                               placeholder="Икс до" name="yandex_x__lt" step="any">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-xl col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Ссылок, от:</label>
-                                                        <select class="form-control select2-search-disable">
-                                                            <option value="CO" selected>Completed</option>
-                                                            <option value="PE">Pending</option>
-                                                        </select>
-                                                        <label class="form-label mt-2">Ссылок, до:</label>
-                                                        <select class="form-control select2-search-disable">
-                                                            <option value="CO" selected>Completed</option>
-                                                            <option value="PE">Pending</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+<!--                                                <div class="col-xl col-sm-6">-->
+<!--                                                    <div class="mb-3">-->
+<!--                                                        <label class="form-label">Ссылок, от:</label>-->
+<!--                                                        <select class="form-control select2-search-disable">-->
+<!--                                                            <option value="CO" selected>Completed</option>-->
+<!--                                                            <option value="PE">Pending</option>-->
+<!--                                                        </select>-->
+<!--                                                        <label class="form-label mt-2">Ссылок, до:</label>-->
+<!--                                                        <select class="form-control select2-search-disable">-->
+<!--                                                            <option value="CO" selected>Completed</option>-->
+<!--                                                            <option value="PE">Pending</option>-->
+<!--                                                        </select>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
 
 
                                             </div>
@@ -101,7 +92,7 @@
                                             <div class="row">
                                                 <div class="col-xl col-sm-6 align-self-end">
                                                     <div class="mb-3">
-                                                        <button type="button" class="btn btn-primary w-md">Поиск
+                                                        <button type="submit" class="btn btn-primary w-md">Поиск
                                                         </button>
                                                     </div>
                                                 </div>

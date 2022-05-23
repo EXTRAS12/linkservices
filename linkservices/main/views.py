@@ -1,7 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
+from django_filters.views import FilterView
 from site_app.models import WebSite
 
+from .filters import SiteFilter
 from .models import Plugin, GeneralHelp
 
 
@@ -18,11 +21,12 @@ class Help(LoginRequiredMixin, ListView):
     context_object_name = 'help'
 
 
-class Catalog(LoginRequiredMixin, ListView):
+class Catalog(LoginRequiredMixin, FilterView, ListView):
     """Каталог сайтов"""
     template_name = 'main/catalog.html'
     context_object_name = 'website'
     paginate_by = 15
+    filterset_class = SiteFilter
 
     def get_queryset(self):
         return WebSite.objects.filter(status__name='Опубликовано').select_related('category')\

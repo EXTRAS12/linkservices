@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     'debug_toolbar',
+    'django_filters',
     'captcha',
     'ckeditor',
     'ckeditor_uploader',
