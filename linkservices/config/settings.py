@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'link_app',
     'users',
     'api',
+    'transactions',
 
 ]
 
@@ -120,6 +121,10 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+#  для транзакций
+MINIMUM_DEPOSIT_AMOUNT = 10
+MINIMUM_WITHDRAWAL_AMOUNT = 10
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

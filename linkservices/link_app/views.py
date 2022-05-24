@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin, UpdateView
@@ -34,7 +35,18 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        form.save()
+        month = form.cleaned_data.get('count_month')
+        price = form.cleaned_data.get('price_per_item')
+        total = month * price
+        if total > self.request.user.profile.current_balance:
+            raise ValidationError(
+               f'Недостаточно средств'
+            )
+        else:
+            self.request.user.profile.current_balance -= total
+            self.request.user.profile.save(update_fields=['current_balance'])
+
+            form.save()
         return super(BuyLink, self).form_valid(form)
 
 

@@ -14,7 +14,7 @@ class NewFlatpage(models.Model):
 
     class Meta:
         verbose_name = "Содержание страницы"
-        verbose_name_plural = "Содержание страницы"
+        verbose_name_plural = "Содержание страниц"
 
 
 class Plugin(models.Model):

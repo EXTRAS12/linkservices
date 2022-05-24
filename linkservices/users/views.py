@@ -6,12 +6,14 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.contrib.auth import login, authenticate, get_user_model
 from django.views.generic import DetailView, UpdateView
+from django.views.generic.edit import FormMixin
 
 from .forms import UserRegisterForm, AuthenticationForm, ProfileForm
 from .models import Profile
 from .utils import send_email_for_verify
 from django.contrib.auth.tokens import default_token_generator as token_generator
 
+from transactions.models import Transaction
 
 User = get_user_model()
 
@@ -20,6 +22,20 @@ class ProfileView(LoginRequiredMixin, DetailView):
     """Профиль"""
     model = Profile
     template_name = 'users/profile.html'
+    context_object_name = 'profile'
+    queryset = Profile.objects.select_related('user')
+
+    def dispatch(self, request, *args, **kwargs):
+        """Пользователь может смотреть свой профиль"""
+        obj = self.get_object()
+        if obj.user != self.request.user:
+            return redirect('catalog')
+        return super(ProfileView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        context['transactions'] = Transaction.objects.filter(account=self.request.user.profile)
+        return context
 
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
@@ -30,10 +46,10 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
     success_url = '/profile/id={user_id}'
 
     def dispatch(self, request, *args, **kwargs):
-        """ Пользователь может редактировать только свои сайты """
+        """Пользователь может редактировать только свои сайты"""
         obj = self.get_object()
         if obj.user != self.request.user:
-            return redirect(obj)
+            return redirect('catalog')
         return super(ProfileUpdate, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
