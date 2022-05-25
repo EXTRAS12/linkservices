@@ -14,11 +14,11 @@ class VerifyStatusAdmin(admin.ModelAdmin):
 
 class LinkAdmin(admin.ModelAdmin):
     """Ссылки"""
-    fields = ('url', 'user_email', 'link', 'status_verify', 'moderation', 'total_price',
+    fields = ('url', 'user', 'link', 'status_verify', 'moderation', 'total_price',
               'price_per_item', 'count_month', 'valid_date', 'created', 'update')
-    list_display = ('url', 'user_email', 'valid_date', 'status_verify', 'moderation',  'created',
+    list_display = ('url', 'user', 'valid_date', 'status_verify', 'moderation',  'created',
                     'update')
-    search_fields = ('url', 'user_email', 'link')
+    search_fields = ('url', 'user', 'link')
     list_filter = ('url', 'status_verify', 'moderation', 'valid_date', 'created', 'update')
     readonly_fields = ('created', 'update', 'valid_date')
 

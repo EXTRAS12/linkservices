@@ -16,10 +16,8 @@ def send_updates_status(sender, update_fields, instance, **kwargs):
         if sta in update_fields:
             status = instance.status
             url = instance.url
-            chat_id = instance.user_email.chat_id
-            # status = instance.status
+            chat_id = instance.user.chat_id
             api_key = settings.API
-            # chat_id = str(instance.bot_id)
             text = f'Статус вашего сайта изменился: {url} ' + str(status)
             url = f'https://api.telegram.org/bot{api_key}/sendMessage'
             params = {
@@ -35,10 +33,8 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
         sta = 'status_verify'
         if sta in update_fields:
             status = instance.status_verify
-            chat_id = instance.user_email.chat_id
-            # status = instance.status
+            chat_id = instance.user.chat_id
             api_key = settings.API
-            # chat_id = str(instance.bot_id)
             text = f'Статус вашей ссылки: ' + str(status)
             url = f'https://api.telegram.org/bot{api_key}/sendMessage'
             params = {

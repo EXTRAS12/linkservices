@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django_filters.views import FilterView
 from site_app.models import WebSite
 
 from .filters import SiteFilter
-from .models import Plugin, GeneralHelp
+from .models import Plugin
+from link_app.models import Link
 
 
 class FrontPage(TemplateView):
@@ -14,11 +14,9 @@ class FrontPage(TemplateView):
     context_object_name = 'website'
 
 
-class Help(LoginRequiredMixin, ListView):
+class Help(LoginRequiredMixin, TemplateView):
     """Страница помощи"""
-    model = GeneralHelp
     template_name = 'main/help.html'
-    context_object_name = 'help'
 
 
 class Catalog(LoginRequiredMixin, FilterView, ListView):
@@ -29,8 +27,8 @@ class Catalog(LoginRequiredMixin, FilterView, ListView):
     filterset_class = SiteFilter
 
     def get_queryset(self):
-        return WebSite.objects.filter(status__name='Опубликовано').select_related('category')\
-            .exclude(user_email=self.request.user.profile)
+        return WebSite.objects.filter(status__name='Опубликовано')\
+            .select_related('category').exclude(user=self.request.user.profile)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Catalog, self).get_context_data(**kwargs)

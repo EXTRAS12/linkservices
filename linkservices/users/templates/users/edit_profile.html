@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Профиль пользователя :: {{ block.super }}{% endblock %}
+{% block title %}Редактируем профиль :: {{ block.super }}{% endblock %}
 
 {% block content %}
 <div id="layout-wrapper">
@@ -14,11 +14,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Главная панель</h4>
+                            <h4 class="mb-sm-0 font-size-18">Редактируем профиль</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'catalog' %}">Главная</a></li>
                                     <li class="breadcrumb-item active">Панель управления</li>
                                 </ol>
                             </div>
@@ -28,14 +28,14 @@
                 </div>
                 <!-- end page title -->
 
-                <div class="row">
-                    <div class="col-xl-4">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-xl-6">
                         <div class="card overflow-hidden">
                             <div class="bg-primary bg-soft">
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-3">
-                                            <h5 class="text-primary">Добро пожаловать в Linkservices.ru</h5>
+                                            <h5 class="text-primary">Linkservices.ru</h5>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -47,11 +47,16 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="avatar-md profile-user-wid mb-4">
-                                            <img src="{% static '/images/users/avatar-1.jpg' %}" alt=""
+                                           {% if profile.avatar %}
+                                            <img src="{{ profile.avatar.url }}" alt=""
                                                  class="img-thumbnail rounded-circle">
+                                            {% else %}
+                                            <img src="{% static '/images/favicon.ico' %}" alt=""
+                                                 class="img-thumbnail rounded-circle">
+                                            {% endif %}
                                         </div>
-                                        <h5 class="font-size-15 text-truncate">Ваш ID: {{ user.id }} </h5>
-                                        <p class="text-muted mb-0 text-truncate">{{ user.name_telegram }}</p>
+                                        <h5 class="font-size-15 text-truncate">Ваш ID: {{ profile.id }} </h5>
+                                        <p class="text-muted mb-0 text-truncate">{{ user.username }}</p>
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="pt-4">
@@ -59,20 +64,16 @@
                                             <div class="row">
                                                 <div class="col-6">
 
-                                                    <h5 class="font-size-15">{{ user.profile.user_website.count }}</h5>
+                                                    <h5 class="font-size-15">{{ profile.user_website.count }}</h5>
 
                                                     <p class="text-muted mb-0">Сайты</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <h5 class="font-size-15">{{ user.profile.user_link.count }}</h5>
+                                                    <h5 class="font-size-15">{{ profile.user_link.count }}</h5>
                                                     <p class="text-muted mb-0">Ссылки</p>
                                                 </div>
                                             </div>
-                                            <div class="mt-4">
-                                                <a href="javascript: void(0);"
-                                                   class="btn btn-primary waves-effect waves-light btn-sm">Вывести
-                                                    средства <i class="mdi mdi-arrow-right ms-1"></i></a>
-                                            </div>
+
                                         </div>
                                     </div>
 
@@ -83,136 +84,125 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Персональная информация</h4>
+                                <h4 class="card-title mb-4">Редактируем информацию</h4>
 
                                 <div class="table-responsive">
+                                    <form method="post" action="" enctype="multipart/form-data">
+                                    {% csrf_token %}
                                     <table class="table table-nowrap mb-0">
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">Ваш email:</th>
-                                            <td>{{ user.email }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">WMZ-кошелек:</th>
+                                        {{ form }}
 
-                                            <td>{{ user.profile.wmz }}</td>
-
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">ЮMoney-кошелек:</th>
-
-                                            <td>{{ user.profile.ymoney }}</td>
-
-
-                                        </tr>
-                                        <!--                                        <tr>-->
-                                        <!--                                            <th scope="row">Пароль:</th>-->
-                                        <!--                                            <td>*********</td>-->
-                                        <!--                                        </tr>-->
 
                                         </tbody>
 
                                     </table>
+                                        <button type="submit" class="btn btn-primary text-center">
+                                        Сохранить
+
+                                        </button>
+
+                                        </form>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary waves-effect waves-light btn-sm"
-                                            data-bs-toggle="modal" data-bs-target="#EditModal">
-                                        Редактировать <i class="mdi mdi-arrow-right ms-1"></i>
-                                    </button>
+<!--                                    <button type="button" class="btn btn-primary waves-effect waves-light btn-sm"-->
+<!--                                            data-bs-toggle="modal" data-bs-target="#EditModal">-->
+<!--                                        Редактировать <i class="mdi mdi-arrow-right ms-1"></i>-->
+<!--                                    </button>-->
 
                                     <!-- EditModal -->
-                                    <div class="modal fade" id="EditModal" tabindex="-1"
-                                         aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header border-bottom-0">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
+<!--                                    <div class="modal fade" id="EditModal" tabindex="-1"-->
+<!--                                         aria-labelledby="subscribeModalLabel" aria-hidden="true">-->
+<!--                                        <div class="modal-dialog modal-dialog-centered">-->
+<!--                                            <div class="modal-content">-->
+<!--                                                <div class="modal-header border-bottom-0">-->
+<!--                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+<!--                                                            aria-label="Close"></button>-->
+<!--                                                </div>-->
 
-                                                <div class="modal-body">
-                                                    <div class="text-center mb-4">
-                                                        <div class="avatar-md mx-auto mb-4">
-                                                            <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                                                <img src="{% static '/images/users/avatar-1.jpg' %}"
-                                                                     alt=""
-                                                                     class="img-thumbnail rounded-circle">
-                                                            </div>
-                                                        </div>
+<!--                                                <div class="modal-body">-->
+<!--                                                    <div class="text-center mb-4">-->
+<!--                                                        <div class="avatar-md mx-auto mb-4">-->
+<!--                                                            <div class="avatar-title bg-light rounded-circle text-primary h1">-->
+<!--                                                                <img src="{% static '/images/users/avatar-1.jpg' %}"-->
+<!--                                                                     alt=""-->
+<!--                                                                     class="img-thumbnail rounded-circle">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
 
-                                                        <form method="post" action="">
+<!--                                                        <form method="post" action="">-->
 
-                                                            <div class="row justify-content-center">
+<!--                                                            <div class="row justify-content-center">-->
 
-                                                                <div class="col-xl-10">
-                                                                    <h4 class="text-primary mb-5">Редактирование
-                                                                        данных</h4>
+<!--                                                                <div class="col-xl-10">-->
+<!--                                                                    <h4 class="text-primary mb-5">Редактирование-->
+<!--                                                                        данных</h4>-->
 
-                                                                    <div class="input-group bg-light rounded mb-3">
-                                                                        <input type="email"
-                                                                               name="user"
-                                                                               class="form-control bg-transparent border-0"
-                                                                               placeholder="Ваш Email"
-                                                                               aria-label="Recipient's username"
-                                                                               aria-describedby="button-addon2">
+<!--                                                                    <div class="input-group bg-light rounded mb-3">-->
+<!--                                                                        <input type="email"-->
+<!--                                                                               name="user"-->
+<!--                                                                               class="form-control bg-transparent border-0"-->
+<!--                                                                               placeholder="Ваш Email"-->
+<!--                                                                               aria-label="Recipient's username"-->
+<!--                                                                               aria-describedby="button-addon2">-->
 
-                                                                        <button class="btn btn-primary" type="button"
-                                                                                id="button-addon2">
-                                                                            <i class="bx bx-save"
-                                                                               style="font-size: 18px;"></i>
-                                                                        </button>
-                                                                    </div>
+<!--                                                                        <button class="btn btn-primary" type="button"-->
+<!--                                                                                id="button-addon2">-->
+<!--                                                                            <i class="bx bx-save"-->
+<!--                                                                               style="font-size: 18px;"></i>-->
+<!--                                                                        </button>-->
+<!--                                                                    </div>-->
 
-                                                                    <div class="input-group bg-light rounded mb-3">
-                                                                        <input type="email"
-                                                                               class="form-control bg-transparent border-0"
-                                                                               placeholder="WMZ-кошелек"
-                                                                               aria-label="Recipient's username"
-                                                                               aria-describedby="button-addon2">
+<!--                                                                    <div class="input-group bg-light rounded mb-3">-->
+<!--                                                                        <input type="email"-->
+<!--                                                                               class="form-control bg-transparent border-0"-->
+<!--                                                                               placeholder="WMZ-кошелек"-->
+<!--                                                                               aria-label="Recipient's username"-->
+<!--                                                                               aria-describedby="button-addon2">-->
 
-                                                                        <button class="btn btn-primary" type="button"
-                                                                                id="button-addon2">
-                                                                            <i class="bx bx-save"
-                                                                               style="font-size: 18px;"></i>
-                                                                        </button>
-                                                                    </div>
+<!--                                                                        <button class="btn btn-primary" type="button"-->
+<!--                                                                                id="button-addon2">-->
+<!--                                                                            <i class="bx bx-save"-->
+<!--                                                                               style="font-size: 18px;"></i>-->
+<!--                                                                        </button>-->
+<!--                                                                    </div>-->
 
-                                                                    <div class="input-group bg-light rounded mb-3">
-                                                                        <input type="email"
-                                                                               class="form-control bg-transparent border-0"
-                                                                               placeholder="ЮMoney-кошелек"
-                                                                               aria-label="Recipient's username"
-                                                                               aria-describedby="button-addon2">
+<!--                                                                    <div class="input-group bg-light rounded mb-3">-->
+<!--                                                                        <input type="email"-->
+<!--                                                                               class="form-control bg-transparent border-0"-->
+<!--                                                                               placeholder="ЮMoney-кошелек"-->
+<!--                                                                               aria-label="Recipient's username"-->
+<!--                                                                               aria-describedby="button-addon2">-->
 
-                                                                        <button class="btn btn-primary" type="button"
-                                                                                id="button-addon2">
-                                                                            <i class="bx bx-save"
-                                                                               style="font-size: 18px;"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                                <button type="submit" class="btn btn-primary">
-                                                                    Сохранить
-                                                                </button>
+<!--                                                                        <button class="btn btn-primary" type="button"-->
+<!--                                                                                id="button-addon2">-->
+<!--                                                                            <i class="bx bx-save"-->
+<!--                                                                               style="font-size: 18px;"></i>-->
+<!--                                                                        </button>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                                <button type="submit" class="btn btn-primary">-->
+<!--                                                                    Сохранить-->
+<!--                                                                </button>-->
 
-                                                            </div>
-                                                        </form>
+<!--                                                            </div>-->
+<!--                                                        </form>-->
 
-                                                    </div>
+<!--                                                    </div>-->
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </div>
                                 <!-- end modal -->
-                                <form method="post" action="">
-                                    {% csrf_token %}
+<!--                                <form method="post" action="">-->
+<!--                                    {% csrf_token %}-->
 
-                                {{ form }}
-                                    <button type="submit" class="btn btn-primary">
-                                        Сохранить
-                                    </button>
-                                </form>
+<!--                                -->
+<!--                                    <button type="submit" class="btn btn-primary">-->
+<!--                                        Сохранить-->
+<!--                                    </button>-->
+<!--                                </form>-->
                             </div>
                         </div>
                     </div>

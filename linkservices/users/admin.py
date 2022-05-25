@@ -11,7 +11,7 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    list_display = ('username', 'name_telegram', 'email', 'date_joined', 'is_staff',  'email_verify')
+    list_display = ('username', 'email', 'date_joined', 'is_staff',  'email_verify')
     search_fields = ('username', 'email', 'date_joined', 'is_staff')
     fieldsets = (
         (None, {"fields": ("username", "password")}),
@@ -46,6 +46,6 @@ class UserAdmin(UserAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     """Профили пользователей"""
-    list_display = ('user', 'current_balance', 'hold_balance', 'output_balance', 'chat_id', 'TOKEN',
+    list_display = ('user', 'name_telegram', 'current_balance', 'hold_balance', 'output_balance', 'chat_id', 'TOKEN',
                     'created', 'update')
 

@@ -4,8 +4,6 @@
 
 {% block content %}
 <div id="layout-wrapper">
-
-
     <div class="main-content">
 
         <div class="page-content">
@@ -48,11 +46,16 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="avatar-md profile-user-wid mb-4">
-                                            <img src="{% static '/images/users/avatar-1.jpg' %}" alt=""
+                                            {% if profile.avatar %}
+                                            <img src="{{ profile.avatar.url }}" alt=""
                                                  class="img-thumbnail rounded-circle">
+                                            {% else %}
+                                            <img src="{% static '/images/favicon.ico' %}" alt=""
+                                                 class="img-thumbnail rounded-circle">
+                                            {% endif %}
                                         </div>
                                         <h5 class="font-size-15 text-truncate">Ваш ID: {{ profile.id }} </h5>
-                                        <p class="text-muted mb-0 text-truncate">{{ user.name_telegram }}</p>
+                                        <p class="text-muted mb-0 text-truncate">{{ user.username }}</p>
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="pt-4">
@@ -94,6 +97,13 @@
                                             <td>{{ profile.user }}</td>
                                         </tr>
                                         <tr>
+                                            <th scope="row">Ваш телеграм:</th>
+
+                                            <td>{{ profile.name_telegram }}</td>
+
+
+                                        </tr>
+                                        <tr>
                                             <th scope="row">WMZ-кошелек:</th>
 
                                             <td>{{ profile.wmz }}</td>
@@ -106,110 +116,96 @@
 
 
                                         </tr>
-                                        <!--                                        <tr>-->
-                                        <!--                                            <th scope="row">Пароль:</th>-->
-                                        <!--                                            <td>*********</td>-->
-                                        <!--                                        </tr>-->
 
                                         </tbody>
 
                                     </table>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary waves-effect waves-light btn-sm"
+                                    <a href="{% url 'edit_profile' pk=user.id %}" > <button type="button" class="btn btn-primary waves-effect waves-light btn-sm"
                                             data-bs-toggle="modal" data-bs-target="#EditModal">
-                                        Редактировать <i class="mdi mdi-arrow-right ms-1"></i>
-                                    </button>
+                                       Редактировать <i class="mdi mdi-arrow-right ms-1"></i>
+                                    </button></a>
 
                                     <!-- EditModal -->
-                                    <div class="modal fade" id="EditModal" tabindex="-1"
-                                         aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header border-bottom-0">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
+<!--                                    <div class="modal fade" id="EditModal" tabindex="-1"-->
+<!--                                         aria-labelledby="subscribeModalLabel" aria-hidden="true">-->
+<!--                                        <div class="modal-dialog modal-dialog-centered">-->
+<!--                                            <div class="modal-content">-->
+<!--                                                <div class="modal-header border-bottom-0">-->
+<!--                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+<!--                                                            aria-label="Close"></button>-->
+<!--                                                </div>-->
 
-                                                <div class="modal-body">
-                                                    <div class="text-center mb-4">
-                                                        <div class="avatar-md mx-auto mb-4">
-                                                            <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                                                <img src="{% static '/images/users/avatar-1.jpg' %}"
-                                                                     alt=""
-                                                                     class="img-thumbnail rounded-circle">
-                                                            </div>
-                                                        </div>
+<!--                                                <div class="modal-body">-->
+<!--                                                    <div class="text-center mb-4">-->
+<!--                                                        <div class="avatar-md mx-auto mb-4">-->
+<!--                                                            <div class="avatar-title bg-light rounded-circle text-primary h1">-->
+<!--                                                                <img src="{% static '/images/users/avatar-1.jpg' %}"-->
+<!--                                                                     alt=""-->
+<!--                                                                     class="img-thumbnail rounded-circle">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
 
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-xl-10">
-                                                                <h4 class="text-primary mb-5">Редактирование данных</h4>
-                                                                <form method="post" action="">
+<!--                                                        <div class="row justify-content-center">-->
+<!--                                                            <div class="col-xl-10">-->
+<!--                                                                <h4 class="text-primary mb-5">Редактирование данных</h4>-->
+<!--                                                                <form method="post" action="">-->
 
-                                                                <div class="input-group bg-light rounded mb-3">
-                                                                    <input type="email"
-                                                                           name="user"
-                                                                           class="form-control bg-transparent border-0"
-                                                                           placeholder="Ваш Email"
-                                                                           aria-label="Recipient's username"
-                                                                           aria-describedby="button-addon2">
+<!--                                                                    <div class="input-group bg-light rounded mb-3">-->
+<!--                                                                        <input type="email"-->
+<!--                                                                               name="user"-->
+<!--                                                                               class="form-control bg-transparent border-0"-->
+<!--                                                                               placeholder="Ваш Email"-->
+<!--                                                                               aria-label="Recipient's username"-->
+<!--                                                                               aria-describedby="button-addon2">-->
 
-                                                                    <button class="btn btn-primary" type="button"
-                                                                            id="button-addon2">
-                                                                        <i class="bx bx-save"
-                                                                           style="font-size: 18px;"></i>
-                                                                    </button>
-                                                                </div>
+<!--                                                                        <button class="btn btn-primary" type="button"-->
+<!--                                                                                id="button-addon2">-->
+<!--                                                                            <i class="bx bx-save"-->
+<!--                                                                               style="font-size: 18px;"></i>-->
+<!--                                                                        </button>-->
+<!--                                                                    </div>-->
 
-                                                                <div class="input-group bg-light rounded mb-3">
-                                                                    <input type="email"
-                                                                           class="form-control bg-transparent border-0"
-                                                                           placeholder="WMZ-кошелек"
-                                                                           aria-label="Recipient's username"
-                                                                           aria-describedby="button-addon2">
+<!--                                                                    <div class="input-group bg-light rounded mb-3">-->
+<!--                                                                        <input type="email"-->
+<!--                                                                               class="form-control bg-transparent border-0"-->
+<!--                                                                               placeholder="WMZ-кошелек"-->
+<!--                                                                               aria-label="Recipient's username"-->
+<!--                                                                               aria-describedby="button-addon2">-->
 
-                                                                    <button class="btn btn-primary" type="button"
-                                                                            id="button-addon2">
-                                                                        <i class="bx bx-save"
-                                                                           style="font-size: 18px;"></i>
-                                                                    </button>
-                                                                </div>
+<!--                                                                        <button class="btn btn-primary" type="button"-->
+<!--                                                                                id="button-addon2">-->
+<!--                                                                            <i class="bx bx-save"-->
+<!--                                                                               style="font-size: 18px;"></i>-->
+<!--                                                                        </button>-->
+<!--                                                                    </div>-->
 
-                                                                <div class="input-group bg-light rounded mb-3">
-                                                                    <input type="email"
-                                                                           class="form-control bg-transparent border-0"
-                                                                           placeholder="ЮMoney-кошелек"
-                                                                           aria-label="Recipient's username"
-                                                                           aria-describedby="button-addon2">
+<!--                                                                    <div class="input-group bg-light rounded mb-3">-->
+<!--                                                                        <input type="email"-->
+<!--                                                                               class="form-control bg-transparent border-0"-->
+<!--                                                                               placeholder="ЮMoney-кошелек"-->
+<!--                                                                               aria-label="Recipient's username"-->
+<!--                                                                               aria-describedby="button-addon2">-->
 
-                                                                    <button class="btn btn-primary" type="button"
-                                                                            id="button-addon2">
-                                                                        <i class="bx bx-save"
-                                                                           style="font-size: 18px;"></i>
-                                                                    </button>
-                                                                </div>
+<!--                                                                        <button class="btn btn-primary" type="button"-->
+<!--                                                                                id="button-addon2">-->
+<!--                                                                            <i class="bx bx-save"-->
+<!--                                                                               style="font-size: 18px;"></i>-->
+<!--                                                                        </button>-->
+<!--                                                                    </div>-->
 
-<!--                                                                <div class="input-group bg-light rounded mb-3">-->
-<!--                                                                    <input type="email"-->
-<!--                                                                           class="form-control bg-transparent border-0"-->
-<!--                                                                           placeholder="Пароль"-->
-<!--                                                                           aria-label="Recipient's username"-->
-<!--                                                                           aria-describedby="button-addon2">-->
-
-<!--                                                                    <button class="btn btn-primary" type="button"-->
-<!--                                                                            id="button-addon2">-->
-<!--                                                                        <i class="bx bx-save"-->
-<!--                                                                           style="font-size: 18px;"></i>-->
+<!--                          -->
+<!--                                                                    <button type="submit" class="btn btn-primary">-->
+<!--                                                                        Сохранить-->
 <!--                                                                    </button>-->
-<!--                                                                </div>-->
-                                                                <button type="submit" class="btn btn-primary">Сохранить</button>
-                                                                    </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                                                </form>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <!-- end modal -->
 
 
@@ -264,9 +260,9 @@
 
                                             <div class="flex-shrink-0 align-self-center">
                                                 <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
-<span class="avatar-title">
-<i class="bx bx-copy-alt font-size-24"></i>
-</span>
+                                                    <span class="avatar-title">
+                                                    <i class="bx bx-copy-alt font-size-24"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,7 +275,7 @@
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <p class="text-muted fw-medium">На удержании</p>
-                                                <h4 class="mb-0">{{ profile.hold_balance }}</h4>
+                                                <h4 class="mb-0">{{ profile.hold_balance }} RUB</h4>
                                             </div>
 
                                             <div class="flex-shrink-0 align-self-center">
@@ -299,7 +295,7 @@
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <p class="text-muted fw-medium">Ожидает вывода</p>
-                                                <h4 class="mb-0">{{ profile.output_balance }}</h4>
+                                                <h4 class="mb-0">{{ profile.output_balance }} RUB</h4>
                                             </div>
 
                                             <div class="flex-shrink-0 align-self-center">
@@ -385,68 +381,68 @@
                                         </tr>
                                         {% endfor %}
 
-<!--                                        <tr>-->
+                                        <!--                                        <tr>-->
 
-<!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 520</a></td>-->
-<!--                                            <td>Попоплнение</td>-->
-<!--                                            <td>-->
-<!--                                                07 Oct, 2019-->
-<!--                                            </td>-->
-<!--                                            <td>-->
-<!--                                                $380-->
-<!--                                            </td>-->
-<!--                                            <td>-->
-<!--                                                <span class="badge badge-pill badge-soft-danger font-size-11">Отменен</span>-->
-<!--                                            </td>-->
-<!--                                            <td>Платежная система Enot</td>-->
-<!--                                            <td>-->
-<!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
-<!--                                                <button type="button"-->
-<!--                                                        class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"-->
-<!--                                                        data-bs-toggle="modal"-->
-<!--                                                        data-bs-target=".transaction-detailModal">Отменить заявку-->
-<!--                                                </button>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
+                                        <!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 520</a></td>-->
+                                        <!--                                            <td>Попоплнение</td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                07 Oct, 2019-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                $380-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <span class="badge badge-pill badge-soft-danger font-size-11">Отменен</span>-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>Платежная система Enot</td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                                        <!--                                                <button type="button"-->
+                                        <!--                                                        class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"-->
+                                        <!--                                                        data-bs-toggle="modal"-->
+                                        <!--                                                        data-bs-target=".transaction-detailModal">Отменить заявку-->
+                                        <!--                                                </button>-->
+                                        <!--                                            </td>-->
+                                        <!--                                        </tr>-->
 
-<!--                                        <tr>-->
+                                        <!--                                        <tr>-->
 
-<!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 519</a></td>-->
-<!--                                            <td>Вывод</td>-->
-<!--                                            <td>-->
-<!--                                                06 Oct, 2019-->
-<!--                                            </td>-->
-<!--                                            <td>-->
-<!--                                                $384-->
-<!--                                            </td>-->
-<!--                                            <td>-->
-<!--                                                <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>-->
-<!--                                            </td>-->
-<!--                                            <td>Webmoney:Z4343477474747</td>-->
-<!--                                            <td>-->
-<!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                                        <!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 519</a></td>-->
+                                        <!--                                            <td>Вывод</td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                06 Oct, 2019-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                $384-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>Webmoney:Z4343477474747</td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
 
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
+                                        <!--                                            </td>-->
+                                        <!--                                        </tr>-->
+                                        <!--                                        <tr>-->
 
-<!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 518</a></td>-->
-<!--                                            <td>Зачисление на баланс</td>-->
-<!--                                            <td>-->
-<!--                                                05 Oct, 2019-->
-<!--                                            </td>-->
-<!--                                            <td>-->
-<!--                                                $412-->
-<!--                                            </td>-->
-<!--                                            <td>-->
-<!--                                                <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>-->
-<!--                                            </td>-->
-<!--                                            <td>Заказ по ссылке полностью обработан</td>-->
-<!--                                            <td>-->
-<!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                                        <!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 518</a></td>-->
+                                        <!--                                            <td>Зачисление на баланс</td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                05 Oct, 2019-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                $412-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>Заказ по ссылке полностью обработан</td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
 
-<!--                                            </td>-->
-<!--                                        </tr>-->
+                                        <!--                                            </td>-->
+                                        <!--                                        </tr>-->
 
 
                                         </tbody>

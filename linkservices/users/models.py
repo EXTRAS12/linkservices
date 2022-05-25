@@ -6,11 +6,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
 
+from django.core.files import File
+from io import BytesIO
+from PIL import Image
+
 
 class User(AbstractUser):
     """Основной юзер"""
     email = models.EmailField(_("email address"), unique=True, )
-    name_telegram = models.CharField(max_length=100, blank=True, null=True, verbose_name='Телеграмм')
 
     email_verify = models.BooleanField(default=False)
 
@@ -35,6 +38,7 @@ class Profile(models.Model):
     hold_balance = models.PositiveIntegerField(default=0, blank=True, null=True, verbose_name='На удержании')
     output_balance = models.PositiveIntegerField(default=0, blank=True, null=True, verbose_name='Ожидает вывода')
     name_telegram = models.CharField(blank=True, null=True, max_length=100, verbose_name='Телеграмм')
+    avatar = models.ImageField(upload_to='avatar/%Y/%m/%d/', blank=True, null=True, verbose_name='Аватар')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлён')
 

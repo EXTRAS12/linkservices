@@ -36,7 +36,7 @@
                                 <p class="card-title-desc">Арендуйте ссылку на сайте сроком от 1 до 12 месяцев </p>
                                 <form method="post" action="">
                                     {% csrf_token %}
-                                    <input class="form-control" name="user_email" id="id_user_email"
+                                    <input class="form-control" name="user" id="id_user"
                                            value="{{ user.profile.id }}" hidden="" type="text" readonly>
                                     <input class="form-control" name="price_per_item" id="id_price_per_item"
                                            value="{{ link.price_per_item}}" hidden="" required="" type="number" readonly>

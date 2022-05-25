@@ -13,10 +13,14 @@ User = get_user_model()
 
 class ProfileForm(forms.ModelForm):
     """Форма профиля"""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['user'].widget = forms.HiddenInput()
 
     class Meta:
         model = Profile
-        fields = ('wmz', 'ymoney', 'user')
+        fields = ('name_telegram', 'wmz', 'ymoney', 'avatar', 'user')
 
 
 class AuthenticationForm(DjangoAuthenticationForm):
@@ -64,4 +68,4 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'name_telegram', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')

@@ -13,8 +13,7 @@ class FlatPageNewAdmin(FlatPageAdmin):
     """Для статических страниц"""
     inlines = [NewFlatpageInline]
     fieldsets = (
-        (None, {'fields': ('url', 'title', 'sites')}),
-        (('Advanced options'), {
+        (None, {'fields': ('url', 'title', 'sites')}), (('Advanced options',), {
             'fields': ('template_name',),
         }),
     )
@@ -26,8 +25,6 @@ class FlatPageNewAdmin(FlatPageAdmin):
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageNewAdmin)
 admin.site.register(Plugin)
-admin.site.register(HelpCategory)
-admin.site.register(GeneralHelp)
 
 admin.site.site_title = 'Вас приветствует linkservices.ru'
 admin.site.site_header = 'Вас приветствует Linkservices.ru'

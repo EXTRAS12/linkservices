@@ -34,13 +34,12 @@ class Status(models.Model):
 class WebSite(models.Model):
     """Модель добавления сайта"""
     url = models.CharField(max_length=255, verbose_name='url сайта')
-    user_email = models.ForeignKey(Profile, related_name='user_website', on_delete=models.CASCADE,
-                                   max_length=100, blank=True, null=True, verbose_name='email заказчика')
+    user = models.ForeignKey(Profile, related_name='user_website', on_delete=models.CASCADE,
+                             max_length=100, blank=True, null=True, verbose_name='email заказчика')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Тематика')
     price = models.IntegerField(verbose_name='Цена')
     status = models.ForeignKey(Status, verbose_name='Статус', on_delete=models.CASCADE, blank=True, null=True)
     total_link = models.IntegerField(verbose_name='Всего ссылок', blank=True, null=True)
-    sold_link = models.IntegerField(verbose_name='Продано ссылок', blank=True, null=True)
     yandex_x = models.IntegerField(verbose_name='Яндекс Икс', blank=True, null=True)
     yandex_stat = models.CharField(max_length=255, verbose_name='Яндекс статистика')
     password_yandex = models.CharField(max_length=250, verbose_name='Пароль от статистики', blank=True, null=True)

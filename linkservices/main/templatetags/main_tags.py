@@ -1,5 +1,4 @@
 from django import template
-from django.shortcuts import render
 from link_app.models import Link
 from site_app.models import WebSite
 

@@ -52,14 +52,6 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
             return redirect('catalog')
         return super(ProfileUpdate, self).dispatch(request, *args, **kwargs)
 
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        print(form.instance.wmz)
-        print(form.instance.ymoney)
-        return super().form_invalid(form)
-
 
 class MyLoginView(LoginView):
     form_class = AuthenticationForm
@@ -74,7 +66,7 @@ class EmailVerify(View):
             user.email_verify = True
             user.save()
             login(request, user)
-            return redirect('profile')
+            return redirect('catalog')
         return redirect('invalid_verify')
 
     @staticmethod

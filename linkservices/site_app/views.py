@@ -16,7 +16,7 @@ class MySites(LoginRequiredMixin, ListView):
     paginate_by = 15
 
     def get_queryset(self):
-        return WebSite.objects.filter(user_email=self.request.user.profile).\
+        return WebSite.objects.filter(user=self.request.user.profile).\
             select_related('category', 'status')
 
 
@@ -31,7 +31,7 @@ class UpdateSite(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         """ Пользователь может редактировать только свои сайты """
         obj = self.get_object()
-        if obj.user_email != self.request.user.profile:
+        if obj.user != self.request.user.profile:
             return redirect(obj)
         return super(UpdateSite, self).dispatch(request, *args, **kwargs)
 
@@ -44,7 +44,7 @@ class DeleteSite(LoginRequiredMixin, DeleteView):
     def dispatch(self, request, *args, **kwargs):
         """ Пользователь может удалять только свои сайты """
         obj = self.get_object()
-        if obj.user_email != self.request.user.profile:
+        if obj.user != self.request.user.profile:
             return redirect(obj)
         return super(DeleteSite, self).dispatch(request, *args, **kwargs)
 
@@ -56,7 +56,7 @@ def add_site(request):
     if request.method == "POST":
         if form.is_valid():
             new_site = form.save(commit=False)
-            new_site.user_email = request.user.profile
+            new_site.user = request.user.profile
             new_site.save()
             return redirect('my-sites')
     return render(request, 'site_app/add-site.html', locals())
