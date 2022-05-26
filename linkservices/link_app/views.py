@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin, UpdateView
 
@@ -35,19 +37,21 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
         form = self.get_form()
         if form.is_valid():
             month = form.cleaned_data.get('count_month')
-            price = form.cleaned_data.get('price_per_item')
-            total = month * price
+
+            price = WebSite.objects.get(pk=self.kwargs.get('pk'))
+
+            total = month * price.price
             if total > self.request.user.profile.current_balance:
-                context = 'Недостаточно средств на балансе'
-                return HttpResponse(context)
+                messages.error(request, 'Недостаточно средств на балансе')
+                return HttpResponseRedirect(reverse_lazy('buy-link',  kwargs={'pk': price.pk}))
 
             else:
                 self.request.user.profile.current_balance -= total
                 self.request.user.profile.save(update_fields=['current_balance'])
-                reciever = WebSite.objects.get(pk=self.kwargs.get('pk'))
 
-                reciever.user.current_balance = reciever.user.current_balance + total
-                reciever.user.save(update_fields=['current_balance'])
+                reciever = WebSite.objects.get(pk=self.kwargs.get('pk'))
+                reciever.user.hold_balance = reciever.user.hold_balance + total
+                reciever.user.save(update_fields=['hold_balance'])
 
                 return self.form_valid(form)
         else:
