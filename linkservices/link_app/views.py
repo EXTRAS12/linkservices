@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction, IntegrityError
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
@@ -11,7 +14,9 @@ from .forms import AddLinkForm
 from .models import Link
 from site_app.models import WebSite
 
-from users.models import User
+from transactions.models import Transaction
+
+from transactions.constants import WITHDRAWAL, PURCHASE
 
 
 class MyLinks(LoginRequiredMixin, ListView):
@@ -58,6 +63,7 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
+
         form.save()
         return super(BuyLink, self).form_valid(form)
 
@@ -76,3 +82,20 @@ class UpdateLink(LoginRequiredMixin, UpdateView):
         if obj.user != self.request.user.profile:
             return redirect(obj)
         return super(UpdateLink, self).dispatch(request, *args, **kwargs)
+
+
+@receiver(post_save, sender=Link)
+def save_or_create_profile(sender, instance, created, **kwargs):
+    """При регистрации создаётся профиль пользователя"""
+    if created:
+        Transaction.objects.create(account=instance.user,
+                                   amount=instance.total_price,
+                                   detail_pay=instance.url,
+                                   timestamp=instance.created,
+                                   transaction_type=PURCHASE)
+
+    else:
+        try:
+            instance.user.save()
+        except ObjectDoesNotExist:
+            Transaction.objects.create(account=instance.user)

@@ -73,9 +73,14 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4">
-                                                <a href="javascript: void(0);"
+                                                <a href="{% url 'transactions:withdraw_money' %}"
                                                    class="btn btn-primary waves-effect waves-light btn-sm">Вывести
                                                     средства <i class="mdi mdi-arrow-right ms-1"></i></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'transactions:deposit_money' %}"
+                                                   class="btn btn-primary waves-effect waves-light btn-sm">Пополнить баланс
+                                                    <i class="mdi mdi-arrow-right ms-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -355,7 +360,7 @@
                                             <th class="align-middle">Сумма</th>
                                             <th class="align-middle">Статус</th>
                                             <th class="align-middle">Детали платежа</th>
-                                            <th class="align-middle">Действия</th>
+<!--                                            <th class="align-middle">Действия</th>-->
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -367,82 +372,38 @@
                                             <td>
                                                 {{ transaction.timestamp }}
                                             </td>
+                                                {% if transaction.transaction_type == 2 %}
                                             <td>
-                                                {{ transaction.amount }} руб.
+                                                <span class="text-danger">{{ transaction.amount }} руб.</span>
                                             </td>
+                                                {% elif transaction.transaction_type == 4 %}
+                                            <td>
+                                               <span class="text-danger">{{ transaction.amount }} руб.</span>
+                                            </td>
+                                                {% else %}
+                                            <td>
+                                               <span class="text-success">{{ transaction.amount }} руб.</span>
+                                            </td>
+                                                {% endif %}
                                             <td>
                                                 <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>
                                             </td>
-                                            <td>Куплена ссылка на сайте: http://ero-storitop.com/</td>
-                                            <td>
-                                                <!-- Button trigger modal -->
+                                                {% if transaction.transaction_type == 4 %}
+                                            <td>Куплена ссылка на сайте: {{ transaction.detail_pay }}</td>
+                                            {% elif transaction.transaction_type == 2 %}
+                                            <td>Вывод средств с баланса пользователя</td>
 
-                                            </td>
+                                            {% else %}
+                                            <td>Пополнение баланса </td>
+
+                                            {% endif %}
+
+<!--                                            <td>-->
+<!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+
+<!--                                            </td>-->
                                         </tr>
                                         {% endfor %}
-
-                                        <!--                                        <tr>-->
-
-                                        <!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 520</a></td>-->
-                                        <!--                                            <td>Попоплнение</td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                07 Oct, 2019-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                $380-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                <span class="badge badge-pill badge-soft-danger font-size-11">Отменен</span>-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>Платежная система Enot</td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
-                                        <!--                                                <button type="button"-->
-                                        <!--                                                        class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"-->
-                                        <!--                                                        data-bs-toggle="modal"-->
-                                        <!--                                                        data-bs-target=".transaction-detailModal">Отменить заявку-->
-                                        <!--                                                </button>-->
-                                        <!--                                            </td>-->
-                                        <!--                                        </tr>-->
-
-                                        <!--                                        <tr>-->
-
-                                        <!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 519</a></td>-->
-                                        <!--                                            <td>Вывод</td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                06 Oct, 2019-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                $384-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>Webmoney:Z4343477474747</td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
-
-                                        <!--                                            </td>-->
-                                        <!--                                        </tr>-->
-                                        <!--                                        <tr>-->
-
-                                        <!--                                            <td><a href="javascript: void(0);" class="text-body fw-bold">ID 518</a></td>-->
-                                        <!--                                            <td>Зачисление на баланс</td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                05 Oct, 2019-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                $412-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>-->
-                                        <!--                                            </td>-->
-                                        <!--                                            <td>Заказ по ссылке полностью обработан</td>-->
-                                        <!--                                            <td>-->
-                                        <!--                                                &lt;!&ndash; Button trigger modal &ndash;&gt;-->
-
-                                        <!--                                            </td>-->
-                                        <!--                                        </tr>-->
 
 
                                         </tbody>

@@ -5,10 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
-
-from django.core.files import File
-from io import BytesIO
-from PIL import Image
+from uuid import uuid4
 
 
 class User(AbstractUser):
@@ -56,10 +53,13 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def save_or_create_profile(sender, instance, created, **kwargs):
     """При регистрации создаётся профиль пользователя"""
+    TOKEN = str(uuid4())
     if created:
-        Profile.objects.create(user=instance)
+        Profile.objects.create(user=instance,
+                               TOKEN=TOKEN)
     else:
         try:
             instance.profile.save()
         except ObjectDoesNotExist:
-            Profile.objects.create(user=instance)
+            Profile.objects.create(user=instance,
+                                   TOKEN=TOKEN)

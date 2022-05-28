@@ -10,9 +10,10 @@ class Transaction(models.Model):
                                 on_delete=models.CASCADE, verbose_name='Пользователь')
     amount = models.DecimalField(decimal_places=2, max_digits=12, verbose_name='Количество')
     balance_after_transaction = models.DecimalField(decimal_places=2, max_digits=12,
-                                                    verbose_name='Баланс после транзакции')
+                                                    verbose_name='Баланс после транзакции',
+                                                    blank=True, null=True)
     transaction_type = models.PositiveIntegerField(choices=TRANSACTION_TYPE_CHOICES,
-                                                   verbose_name='Тип транзакции')
+                                                   verbose_name='Тип транзакции', blank=True, null=True)
     detail_pay = models.CharField(max_length=250, blank=True, null=True, verbose_name='Детали платежа')
     timestamp = models.DateField(auto_now_add=True, verbose_name='Дата')
 
@@ -20,7 +21,7 @@ class Transaction(models.Model):
         return str(self.account)
 
     class Meta:
-        ordering = ['timestamp']
+        ordering = ['-timestamp']
         verbose_name = 'Транзакция'
         verbose_name_plural = 'Транзакции'
 
