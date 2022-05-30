@@ -4,6 +4,8 @@ from site_app.models import WebSite
 
 from users.models import User
 
+from main.models import Plugin
+
 register = template.Library()
 
 
@@ -26,3 +28,9 @@ def show_count_user():
     user = User.objects.all().count()
 
     return user
+
+
+@register.inclusion_tag('main/partials/plugins_tpl.html')
+def show_plugins():
+    plugins = Plugin.objects.all()[:3]
+    return {"plugins": plugins}

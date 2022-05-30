@@ -1,7 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, UpdateView, DeleteView
 
 from .forms import AddSiteForm
@@ -13,7 +14,7 @@ class MySites(LoginRequiredMixin, ListView):
     template_name = 'site_app/mysites.html'
     model = WebSite
     context_object_name = 'website'
-    paginate_by = 15
+    paginate_by = 10
 
     def get_queryset(self):
         return WebSite.objects.filter(user=self.request.user.profile).\
@@ -36,17 +37,12 @@ class UpdateSite(LoginRequiredMixin, UpdateView):
         return super(UpdateSite, self).dispatch(request, *args, **kwargs)
 
 
-class DeleteSite(LoginRequiredMixin, DeleteView):
+class RemoveSite(LoginRequiredMixin, View):
     """Удаление сайта"""
-    model = WebSite
-    success_url = reverse_lazy('my-sites')
-
-    def dispatch(self, request, *args, **kwargs):
-        """ Пользователь может удалять только свои сайты """
-        obj = self.get_object()
-        if obj.user != self.request.user.profile:
-            return redirect(obj)
-        return super(DeleteSite, self).dispatch(request, *args, **kwargs)
+    def get(self, request, pk):
+        WebSite.objects.get(id=pk).delete()
+        messages.success(request, 'Ваш сайт успешно удалён')
+        return redirect("my-sites")
 
 
 @login_required
@@ -58,5 +54,7 @@ def add_site(request):
             new_site = form.save(commit=False)
             new_site.user = request.user.profile
             new_site.save()
+            messages.success(request, 'Ваш сайт успешно добавлен!')
             return redirect('my-sites')
     return render(request, 'site_app/add-site.html', locals())
+

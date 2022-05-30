@@ -105,15 +105,15 @@
                                         </button>
                                     </div>
                                 </form>
-                                {% if messages %}
-                                    <ul class="messages mt-3">
-                                        {% for message in messages %}
-                                        <div class="alert alert-danger" role="alert">
-                                      {{ message }}
-                                    </div>
-                                        {% endfor %}
-                                    </ul>
-                                    {% endif %}
+                                 {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                                    <script>
+                                        var m = "{{ message }}";
+                                        swal("Ошибка", m, "error")
+                                    </script>
+                                 {% endif %}
+                                 {% endfor %}
                             </div>
 
                         </div>

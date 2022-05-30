@@ -1,0 +1,22 @@
+    {% for plug in plugins %}
+<tr>
+    <td style="width: 45px;">
+        <div class="avatar-sm">
+<span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-24">
+<i class="bx bxs-file-doc"></i>
+</span>
+        </div>
+    </td>
+
+    <td>
+        <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">{{ plug.title }}</a></h5>
+        <small>{{ plug.description }}</small>
+    </td>
+
+    <td>
+        <div class="text-center">
+            <a href="{{ plug.file.url }}" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
+        </div>
+    </td>
+</tr>
+    {% endfor %}

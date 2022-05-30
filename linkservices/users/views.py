@@ -6,7 +6,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.contrib.auth import login, authenticate, get_user_model
 from django.views.generic import DetailView, UpdateView
-from django.views.generic.edit import FormMixin
+from django.views.generic.list import MultipleObjectMixin
 
 from .forms import UserRegisterForm, AuthenticationForm, ProfileForm
 from .models import Profile
@@ -18,23 +18,26 @@ from transactions.models import Transaction
 User = get_user_model()
 
 
-class ProfileView(LoginRequiredMixin, DetailView):
+class ProfileView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
     """Профиль"""
     model = Profile
     template_name = 'users/profile.html'
     context_object_name = 'profile'
+    paginate_by = 10
     queryset = Profile.objects.select_related('user')
 
     def dispatch(self, request, *args, **kwargs):
-        """Пользователь может смотреть свой профиль"""
+        """Пользователь может только смотреть свой профиль"""
         obj = self.get_object()
         if obj.user != self.request.user:
             return redirect('catalog')
         return super(ProfileView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-        context['transactions'] = Transaction.objects.filter(account=self.request.user.profile)
+        object_list = Transaction.objects. \
+            filter(account=self.request.user.profile).order_by('-id')
+        context = super(ProfileView, self).get_context_data(object_list=object_list, **kwargs)
+
         return context
 
 

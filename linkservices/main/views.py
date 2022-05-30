@@ -23,7 +23,7 @@ class Catalog(LoginRequiredMixin, FilterView, ListView):
     """Каталог сайтов"""
     template_name = 'main/catalog.html'
     context_object_name = 'website'
-    paginate_by = 15
+    paginate_by = 10
     filterset_class = SiteFilter
 
     def get_queryset(self):

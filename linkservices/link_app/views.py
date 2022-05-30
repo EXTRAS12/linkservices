@@ -15,8 +15,7 @@ from .models import Link
 from site_app.models import WebSite
 
 from transactions.models import Transaction
-
-from transactions.constants import WITHDRAWAL, PURCHASE
+from transactions.constants import WITHDRAWAL, PURCHASE, TRANSFER
 
 
 class MyLinks(LoginRequiredMixin, ListView):
@@ -24,7 +23,7 @@ class MyLinks(LoginRequiredMixin, ListView):
     model = Link
     template_name = 'link_app/mylinks.html'
     context_object_name = 'link'
-    paginate_by = 15
+    paginate_by = 10
 
     def get_queryset(self):
         return Link.objects.filter(user=self.request.user.profile).select_related()
@@ -85,17 +84,16 @@ class UpdateLink(LoginRequiredMixin, UpdateView):
 
 
 @receiver(post_save, sender=Link)
-def save_or_create_profile(sender, instance, created, **kwargs):
-    """При регистрации создаётся профиль пользователя"""
+def create_transactions(sender, instance, created, **kwargs):
+    """Сохранение транзакций при покупке ссылки"""
     if created:
         Transaction.objects.create(account=instance.user,
                                    amount=instance.total_price,
                                    detail_pay=instance.url,
                                    timestamp=instance.created,
                                    transaction_type=PURCHASE)
-
-    else:
-        try:
-            instance.user.save()
-        except ObjectDoesNotExist:
-            Transaction.objects.create(account=instance.user)
+        Transaction.objects.create(account=instance.url.user,
+                                   amount=instance.total_price,
+                                   detail_pay=instance.url,
+                                   timestamp=instance.created,
+                                   transaction_type=TRANSFER)
