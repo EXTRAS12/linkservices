@@ -56,3 +56,6 @@ class WebSite(models.Model):
 
     def get_absolute_url(self):
         return reverse('buy-link', kwargs={"pk": self.pk})
+
+    def get_total_link(self):
+        return self.link_set.count()
