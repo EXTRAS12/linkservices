@@ -38,8 +38,7 @@
                                     {% csrf_token %}
                                     <input class="form-control" name="user" id="id_user"
                                            value="{{ user.profile.id }}" hidden="" type="text" readonly>
-                                    <input class="form-control" name="price_per_item" id="id_price_per_item"
-                                           value="{{ link.price_per_item}}" hidden="" required="" type="number" readonly>
+
                                     <input class="form-control" name="url" id="id_url" required="" hidden=""
                                            value="{{ link.url.id }}" readonly>
 
@@ -55,26 +54,26 @@
                                                 $("#link_term_range").ionRangeSlider({
                                                     min: 1,
                                                     max: 12,
-                                                    from: 1,
+                                                    from: {{ link.count_month }},
                                                     skin: "round",
                                                     onChange: function (data) {
                                                         // fired on every range slider update
                                                         var range_val = $('#link_term_range').val();
                                                         var price_val = $('#term_price').html(range_val);
                                                         $('#term_months').html(range_val);
-                                                        $('#term_price').html((range_val * {{ link.price_per_item }}).toFixed(2).replace(/\./g,',') + " RUB");
+                                                        $('#term_price').html((range_val * {{ link.url.get_increase_price }}).toFixed(2).replace(/\./g,',') + " RUB");
                                                     },
                                                 });
                                                 var range_val = $('#link_term_range').val();
-                                                $('#term_price').html((range_val * {{ link.price_per_item }}).toFixed(2).replace(/\./g,',') + " RUB");
+                                                $('#term_price').html((range_val * {{ link.url.get_increase_price }}).toFixed(2).replace(/\./g,',') + " RUB");
 
 
                                                 </script>
 
                                             </div>
                                             <div class="alert alert-secondary" role="alert">
-                                                Вы собираетесь оплатить ссылку на сайте <b>www.site.ru</b> сроком на <b
-                                                    id="term_months">1 месяц</b> за <b id="term_price">{{ link.price_per_item }}</b>
+                                                Вы собираетесь редактировать ссылку на сайте <b>{{ link.url }}</b> сроком на <b
+                                                    id="term_months">{{ link.count_month }}</b> за <b id="term_price">{{ link.total_increase_price }}</b><br>
                                             </div>
                                         </div>
 

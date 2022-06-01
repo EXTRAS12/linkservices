@@ -45,8 +45,6 @@ class Link(models.Model):
     update = models.DateTimeField(auto_now=True, verbose_name='Изменено')
     user = models.ForeignKey(Profile, related_name='user_link', on_delete=models.CASCADE,
                              max_length=100, blank=True, null=True, verbose_name='email заказчика')
-    price_per_item = models.IntegerField(default=0, verbose_name='Цена за 1 месяц')
-    total_price = models.IntegerField(default=0, verbose_name='Общая стоимость')
     count_month = models.IntegerField(default=1, verbose_name='Количество месяцев')
 
     def __str__(self):
@@ -57,15 +55,21 @@ class Link(models.Model):
         verbose_name_plural = 'Ссылки'
         ordering = ('-created',)
 
+    def total_increase_price(self):
+        return self.url.get_increase_price() * int(self.count_month)
+
+    def total_price(self):
+        return self.url.price * int(self.count_month)
+
+    def get_amount_saved(self):
+        return self.total_increase_price() - self.total_price()
+
     def save(self, *args, **kwargs):
         """При сохранении считается общая сумма"""
-        price_per_item = self.url.price
+
         count_month = self.count_month
-        self.price_per_item = price_per_item
-        self.total_price = self.count_month * price_per_item
         self.valid_date = timezone.now() + timezone.timedelta(days=30) * int(count_month)
         super(Link, self).save(*args, **kwargs)
 
-# def one_week_hence():
-#     """ссылка на 30 дней"""
-#     return timezone.now() + timezone.timedelta(days=30)
+
+

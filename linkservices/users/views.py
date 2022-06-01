@@ -19,7 +19,7 @@ User = get_user_model()
 
 
 class ProfileView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
-    """Профиль"""
+    """Профиль пользователя"""
     model = Profile
     template_name = 'users/profile.html'
     context_object_name = 'profile'
@@ -27,7 +27,7 @@ class ProfileView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
     queryset = Profile.objects.select_related('user')
 
     def dispatch(self, request, *args, **kwargs):
-        """Пользователь может только смотреть свой профиль"""
+        """Пользователь может смотреть только свой профиль"""
         obj = self.get_object()
         if obj.user != self.request.user:
             return redirect('catalog')

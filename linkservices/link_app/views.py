@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import transaction, IntegrityError
+from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect
@@ -13,9 +12,12 @@ from django.views.generic.edit import FormMixin, UpdateView
 from .forms import AddLinkForm
 from .models import Link
 from site_app.models import WebSite
+import datetime
 
 from transactions.models import Transaction
 from transactions.constants import WITHDRAWAL, PURCHASE, TRANSFER
+
+from main.models import Stat
 
 
 class MyLinks(LoginRequiredMixin, ListView):
@@ -26,7 +28,8 @@ class MyLinks(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Link.objects.filter(user=self.request.user.profile).select_related()
+        return Link.objects.filter(user=self.request.user.profile,
+                                   valid_date__gte=datetime.datetime.now()).select_related()
 
 
 class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
@@ -34,7 +37,7 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
     model = WebSite
     form_class = AddLinkForm
     template_name = 'link_app/buy-links.html'
-    success_url = '/catalog/'
+    success_url = '/my-links/'
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
@@ -44,7 +47,9 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
 
             price = WebSite.objects.get(pk=self.kwargs.get('pk'))
 
-            total = month * price.price
+            total = month * price.get_increase_price()
+            total_q = month * price.price
+
             if total > self.request.user.profile.current_balance:
                 messages.error(request, 'Недостаточно средств на балансе')
                 return HttpResponseRedirect(reverse_lazy('buy-link',  kwargs={'pk': price.pk}))
@@ -54,8 +59,14 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
                 self.request.user.profile.save(update_fields=['current_balance'])
 
                 reciever = WebSite.objects.get(pk=self.kwargs.get('pk'))
-                reciever.user.hold_balance = reciever.user.hold_balance + total
+                reciever.user.hold_balance = reciever.user.hold_balance + total_q
                 reciever.user.save(update_fields=['hold_balance'])
+
+                system = Stat.objects.get(id=1)
+                system.balance_hold = system.balance_hold + (total - total_q)
+                system.balance_for_all_time = system.balance_for_all_time + (total - total_q)
+                system.save(update_fields=['balance_hold'])
+                system.save(update_fields=['balance_for_all_time'])
 
                 return self.form_valid(form)
         else:
@@ -72,7 +83,7 @@ class UpdateLink(LoginRequiredMixin, UpdateView):
     form_class = AddLinkForm
     model = Link
     template_name = 'link_app/update-link.html'
-    success_url = '/catalog/'
+    success_url = '/my-links/'
     context_object_name = 'link'
 
     def dispatch(self, request, *args, **kwargs):
@@ -88,12 +99,12 @@ def create_transactions(sender, instance, created, **kwargs):
     """Сохранение транзакций при покупке ссылки"""
     if created:
         Transaction.objects.create(account=instance.user,
-                                   amount=instance.total_price,
+                                   amount=instance.total_increase_price(),
                                    detail_pay=instance.url,
                                    timestamp=instance.created,
                                    transaction_type=PURCHASE)
         Transaction.objects.create(account=instance.url.user,
-                                   amount=instance.total_price,
+                                   amount=instance.total_price(),
                                    detail_pay=instance.url,
                                    timestamp=instance.created,
                                    transaction_type=TRANSFER)

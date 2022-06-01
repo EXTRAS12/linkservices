@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import ListView, UpdateView, DeleteView
+from django.views.generic import ListView, UpdateView
+from django import forms
 
 from .forms import AddSiteForm
 from .models import WebSite
@@ -17,7 +19,7 @@ class MySites(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return WebSite.objects.filter(user=self.request.user.profile).\
+        return WebSite.objects.filter(user=self.request.user.profile). \
             select_related('category', 'status')
 
 
@@ -29,6 +31,14 @@ class UpdateSite(LoginRequiredMixin, UpdateView):
     template_name = 'site_app/update-site.html'
     success_url = '/my-sites/'
 
+    def form_valid(self, form):
+        if self.object.total_link < self.object.get_total_link():
+            messages.error(self.request, 'Вы не можете указать меньше доступных ссылок,'
+                                         ' чем уже куплено!')
+            return HttpResponseRedirect("")
+        self.object = form.save()
+        return super().form_valid(form)
+
     def dispatch(self, request, *args, **kwargs):
         """ Пользователь может редактировать только свои сайты """
         obj = self.get_object()
@@ -39,8 +49,9 @@ class UpdateSite(LoginRequiredMixin, UpdateView):
 
 class RemoveSite(LoginRequiredMixin, View):
     """Удаление сайта"""
+
     def get(self, request, pk):
-        WebSite.objects.get(id=pk).delete()
+        WebSite.objects.get(id=pk, user=self.request.user.profile).delete()
         messages.success(request, 'Ваш сайт успешно удалён')
         return redirect("my-sites")
 
@@ -57,4 +68,3 @@ def add_site(request):
             messages.success(request, 'Ваш сайт успешно добавлен!')
             return redirect('my-sites')
     return render(request, 'site_app/add-site.html', locals())
-

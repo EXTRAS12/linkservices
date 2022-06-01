@@ -34,3 +34,19 @@ class Plugin(models.Model):
     class Meta:
         verbose_name = "Плагин"
         verbose_name_plural = "Плагины"
+
+
+class Stat(models.Model):
+    """Модель статистики в системе"""
+    balance_for_all_time = models.PositiveIntegerField(default=0, blank=True,
+                                                       null=True, verbose_name="Заработано за всё время")
+    balance_current = models.PositiveIntegerField(default=0, blank=True,
+                                                  null=True, verbose_name="Заработано на текущий момент")
+    balance_hold = models.PositiveIntegerField(default=0, blank=True,
+                                               null=True, verbose_name="На удержании")
+    update = models.DateTimeField(auto_now=True, verbose_name='Обновлён')
+
+    class Meta:
+        verbose_name = 'Статистика'
+        verbose_name_plural = 'Статистика'
+

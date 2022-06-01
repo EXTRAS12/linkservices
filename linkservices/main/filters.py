@@ -1,6 +1,5 @@
 import django_filters
 from django import forms
-from django_filters.widgets import LinkWidget
 
 from site_app.models import WebSite
 

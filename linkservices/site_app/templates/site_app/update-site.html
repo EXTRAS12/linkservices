@@ -79,11 +79,17 @@
                                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Редактировать сайт</button>
                                             </div>
                                         </form>
-
+{% for message in messages %}
+    {% if message.tags == 'error' %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{ message }}";
+            swal("Ошибка!", m, "error")
+        </script>
+     {% endif %}
+{% endfor %}
                                     </div>
                                 </div>
-
-
 
 
                             </div>

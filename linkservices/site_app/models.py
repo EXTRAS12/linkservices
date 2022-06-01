@@ -42,6 +42,7 @@ class WebSite(models.Model):
     total_link = models.IntegerField(verbose_name='Всего ссылок', blank=True, null=True)
     yandex_x = models.IntegerField(verbose_name='Яндекс Икс', blank=True, null=True)
     yandex_stat = models.CharField(max_length=255, verbose_name='Яндекс статистика')
+    increase = models.PositiveIntegerField(verbose_name='Наценка %', default=50, blank=True, null=True)
     password_yandex = models.CharField(max_length=250, verbose_name='Пароль от статистики', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено')
     update = models.DateTimeField(auto_now=True, verbose_name='Изменено')
@@ -59,3 +60,7 @@ class WebSite(models.Model):
 
     def get_total_link(self):
         return self.link_set.count()
+
+    def get_increase_price(self):
+        return int(self.price * (self.increase / 100 + 1))
+

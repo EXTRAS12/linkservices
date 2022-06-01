@@ -39,7 +39,7 @@
                                     <input class="form-control" name="user" id="id_user"
                                            value="{{ user.profile.id }}" hidden="" type="text" readonly>
                                     <input class="form-control" name="price_per_item" id="id_price_per_item"
-                                           value="{{ website.price }}" hidden="" required="" type="number" readonly>
+                                           value="{{ website.get_increase_price }}" hidden="" required="" type="number" readonly>
                                     <input class="form-control" name="url" id="id_url" required="" hidden=""
                                            value="{{ website.id }}" readonly>
 
@@ -62,11 +62,11 @@
                                                         var range_val = $('#link_term_range').val();
                                                         var price_val = $('#term_price').html(range_val);
                                                         $('#term_months').html(range_val);
-                                                        $('#term_price').html((range_val * {{ website.price }}).toFixed(2).replace(/\./g,',') + " RUB");
+                                                        $('#term_price').html((range_val * {{ website.get_increase_price }}).toFixed(2).replace(/\./g,',') + " RUB");
                                                     },
                                                 });
                                                 var range_val = $('#link_term_range').val();
-                                                $('#term_price').html((range_val * {{ website.price }}).toFixed(2).replace(/\./g,',') + " RUB");
+                                                $('#term_price').html((range_val * {{ website.get_increase_price }}).toFixed(2).replace(/\./g,',') + " RUB");
 
 
                                                 </script>
@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="alert alert-secondary" role="alert">
                                                 Вы собираетесь оплатить ссылку на сайте <b>{{ website.url }}</b> сроком на <b
-                                                    id="term_months">1 месяц</b> за <b id="term_price">{{ website.price }}</b>
+                                                    id="term_months">1 месяц</b> за <b id="term_price">{{ website.get_increase_price }}</b>
                                             </div>
                                         </div>
 

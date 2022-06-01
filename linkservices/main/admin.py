@@ -22,9 +22,16 @@ class FlatPageNewAdmin(FlatPageAdmin):
     search_fields = ('url', 'title')
 
 
+class StatAdmin(admin.ModelAdmin):
+    """Для статистики"""
+    model = Stat
+    list_display = ('balance_for_all_time', 'balance_current', 'balance_hold', 'update')
+
+
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageNewAdmin)
 admin.site.register(Plugin)
+admin.site.register(Stat, StatAdmin)
 
 admin.site.site_title = 'Вас приветствует linkservices.ru'
 admin.site.site_header = 'Вас приветствует Linkservices.ru'
