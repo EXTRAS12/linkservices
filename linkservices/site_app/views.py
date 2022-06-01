@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, UpdateView
-from django import forms
 
 from .forms import AddSiteForm
 from .models import WebSite

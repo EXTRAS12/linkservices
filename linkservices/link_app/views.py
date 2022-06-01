@@ -86,6 +86,14 @@ class UpdateLink(LoginRequiredMixin, UpdateView):
     success_url = '/my-links/'
     context_object_name = 'link'
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        month = request.POST.get("count_month")
+        if self.object.count_month > int(month):
+            messages.error(self.request, 'Вы можете только продлить ссылку')
+            return HttpResponseRedirect("")
+        return super().post(request, *args, **kwargs)
+
     def dispatch(self, request, *args, **kwargs):
         """ Пользователь может редактировать только свои ссылки """
         obj = self.get_object()

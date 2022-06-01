@@ -105,7 +105,15 @@
                                     </div>
                                 </form>
                             </div>
-
+{% for message in messages %}
+    {% if message.tags == 'error' %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{ message }}";
+            swal("Ошибка!", m, "error")
+        </script>
+     {% endif %}
+{% endfor %}
                         </div>
                     </div>
 
