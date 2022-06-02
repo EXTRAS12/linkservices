@@ -29,10 +29,10 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'main',
-    'telegram',
+    'telegram.apps.TelegramConfig',
     'site_app',
     'link_app',
-    'users',
+    'users.apps.UsersConfig',
     'api',
     'transactions',
 

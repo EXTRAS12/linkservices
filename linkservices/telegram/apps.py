@@ -6,3 +6,5 @@ class TelegramConfig(AppConfig):
     name = 'telegram'
     verbose_name = 'Рассылки телеграм'
 
+    def ready(self):
+        import telegram.signals
