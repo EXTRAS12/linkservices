@@ -71,15 +71,7 @@
                     </div>
                 </div>
                 <!-- end row -->
-{% for message in messages %}
-    {% if message.tags == 'success' %}
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script>
-            var m = "{{ message }}";
-            swal("Получилось!", m, "success")
-        </script>
-     {% endif %}
-{% endfor %}
+{% include 'inc/_messages.html' %}
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->

@@ -1,0 +1,23 @@
+{% load static %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  {% for message in messages %}
+{% if message.tags == 'error' %}
+
+<script>
+    var m = "{{ message }}";
+    swal("Ошибка!", m, "error")
+</script>
+ {% endif %}
+
+
+{% if message.tags == 'success' %}
+
+<script>
+var m = "{{ message }}";
+swal("Получилось!", m, "success")
+
+</script>
+{% endif %}
+
+
+ {% endfor %}
