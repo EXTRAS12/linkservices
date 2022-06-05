@@ -5,7 +5,7 @@ from link_app.models import Link
 
 class LinkOrderAdmin(admin.TabularInline):
     model = Link
-    extra = 2
+    extra = 1
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -25,12 +25,14 @@ class WebsiteAdmin(admin.ModelAdmin):
     """Сайты"""
     fields = ('url', 'user', 'category', 'status', 'price', 'increase', 'total_link', 'yandex_x',
               'yandex_stat', 'password_yandex', 'created', 'update')
-    list_display = ('url', 'category', 'status', 'price', 'user', 'increase', 'total_link', 'yandex_x',
+    list_display = ('url', 'category', 'status', 'price', 'get_increase_price', 'user', 'increase', 'total_link', 'yandex_x',
                     'created', 'update')
-    search_fields = ('url', 'category', 'status')
+    search_fields = ('url',)
     list_editable = ['status', ]
     list_filter = ('status', 'category', )
-    readonly_fields = ('created', 'update')
+    readonly_fields = ('url', 'user', 'created', 'update')
+    list_select_related = ['user__user', 'category', 'status', ]
+
     inlines = [LinkOrderAdmin]
 
     def save_model(self, request, obj, form, change):

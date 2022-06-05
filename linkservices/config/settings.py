@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'main',
     'telegram.apps.TelegramConfig',
     'site_app',
-    'link_app',
+    'link_app.apps.LinkAppConfig',
     'users.apps.UsersConfig',
     'api',
     'transactions',

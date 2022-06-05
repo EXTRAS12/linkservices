@@ -5,7 +5,6 @@ from site_app.models import WebSite
 
 from .filters import SiteFilter
 from .models import Plugin
-from link_app.models import Link
 
 
 class FrontPage(TemplateView):

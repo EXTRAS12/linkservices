@@ -32,8 +32,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Редактировать ссылку </h4>
-                                <p class="card-title-desc">Арендуйте ссылку на сайте сроком от 1 до 12 месяцев </p>
+                                <h4 class="card-title">Продлить ссылку </h4>
+                                <p class="card-title-desc">Продлить ссылку на сайте сроком от 1 до 12 месяцев </p>
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input class="form-control" name="user" id="id_user"
@@ -52,9 +52,9 @@
 
                                                 <script>
                                                 $("#link_term_range").ionRangeSlider({
-                                                    min: 1,
+                                                    min: 0,
                                                     max: 12,
-                                                    from: {{ link.count_month }},
+                                                    from: 0,
                                                     skin: "round",
                                                     onChange: function (data) {
                                                         // fired on every range slider update
@@ -72,8 +72,8 @@
 
                                             </div>
                                             <div class="alert alert-secondary" role="alert">
-                                                Вы собираетесь редактировать ссылку на сайте <b>{{ link.url }}</b> сроком на <b
-                                                    id="term_months">{{ link.count_month }}</b> за <b id="term_price">{{ link.total_increase_price }}</b><br>
+                                                Вы собираетесь продлить ссылку на сайте <b>{{ link.url }}</b> сроком на <b
+                                                    id="term_months">0</b> за <b id="term_price">0</b><br>
                                             </div>
                                         </div>
 
@@ -99,8 +99,9 @@
                                             Шрифт</p>
                                     </div>
                                     <div class="d-flex flex-wrap gap-2">
+
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                            Редактировать
+                                           Сохранить изменения
                                         </button>
                                     </div>
                                 </form>

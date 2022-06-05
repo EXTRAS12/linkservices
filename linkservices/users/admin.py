@@ -48,4 +48,5 @@ class ProfileAdmin(admin.ModelAdmin):
     """Профили пользователей"""
     list_display = ('user', 'name_telegram', 'current_balance', 'hold_balance', 'output_balance', 'chat_id', 'TOKEN',
                     'created', 'update')
+    list_select_related = ['user__profile', ]
 

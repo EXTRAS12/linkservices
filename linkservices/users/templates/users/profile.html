@@ -103,21 +103,29 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">Ваш телеграм:</th>
-
+                                            {% if profile.name_telegram %}
                                             <td>{{ profile.name_telegram }}</td>
-
+                                            {% else %}
+                                             <td>Пусто</td>
+                                            {% endif %}
 
                                         </tr>
                                         <tr>
                                             <th scope="row">WMZ-кошелек:</th>
-
+                                            {% if profile.wmz %}
                                             <td>{{ profile.wmz }}</td>
+                                            {% else %}
+                                            <td>Пусто</td>
+                                            {% endif %}
 
                                         </tr>
                                         <tr>
                                             <th scope="row">ЮMoney-кошелек:</th>
-
+                                            {% if profile.ymoney %}
                                             <td>{{ profile.ymoney }}</td>
+                                            {% else %}
+                                            <td>Пусто</td>
+                                            {% endif %}
 
 
                                         </tr>
