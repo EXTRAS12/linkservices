@@ -70,4 +70,3 @@ class Link(models.Model):
         count_month = self.count_month
         self.valid_date = timezone.now() + timezone.timedelta(days=30) * int(count_month)
         super(Link, self).save(*args, **kwargs)
-

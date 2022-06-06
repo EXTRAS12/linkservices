@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django_filters.views import FilterView
 from site_app.models import WebSite
@@ -23,6 +25,7 @@ class Catalog(LoginRequiredMixin, FilterView, ListView):
     template_name = 'main/catalog.html'
     context_object_name = 'website'
     paginate_by = 10
+    model = WebSite
     filterset_class = SiteFilter
 
     def get_queryset(self):

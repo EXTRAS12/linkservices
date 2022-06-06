@@ -23,6 +23,7 @@ class LinkAdmin(admin.ModelAdmin):
     list_filter = ('url', 'status_verify', 'moderation', 'valid_date', 'created', 'update')
     readonly_fields = ('url', 'user', 'created', 'update', 'valid_date')
     list_select_related = ['user__user', 'url', 'status_verify', 'moderation', ]
+    save_on_top = True
     # raw_id_fields = ['user', 'url']
 
     def save_model(self, request, obj, form, change):

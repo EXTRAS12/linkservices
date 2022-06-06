@@ -28,10 +28,10 @@ class WebsiteAdmin(admin.ModelAdmin):
     list_display = ('url', 'category', 'status', 'price', 'get_increase_price', 'user', 'increase', 'total_link', 'yandex_x',
                     'created', 'update')
     search_fields = ('url',)
-    list_editable = ['status', ]
     list_filter = ('status', 'category', )
     readonly_fields = ('url', 'user', 'created', 'update')
     list_select_related = ['user__user', 'category', 'status', ]
+    save_on_top = True
 
     inlines = [LinkOrderAdmin]
 
