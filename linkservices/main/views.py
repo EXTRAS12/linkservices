@@ -29,7 +29,7 @@ class Catalog(LoginRequiredMixin, FilterView, ListView):
     filterset_class = SiteFilter
 
     def get_queryset(self):
-        return WebSite.objects.filter(status__name='Опубликовано')\
+        return WebSite.objects.filter(status='Опубликовано')\
             .select_related('category').exclude(user=self.request.user.profile)
 
     def get_context_data(self, *, object_list=None, **kwargs):

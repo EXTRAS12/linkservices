@@ -18,7 +18,7 @@ def send_updates_status(sender, update_fields, instance, **kwargs):
             url = instance.url
             chat_id = instance.user.chat_id
             api_key = settings.API
-            text = f'Статус вашего сайта изменился: {url} ' + str(status)
+            text = f'Статус вашего сайта "{url}" изменился:  ' + str(status)
             url = f'https://api.telegram.org/bot{api_key}/sendMessage'
             params = {
                 'chat_id': chat_id,
@@ -33,9 +33,10 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
         sta = 'status_verify'
         if sta in update_fields:
             status = instance.status_verify
+            link_id = instance.id
             chat_id = instance.user.chat_id
             api_key = settings.API
-            text = f'Статус вашей ссылки: ' + str(status)
+            text = f'Ваша ссылка id{link_id} {status}'
             url = f'https://api.telegram.org/bot{api_key}/sendMessage'
             params = {
                 'chat_id': chat_id,
@@ -69,6 +70,23 @@ def add_new_site(sender, instance, created, *args, **kwargs):
         chat_id = settings.MY_BOT_ID  # надо указать айди админ чата
         api_key = settings.API
         text = f'Добавлен новый сайт: id({site_id}) ' + str(website)
+        url = f'https://api.telegram.org/bot{api_key}/sendMessage'
+        params = {
+            'chat_id': chat_id,
+            'text': text,
+        }
+        return requests.get(url, params=params).json()
+
+
+@receiver(post_save, sender=Link)
+def add_new_site(sender, instance, created, *args, **kwargs):
+    """Уведомление покупка ссылки"""
+    if created:
+        link_url = instance.url
+        link_user = instance.user
+        chat_id = settings.MY_BOT_ID  # надо указать айди админ чата
+        api_key = settings.API
+        text = f'Куплена новая ссылка пользователем {link_user} на сайте {link_url}'
         url = f'https://api.telegram.org/bot{api_key}/sendMessage'
         params = {
             'chat_id': chat_id,

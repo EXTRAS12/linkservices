@@ -1,16 +1,5 @@
 from django.contrib import admin
-from django import forms
-from .models import VerifyStatus, Moderation, Link
-
-
-class ModerationAdmin(admin.ModelAdmin):
-    """Статус модерации"""
-    list_display = ('id', 'name')
-
-
-class VerifyStatusAdmin(admin.ModelAdmin):
-    """Статус проверки"""
-    list_display = ('id', 'name')
+from .models import Link
 
 
 class LinkAdmin(admin.ModelAdmin):
@@ -22,9 +11,9 @@ class LinkAdmin(admin.ModelAdmin):
     search_fields = ('url__url', )
     list_filter = ('url', 'status_verify', 'moderation', 'valid_date', 'created', 'update')
     readonly_fields = ('url', 'user', 'created', 'update', 'valid_date')
-    list_select_related = ['user__user', 'url', 'status_verify', 'moderation', ]
+    list_select_related = ['user__user', 'url']
     save_on_top = True
-    # raw_id_fields = ['user', 'url']
+    raw_id_fields = ['user', 'url']
 
     def save_model(self, request, obj, form, change):
         """Отслеживаем изменение статуса для уведомления пользователя"""
@@ -35,6 +24,4 @@ class LinkAdmin(admin.ModelAdmin):
         obj.save(update_fields=update_fields)
 
 
-admin.site.register(Moderation, ModerationAdmin)
-admin.site.register(VerifyStatus, VerifyStatusAdmin)
 admin.site.register(Link, LinkAdmin)

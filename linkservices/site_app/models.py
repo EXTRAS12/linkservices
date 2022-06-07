@@ -18,27 +18,22 @@ class Category(models.Model):
         ordering = ('name',)
 
 
-class Status(models.Model):
-    """Статус"""
-    name = models.CharField(max_length=155, verbose_name='Статус')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Статус'
-        verbose_name_plural = 'Статусы'
-        ordering = ('name',)
-
-
 class WebSite(models.Model):
     """Модель добавления сайта"""
+    MODERATION = 'На модерации'
+    PUBLISHED = 'Опубликовано'
+    REJECTED = 'Отклонено'
+    STATUS_CHOICES = (
+        (MODERATION, 'На модерации'),
+        (PUBLISHED, 'Опубликовано'),
+        (REJECTED, 'Отклонено')
+    )
     url = models.CharField(max_length=255, verbose_name='url сайта')
     user = models.ForeignKey(Profile, related_name='user_website', on_delete=models.CASCADE,
                              max_length=100, blank=True, null=True, verbose_name='email заказчика')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Тематика')
     price = models.IntegerField(verbose_name='Цена')
-    status = models.ForeignKey(Status, verbose_name='Статус', on_delete=models.CASCADE, blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=MODERATION, verbose_name='Статус')
     total_link = models.IntegerField(verbose_name='Всего ссылок', blank=True, null=True)
     yandex_x = models.IntegerField(verbose_name='Яндекс Икс', blank=True, null=True)
     yandex_stat = models.CharField(max_length=255, verbose_name='Яндекс статистика')
@@ -59,6 +54,7 @@ class WebSite(models.Model):
         return reverse('buy-link', kwargs={"pk": self.pk})
 
     def get_increase_price(self):
+        """Цена с наценкой"""
         return int(self.price * (self.increase / 100 + 1))
 
     @property

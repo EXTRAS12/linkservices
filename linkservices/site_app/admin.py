@@ -1,11 +1,13 @@
 from django.contrib import admin
-from .models import Category, Status, WebSite
+from .models import Category, WebSite
 from link_app.models import Link
 
 
-class LinkOrderAdmin(admin.TabularInline):
-    model = Link
-    extra = 1
+# class LinkOrderAdmin(admin.TabularInline):
+#     """Возможность добавлять и изменять ссылки внутри сайта в админке"""
+#     model = Link
+#     raw_id_fields = ['user', 'url']
+#     extra = 1
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -14,11 +16,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name',)
-
-
-class StatusAdmin(admin.ModelAdmin):
-    """Для статуса"""
-    list_display = ('id', 'name')
 
 
 class WebsiteAdmin(admin.ModelAdmin):
@@ -30,10 +27,10 @@ class WebsiteAdmin(admin.ModelAdmin):
     search_fields = ('url',)
     list_filter = ('status', 'category', )
     readonly_fields = ('url', 'user', 'created', 'update')
-    list_select_related = ['user__user', 'category', 'status', ]
+    list_select_related = ['user__user', 'category']
     save_on_top = True
 
-    inlines = [LinkOrderAdmin]
+    # inlines = [LinkOrderAdmin]
 
     def save_model(self, request, obj, form, change):
         """Отслеживаем изменение статуса для уведомления пользователя"""
@@ -45,6 +42,4 @@ class WebsiteAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Status, StatusAdmin)
 admin.site.register(WebSite, WebsiteAdmin)
-

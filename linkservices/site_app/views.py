@@ -19,7 +19,7 @@ class MySites(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return WebSite.objects.filter(user=self.request.user.profile). \
-            select_related('category', 'status')
+            select_related('category')
 
 
 class UpdateSite(LoginRequiredMixin, UpdateView):

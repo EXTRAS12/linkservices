@@ -6,40 +6,23 @@ from site_app.models import WebSite
 from users.models import Profile
 
 
-class VerifyStatus(models.Model):
-    """Статус проверки"""
-    name = models.CharField(max_length=255, verbose_name='Статус проверки')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Статус проверки'
-        verbose_name_plural = 'Статусы проверок'
-        ordering = ('name',)
-
-
-class Moderation(models.Model):
-    """Статус модерации"""
-    name = models.CharField(max_length=255, verbose_name='Статус модерации')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Статус модерации'
-        verbose_name_plural = 'Статусы модерации'
-        ordering = ('name',)
-
-
 class Link(models.Model):
     """Модель для ссылки"""
+    CHECKED = 'Проверено'
+    REVIEW = 'На проверке'
+    PUBLISHED = 'Отображается'
+    STATUS_CHOICE = (
+        (CHECKED, 'Проверено'),
+        (REVIEW, 'На проверке'),
+        (PUBLISHED, 'Отображается')
+
+    )
     url = models.ForeignKey(WebSite, on_delete=models.CASCADE, verbose_name='url сайта')
     link = models.TextField(verbose_name="Ссылка")
-    status_verify = models.ForeignKey(VerifyStatus, on_delete=models.CASCADE,
-                                      verbose_name='Статус проверки', blank=True, null=True)
-    moderation = models.ForeignKey(Moderation, on_delete=models.CASCADE,
-                                   verbose_name='Статус модерации', blank=True, null=True)
+    status_verify = models.CharField(max_length=25, choices=STATUS_CHOICE, default=REVIEW,
+                                     verbose_name='Статус проверки')
+    moderation = models.CharField(max_length=25, choices=STATUS_CHOICE, default=REVIEW,
+                                  verbose_name='Статус модерации')
     valid_date = models.DateTimeField(auto_now_add=False, verbose_name='В работе до', blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено')
     update = models.DateTimeField(auto_now=True, verbose_name='Изменено')
@@ -56,9 +39,11 @@ class Link(models.Model):
         ordering = ('-created',)
 
     def total_increase_price(self):
+        """Общая сумма с наценкой"""
         return self.url.get_increase_price() * int(self.count_month)
 
     def total_price(self):
+        """Общая сумма без наценки"""
         return self.url.price * int(self.count_month)
 
     def get_amount_saved(self):

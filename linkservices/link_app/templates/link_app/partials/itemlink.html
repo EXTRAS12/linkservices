@@ -7,16 +7,24 @@
     </td>
 
     <td>{{ item.valid_date }}</td>
-    {% if item.status_verify.name == 'Опубликовано' %}
+    {% if item.status_verify == 'Отображается' %}
+    <td><span class="text-success">Отображается</span></td>
+
+    {% elif item.status_verify == 'Проверено' %}
     <td><span class="text-success">Проверено</span></td>
+
     {% else %}
-    <td><span class="text-danger">На проверке</span></td>
+    <td><span class="text-warning">На проверке</span></td>
 
     {% endif %}
-        {% if item.moderation.name == 'Проверено' %}
+
+        {% if item.moderation == 'Проверено' %}
     <td><span class="text-success">Проверено</span></td>
+    {% elif item.moderation == 'Отображается' %}
+    <td><span class="text-success">Отображается</span></td>
+
     {% else %}
-    <td><span class="text-danger">На модерации</span></td>
+    <td><span class="text-warning">На модерации</span></td>
 
     {% endif %}
     <td>{{ item.total_increase_price }}  RUB / Месяц</td>
