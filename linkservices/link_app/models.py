@@ -8,11 +8,11 @@ from users.models import Profile
 
 class Link(models.Model):
     """Модель для ссылки"""
-    CHECKED = 'Проверено'
+    REJECT = 'Отклонено'
     REVIEW = 'На проверке'
     PUBLISHED = 'Отображается'
     STATUS_CHOICE = (
-        (CHECKED, 'Проверено'),
+        (REJECT, 'Отклонено'),
         (REVIEW, 'На проверке'),
         (PUBLISHED, 'Отображается')
 

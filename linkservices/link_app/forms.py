@@ -14,3 +14,4 @@ class AddLinkForm(forms.ModelForm):
     class Meta:
         model = Link
         fields = ['url', 'user', 'link', 'count_month']
+

@@ -30,11 +30,11 @@ INSTALLED_APPS = [
 
     'main',
     'telegram.apps.TelegramConfig',
-    'site_app',
+    'site_app.apps.SiteAppConfig',
     'link_app.apps.LinkAppConfig',
     'users.apps.UsersConfig',
     'api',
-    'transactions',
+    'transactions.apps.TransactionsConfig',
 
 ]
 

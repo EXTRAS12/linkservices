@@ -25,7 +25,7 @@ class FlatPageNewAdmin(FlatPageAdmin):
 class StatAdmin(admin.ModelAdmin):
     """Для статистики"""
     model = Stat
-    list_display = ('balance_for_all_time', 'balance_current', 'balance_hold', 'update')
+    list_display = ('balance_for_all_time', 'balance_current', 'balance_hold')
 
 
 admin.site.unregister(FlatPage)

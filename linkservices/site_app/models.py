@@ -57,6 +57,5 @@ class WebSite(models.Model):
         """Цена с наценкой"""
         return int(self.price * (self.increase / 100 + 1))
 
-    @property
     def get_total_link(self):
         return self.link_set.count()

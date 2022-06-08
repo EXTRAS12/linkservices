@@ -13,6 +13,10 @@
     <td>
         <span class="text-danger">{{ transaction.amount }} руб.</span>
     </td>
+     {% elif transaction.transaction_type == 5 %}
+    <td>
+        <span class="text-danger">{{ transaction.amount }} руб.</span>
+    </td>
     {% else %}
     <td>
         <span class="text-success">{{ transaction.amount }} руб.</span>
@@ -26,6 +30,8 @@
     {% elif transaction.transaction_type == 2 %}
     <td>Вывод средств с баланса пользователя</td>
 
+    {% elif transaction.transaction_type == 5 %}
+    <td>Продление ссылки на сайте: {{ transaction.detail_pay }}</td>
     {% else %}
     <td>Пополнение баланса</td>
 
