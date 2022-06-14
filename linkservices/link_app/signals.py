@@ -56,17 +56,6 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
                 'text': text,
             }
             return requests.get(url, params=params).json()
-        # if lk in update_fields:
-        #     chat_id = settings.MY_BOT_ID
-        #     api_key = settings.API
-        #     link_id = instance.id
-        #     text = f'Ссылка id{link_id} была отредактирована'
-        #     url = f'https://api.telegram.org/bot{api_key}/sendMessage'
-        #     params = {
-        #         'chat_id': chat_id,
-        #         'text': text,
-        #     }
-        #     return requests.get(url, params=params).json()
 
 
 @receiver(post_save, sender=Link)
@@ -75,7 +64,7 @@ def add_new_site(sender, instance, created, *args, **kwargs):
     if created:
         link_url = instance.url
         link_user = instance.user
-        chat_id = settings.MY_BOT_ID  # надо указать айди админ чата
+        chat_id = settings.MY_BOT_ID 
         api_key = settings.API
         text = f'Куплена новая ссылка пользователем {link_user} на сайте {link_url}'
         url = f'https://api.telegram.org/bot{api_key}/sendMessage'
