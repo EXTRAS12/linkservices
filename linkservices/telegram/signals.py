@@ -11,41 +11,32 @@ from users.models import Profile
 def send_event(sender, instance, *args, created, **kwargs):
     """Рассылка сообщений в телеграмм"""
     if created:
-        if instance.all:
-            for item in Profile.objects.all():
+        api_key = settings.API
+        msg = instance.text
+        text = f'{msg}'
+        url = f'https://api.telegram.org/bot{api_key}/sendMessage'
+        for item in Profile.objects.all():
+            if instance.all:
                 chat_id = item.chat_id
-                api_key = settings.API
-                msg = instance.text
-                text = f'{msg}'
-                url = f'https://api.telegram.org/bot{api_key}/sendMessage'
                 params = {
                     'chat_id': chat_id,
                     'text': text,
                 }
                 requests.get(url, params=params).json()
 
-        elif instance.web:
-            for web in Profile.objects.all():
-                if web.user_website.count() > 0:
-                    chat_id = web.chat_id
-                    api_key = settings.API
-                    msg = instance.text
-                    text = f'{msg}'
-                    url = f'https://api.telegram.org/bot{api_key}/sendMessage'
+            elif instance.web:
+                if item.user_website.count() > 0:
+                    chat_id = item.chat_id
+
                     params = {
                         'chat_id': chat_id,
                         'text': text,
                     }
                     requests.get(url, params=params).json()
 
-        elif instance.web:
-            for link in Profile.objects.all():
-                if link.user_link.count() > 0:
-                    chat_id = link.chat_id
-                    api_key = settings.API
-                    msg = instance.text
-                    text = f'{msg}'
-                    url = f'https://api.telegram.org/bot{api_key}/sendMessage'
+            elif instance.seo:
+                if item.user_link.count() > 0:
+                    chat_id = item.chat_id
                     params = {
                         'chat_id': chat_id,
                         'text': text,
