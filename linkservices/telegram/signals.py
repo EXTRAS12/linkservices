@@ -42,4 +42,3 @@ def send_event(sender, instance, *args, created, **kwargs):
                         'text': text,
                     }
                     requests.get(url, params=params).json()
-

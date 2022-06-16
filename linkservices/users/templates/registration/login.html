@@ -47,8 +47,13 @@
                             </a>
                         </div>
                         <div class="p-2">
+                            {% if form.non_field_errors %}
+                            <h6 class="text-danger">{{ form.non_field_errors }}</h6>
+                            {% endif %}
                             <form class="form-horizontal" action="" method="post">
                                 {% csrf_token %}
+
+
 
                                 <div class="mb-3">
                                     <label for="id_username" class="form-label">Ваш email</label>

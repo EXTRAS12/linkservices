@@ -13,6 +13,7 @@ User = get_user_model()
 
 class ProfileForm(forms.ModelForm):
     """Форма профиля"""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name_telegram'].widget.attrs.update({'class': 'border border-primary rounded'})
@@ -42,16 +43,15 @@ class AuthenticationForm(DjangoAuthenticationForm):
             self.user_cache = authenticate(
                 self.request, username=username, password=password
             )
-            if not self.user_cache.email_verify:
-                send_email_for_verify(self.request, self.user_cache)
-                raise ValidationError(
-                    'E-mail не верифицирован, проверьте вашу почту.',
-                    code='invalid_login',
-                )
             if self.user_cache is None:
                 raise self.get_invalid_login_error()
+
             else:
                 self.confirm_login_allowed(self.user_cache)
+
+            if not self.user_cache.email_verify:
+                send_email_for_verify(self.request, self.user_cache)
+                raise forms.ValidationError(f'E-mail не верифицирован, проверьте вашу почту.')
 
         return self.cleaned_data
 

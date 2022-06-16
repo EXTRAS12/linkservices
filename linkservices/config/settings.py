@@ -9,7 +9,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -74,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -82,21 +80,20 @@ DATABASES = {
     }
 }
 
-
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
+AUTH_PASSWORD_VALIDATORS = [
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    #     {
+    #         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    #     },
+    #     {
+    #         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    #     },
+    #     {
+    #         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    #     },
+]
 
 INTERNAL_IPS = [
     # ...
@@ -112,7 +109,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
@@ -126,9 +122,7 @@ MEDIA_URL = '/media/'
 MINIMUM_DEPOSIT_AMOUNT = 10
 MINIMUM_WITHDRAWAL_AMOUNT = 10
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 LOGIN_REDIRECT_URL = 'catalog'
 LOGOUT_REDIRECT_URL = 'frontpage'
@@ -161,12 +155,10 @@ MY_BOT_ID = '318722671'
 #  Для статических страниц
 SITE_ID = 1
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 15,
 }
-
 
 #  Настройки REDIS
 
@@ -230,7 +222,7 @@ CKEDITOR_CONFIGS = {
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
+            'uploadimage',  # the upload image feature
             # your extra plugins here
             'div',
             'autolink',
