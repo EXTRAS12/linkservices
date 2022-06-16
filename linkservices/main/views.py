@@ -4,18 +4,22 @@ from django_filters.views import FilterView
 from site_app.models import WebSite
 
 from .filters import SiteFilter
-from .models import Plugin
+from .models import Plugin, Help
 
 
-class FrontPage(TemplateView):
+class FrontPage(ListView):
     """Страница перед входом в аккаунт"""
     template_name = 'main/frontpage.html'
-    context_object_name = 'website'
+    model = Help
+    context_object_name = 'help'
+    queryset = Help.objects.filter(main=True)
 
 
-class Help(LoginRequiredMixin, TemplateView):
+class Help(LoginRequiredMixin, ListView):
     """Страница помощи"""
     template_name = 'main/help.html'
+    model = Help
+    context_object_name = 'help'
 
 
 class Catalog(LoginRequiredMixin, FilterView, ListView):

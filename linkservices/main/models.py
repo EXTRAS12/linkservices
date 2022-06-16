@@ -50,3 +50,29 @@ class Stat(models.Model):
         verbose_name = 'Статистика'
         verbose_name_plural = 'Статистика'
 
+
+class Help(models.Model):
+    """Помощь, вопросы и ответы"""
+    GENERAL = 'Общие вопросы'
+    WEBMASTER = 'Вебмастерам'
+    SEO = 'Сео специалистам'
+
+    CHOICES_CATEGORY = (
+        (GENERAL, 'Общие вопросы'),
+        (WEBMASTER, 'Вебмастерам'),
+        (SEO, 'Сео специалистам')
+    )
+
+    title = models.CharField(max_length=255, verbose_name='Вопрос')
+    text = models.TextField(verbose_name='Ответ на вопрос')
+    category = models.CharField(max_length=50, choices=CHOICES_CATEGORY, verbose_name='Категория')
+    main = models.BooleanField(default=False, verbose_name='Добавить на главную страницу')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'
+
+
