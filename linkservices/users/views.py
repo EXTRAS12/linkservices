@@ -24,7 +24,7 @@ class ProfileView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
     template_name = 'users/profile.html'
     context_object_name = 'profile'
     paginate_by = 10
-    queryset = Profile.objects.select_related('user')
+    queryset = Profile.objects.select_related('user__profile')
 
     def dispatch(self, request, *args, **kwargs):
         """Пользователь может смотреть только свой профиль"""

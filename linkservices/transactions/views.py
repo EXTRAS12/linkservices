@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse
+from django.views import View
 from django.views.generic import CreateView
 
 from transactions.constants import DEPOSIT, WITHDRAWAL
@@ -79,11 +81,28 @@ class WithdrawMoneyView(TransactionCreateMixin):
         amount = form.cleaned_data.get('amount')
 
         self.request.user.profile.current_balance -= form.cleaned_data.get('amount')
-        self.request.user.profile.save(update_fields=['current_balance'])
+        self.request.user.profile.output_balance += form.cleaned_data.get('amount')
+        self.request.user.profile.save(update_fields=['current_balance', 'output_balance'])
 
         messages.success(
             self.request,
-            f'Успешный вывод {amount}руб.'
+            f'Ожидает вывода {amount}руб.'
         )
 
         return super().form_valid(form)
+
+
+class CancelWithdraw(LoginRequiredMixin, View):
+    """Отмена заявки на вывод средств"""
+    def get(self, request, pk):
+        amount = Transaction.objects.get(pk=self.kwargs.get('pk'))
+        if Transaction.objects.get(id=pk, account=self.request.user.profile).delete():
+
+            self.request.user.profile.output_balance -= amount.amount
+            self.request.user.profile.save(update_fields=['output_balance'])
+
+            self.request.user.profile.current_balance += amount.amount
+            self.request.user.profile.save(update_fields=['current_balance'])
+
+            messages.success(request, f'Деньги вернулись на основной баланс {amount.amount}')
+            return redirect(request.META['HTTP_REFERER'])
