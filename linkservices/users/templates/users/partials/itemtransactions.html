@@ -41,7 +41,7 @@
 
         <!-- Button trigger modal -->
         {% if transaction.transaction_type == 2 %}
-       <a href="{% url 'transactions:cancel-withdraw' pk=transaction.id %}"  type="button" class="btn btn-primary">Отменить заявку</a>
+       <a href="{% url 'transactions:cancel-withdraw' pk=transaction.id %}"  type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Отменить заявку</a>
         {% endif %}
     </td>
 </tr>

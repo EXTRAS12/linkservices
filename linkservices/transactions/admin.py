@@ -6,6 +6,7 @@ from transactions.models import Transaction
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('account', 'amount', 'timestamp', 'transaction_type')
     readonly_fields = ('account', 'balance_after_transaction', 'transaction_type', 'amount', )
+    list_filter = ('transaction_type', )
     list_select_related = ['account__user', ]
 
 

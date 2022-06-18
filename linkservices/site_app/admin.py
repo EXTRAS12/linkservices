@@ -22,7 +22,7 @@ class WebsiteAdmin(admin.ModelAdmin):
     """Сайты"""
     fields = ('url', 'user', 'category', 'status', 'price', 'increase', 'total_link', 'yandex_x',
               'yandex_stat', 'password_yandex', 'created', 'update')
-    list_display = ('url', 'category', 'status', 'price', 'get_increase_price', 'user', 'increase', 'total_link', 'yandex_x',
+    list_display = ('id', 'url', 'category', 'status', 'price', 'get_increase_price', 'user', 'increase', 'total_link', 'yandex_x',
                     'created', 'update')
     search_fields = ('url',)
     list_filter = ('status', 'category', )

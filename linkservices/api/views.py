@@ -1,10 +1,8 @@
 from rest_framework import generics
-from django.shortcuts import render
 
 from site_app.models import WebSite
-from api.serializers import WebSiteSerializer
+from api.serializers import WebSiteSerializer, LinkSerializer, DetailSiteSerializer
 from link_app.models import Link
-from api.serializers import LinkSerializer
 
 
 class SiteApiView(generics.ListAPIView):
@@ -17,3 +15,9 @@ class LinkApiView(generics.ListAPIView):
     """Апи для получения списка ссылок"""
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
+
+
+class DetailSite(generics.RetrieveAPIView):
+    serializer_class = DetailSiteSerializer
+    queryset = WebSite.objects.all()
+

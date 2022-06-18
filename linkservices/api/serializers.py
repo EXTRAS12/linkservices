@@ -24,5 +24,20 @@ class LinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Link
-        fields = ('id', 'link', 'valid_date', 'count_month', 'price_per_item', 'total_price', 'url',
+        fields = ('id', 'link', 'valid_date', 'count_month', 'total_price', 'url',
                   'created', 'update')
+
+
+class LinkSetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Link
+        fields = ('id', 'link', 'valid_date', 'count_month', 'total_increase_price')
+
+
+class DetailSiteSerializer(serializers.ModelSerializer):
+    """Для конкретного сайта"""
+    link_set = LinkSetSerializer(many=True)
+
+    class Meta:
+        model = WebSite
+        fields = ['id', 'url', 'get_increase_price', 'link_set']
