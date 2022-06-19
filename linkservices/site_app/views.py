@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
@@ -19,7 +20,8 @@ class MySites(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return WebSite.objects.filter(user=self.request.user.profile). \
-            select_related('category')
+            select_related('category').prefetch_related(
+            Prefetch('link_set'))
 
 
 class UpdateSite(LoginRequiredMixin, UpdateView):

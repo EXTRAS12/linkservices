@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView
+from django.db.models import Prefetch, Count
+from django.views.generic import ListView
 from django_filters.views import FilterView
 from site_app.models import WebSite
 
@@ -15,7 +16,7 @@ class FrontPage(ListView):
     queryset = Help.objects.filter(main=True)
 
 
-class Help(LoginRequiredMixin, ListView):
+class HelpView(LoginRequiredMixin, ListView):
     """Страница помощи"""
     template_name = 'main/help.html'
     model = Help
@@ -32,7 +33,8 @@ class Catalog(LoginRequiredMixin, FilterView, ListView):
 
     def get_queryset(self):
         return WebSite.objects.filter(status='Опубликовано')\
-            .select_related('category').exclude(user=self.request.user.profile)
+            .select_related('category').exclude(user=self.request.user.profile)\
+            .prefetch_related(Prefetch('link_set'))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Catalog, self).get_context_data(**kwargs)
