@@ -1,7 +1,11 @@
+from django.db.models import Prefetch
 from rest_framework import generics
+import datetime
+
+from rest_framework.generics import get_object_or_404
 
 from site_app.models import WebSite
-from api.serializers import WebSiteSerializer, LinkSerializer, DetailSiteSerializer
+from api.serializers import WebSiteSerializer, LinkSerializer, DetailSiteSerializer, LinkSetSerializer
 from link_app.models import Link
 
 
@@ -18,6 +22,10 @@ class LinkApiView(generics.ListAPIView):
 
 
 class DetailSite(generics.RetrieveAPIView):
+    """Для получения конкретного сайта"""
     serializer_class = DetailSiteSerializer
-    queryset = WebSite.objects.all()
 
+    def get_queryset(self):
+        return WebSite.objects.prefetch_related(
+            Prefetch('link_set', queryset=Link.objects.filter(valid_date__gte=datetime.datetime.now(),
+                                                              status_verify='Отображается')))

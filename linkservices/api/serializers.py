@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from site_app.models import WebSite, Category
 from link_app.models import Link
+import datetime
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -29,9 +30,10 @@ class LinkSerializer(serializers.ModelSerializer):
 
 
 class LinkSetSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Link
-        fields = ('id', 'link', 'valid_date', 'count_month', 'total_increase_price')
+        fields = ('id', 'link', 'valid_date', 'count_month', 'total_increase_price', 'status_verify')
 
 
 class DetailSiteSerializer(serializers.ModelSerializer):
