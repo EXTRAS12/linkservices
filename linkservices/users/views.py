@@ -34,8 +34,8 @@ class ProfileView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
         return super(ProfileView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        object_list = Transaction.objects. \
-            filter(account=self.request.user.profile).order_by('-id')
+        object_list = Transaction.objects.filter(account=self.request.user.profile)\
+            .order_by('-id')
         context = super(ProfileView, self).get_context_data(object_list=object_list, **kwargs)
 
         return context

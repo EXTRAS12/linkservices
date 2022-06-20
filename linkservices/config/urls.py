@@ -7,7 +7,7 @@ handler404 = "config.views.page_not_found_view"
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('superuser/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),

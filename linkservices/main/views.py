@@ -1,19 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Prefetch, Count
+from django.db.models import Prefetch
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from django_filters.views import FilterView
 from site_app.models import WebSite
+from django.shortcuts import render
 
 from .filters import SiteFilter
 from .models import Plugin, Help
-
-
-class FrontPage(ListView):
-    """Страница перед входом в аккаунт"""
-    template_name = 'main/frontpage.html'
-    model = Help
-    context_object_name = 'help'
-    queryset = Help.objects.filter(main=True)
 
 
 class HelpView(LoginRequiredMixin, ListView):
@@ -48,3 +42,13 @@ class Plugins(LoginRequiredMixin, ListView):
     template_name = 'main/plugins.html'
     context_object_name = 'plugins'
     paginate_by = 15
+
+
+def frontpage(request):
+    """Страница перед входом в аккаунт"""
+    if request.user.is_authenticated:
+        user_id = request.user.pk
+        return HttpResponseRedirect(f'/profile/id={user_id}', locals())
+    else:
+        help = Help.objects.filter(main=True)
+        return render(request, 'main/frontpage.html', {'help': help})

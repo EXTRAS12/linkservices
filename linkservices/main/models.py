@@ -38,6 +38,7 @@ class Plugin(models.Model):
 
 class Stat(models.Model):
     """Модель статистики в системе"""
+    name = models.CharField(max_length=100, verbose_name='Название(Статистика)')
     balance_for_all_time = models.PositiveIntegerField(default=0, blank=True,
                                                        null=True, verbose_name="Заработано за всё время")
     balance_current = models.PositiveIntegerField(default=0, blank=True,
@@ -46,8 +47,11 @@ class Stat(models.Model):
                                                null=True, verbose_name="На удержании")
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлён')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
-        verbose_name = 'Статистика'
+        verbose_name = 'Статистику'
         verbose_name_plural = 'Статистика'
 
 

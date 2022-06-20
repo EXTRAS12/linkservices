@@ -117,7 +117,7 @@ class UpdateLink(LoginRequiredMixin, UpdateView):
             reciever.user.save(update_fields=['hold_balance'])
 
             #  отправляем деньги на баланс системы
-            system = Stat.objects.get(id=1)
+            system = Stat.objects.get(name='Статистика')
             system.balance_hold = system.balance_hold + (total - total_q)
             system.balance_for_all_time = system.balance_for_all_time + (total - total_q)
             system.save(update_fields=['balance_hold'])

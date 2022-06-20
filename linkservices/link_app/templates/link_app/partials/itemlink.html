@@ -27,8 +27,8 @@
     <td><span class="text-warning">На модерации</span></td>
 
     {% endif %}
-    <td>{{ item.total_increase_price }}  RUB / Месяц</td>
-    <td>Новая ссылка</td>
+    <td>{{ item.url.get_increase_price }}  RUB / Месяц</td>
+
     <td>
         <a href="{% url 'update-link' item.id %}" class="btn btn-primary btn-sm w-md">Редактировать / Продлить</a>
     </td>
