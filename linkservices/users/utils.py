@@ -5,6 +5,8 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator as token_generator
 
+from config import settings
+
 
 def send_email_for_verify(request, user):
     """Функция для отправки сообщения на email для подтверждения"""
@@ -22,7 +24,7 @@ def send_email_for_verify(request, user):
     email = EmailMessage(
         'Verify email',
         message,
-        'info.moonshine@yandex.ru',
+        settings.EMAIL_HOST_USER,
         [user.email],
     )
     email.send()
