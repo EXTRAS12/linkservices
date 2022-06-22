@@ -19,6 +19,7 @@ class Link(models.Model):
     )
     url = models.ForeignKey(WebSite, on_delete=models.CASCADE, verbose_name='url сайта')
     link = models.TextField(verbose_name="Ссылка")
+    link2 = models.TextField(blank=True, null=True, verbose_name="Ссылка2")
     status_verify = models.CharField(max_length=25, choices=STATUS_CHOICE, default=REVIEW,
                                      verbose_name='Статус проверки')
     moderation = models.CharField(max_length=25, choices=STATUS_CHOICE, default=REVIEW,

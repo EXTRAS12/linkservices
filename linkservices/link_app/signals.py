@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.conf import settings
 import requests
@@ -43,7 +43,7 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
     """Уведомляем пользователя о статусе ссылки"""
     if update_fields is not None:
         sta = 'status_verify'
-        lk = 'link'
+        moderation = 'moderation'
         if sta in update_fields:
             status = instance.status_verify
             link_id = instance.id
@@ -58,13 +58,25 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
             return requests.get(url, params=params).json()
 
 
+@receiver(pre_save, sender=Link)
+def change_moderation_link(sender, update_fields, instance, **kwargs):
+    """Замена ссылок при смене модерации"""
+    if update_fields is not None:
+        moderation = 'moderation'
+        if moderation in update_fields and instance.moderation == 'Отображается'\
+                and instance.link2 != '':
+
+            instance.link = instance.link2
+            instance.save(update_fields=['link'])
+
+
 @receiver(post_save, sender=Link)
 def add_new_site(sender, instance, created, *args, **kwargs):
     """Уведомление покупка ссылки"""
     if created:
         link_url = instance.url
         link_user = instance.user
-        chat_id = settings.MY_BOT_ID 
+        chat_id = settings.MY_BOT_ID
         api_key = settings.API
         text = f'Куплена новая ссылка пользователем {link_user} на сайте {link_url}'
         url = f'https://api.telegram.org/bot{api_key}/sendMessage'

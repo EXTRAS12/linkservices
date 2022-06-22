@@ -16,9 +16,9 @@ class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name_telegram'].widget.attrs.update({'class': 'border border-primary rounded'})
-        self.fields['wmz'].widget.attrs.update({'class': 'border border-primary rounded'})
-        self.fields['ymoney'].widget.attrs.update({'class': 'border border-primary rounded'})
+        self.fields['name_telegram'].widget.attrs.update({'class': 'form-control border border-primary rounded'})
+        self.fields['wmz'].widget.attrs.update({'class': 'form-control border border-primary rounded'})
+        self.fields['ymoney'].widget.attrs.update({'class': 'form-control border border-primary rounded'})
         self.fields['avatar'].widget.attrs.update({'class': 'form-control border border-primary'})
         self.fields['user'].widget = forms.HiddenInput()
 

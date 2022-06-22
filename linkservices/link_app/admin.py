@@ -4,7 +4,7 @@ from .models import Link
 
 class LinkAdmin(admin.ModelAdmin):
     """Ссылки"""
-    fields = ('url', 'user', 'link', 'status_verify', 'moderation',
+    fields = ('url', 'user', 'link', 'link2', 'status_verify', 'moderation',
               'count_month', 'valid_date', 'created', 'update')
     list_display = ('url', 'user', 'valid_date', 'total_increase_price', 'status_verify', 'moderation', 'created',
                     'update')

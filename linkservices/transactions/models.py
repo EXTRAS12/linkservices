@@ -1,6 +1,6 @@
 from django.db import models
 
-from .constants import TRANSACTION_TYPE_CHOICES
+from .constants import TRANSACTION_TYPE_CHOICES, STATUS_ORDER
 from users.models import Profile
 
 
@@ -15,6 +15,7 @@ class Transaction(models.Model):
     transaction_type = models.PositiveIntegerField(choices=TRANSACTION_TYPE_CHOICES,
                                                    verbose_name='Тип транзакции', blank=True, null=True)
     detail_pay = models.CharField(max_length=250, blank=True, null=True, verbose_name='Детали платежа')
+    status = models.CharField(max_length=100, choices=STATUS_ORDER, blank=True, null=True, verbose_name='Статус заявки')
     timestamp = models.DateField(auto_now_add=True, verbose_name='Дата')
 
     def __str__(self):

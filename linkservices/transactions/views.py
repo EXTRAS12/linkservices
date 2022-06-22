@@ -86,7 +86,7 @@ class WithdrawMoneyView(TransactionCreateMixin):
 
         messages.success(
             self.request,
-            f'Ожидает вывода {amount}руб.'
+            f'Ожидает вывода {amount} руб.'
         )
 
         return super().form_valid(form)

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Редактировать ссылку :: {{ block.super }}{% endblock %}
+{% block title %}Продление ссылки :: {{ block.super }}{% endblock %}
 
 
 {% block content %}
@@ -19,7 +19,7 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="{% url 'catalog' %}">Каталог сайтов</a></li>
-                                    <li class="breadcrumb-item active">Редактирование ссылки</li>
+                                    <li class="breadcrumb-item active">Продлить ссылку</li>
                                 </ol>
                             </div>
 
@@ -32,8 +32,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Редактировать ссылку </h4>
-                                <p class="card-title-desc">Отредактируйте ссылку, изменения вступят в силу после проверки </p>
+                                <h4 class="card-title">Продлить ссылку </h4>
+                                <p class="card-title-desc">Продлить ссылку на сайте сроком от 1 до 12 месяцев </p>
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input class="form-control" name="user" id="id_user"
@@ -44,19 +44,37 @@
 
 
                                     <div class="row">
-
-                                           <div class="col-sm-6">
-
+                                        <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <div class="col-lg-10">
-                                                    <label for="id_link">Вставьте Html код ссылки</label>
-                                                    {{ form.link2 }}
-<!--                                                    <textarea class="form-control" name='link' id="id_link" rows="4"-->
-<!--                                                              placeholder="Вставьте полноценный код вашей ссылки с анкором или без"></textarea>-->
-                                                </div>
+                                                <label class="control-label">Выберите кол-во месяцев аренды которые вы
+                                                    хотите оплатить </label>
+                                                <input type="range" name="count_month" id="link_term_range">
+
+                                                <script>
+                                                $("#link_term_range").ionRangeSlider({
+                                                    min: 0,
+                                                    max: 12,
+                                                    from: 0,
+                                                    skin: "round",
+                                                    onChange: function (data) {
+                                                        // fired on every range slider update
+                                                        var range_val = $('#link_term_range').val();
+                                                        var price_val = $('#term_price').html(range_val);
+                                                        $('#term_months').html(range_val);
+                                                        $('#term_price').html((range_val * {{ link.url.get_increase_price }}).toFixed(2).replace(/\./g,',') + " RUB");
+                                                    },
+                                                });
+                                                var range_val = $('#link_term_range').val();
+                                                $('#term_price').html((range_val * {{ link.url.get_increase_price }}).toFixed(2).replace(/\./g,',') + " RUB");
+
+
+                                                </script>
+
                                             </div>
-
-
+                                            <div class="alert alert-secondary" role="alert">
+                                                Вы собираетесь продлить ссылку на сайте <b>{{ link.url }}</b> сроком на <b
+                                                    id="term_months">0</b> за <b id="term_price">0</b><br>
+                                            </div>
                                         </div>
 
 
@@ -71,12 +89,12 @@
                                     <div class="d-flex flex-wrap gap-2">
 
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                            Сохранить изменения
+                                           Продлить
                                         </button>
                                     </div>
                                 </form>
                             </div>
-                            {% include 'inc/_messages.html' %}
+{% include 'inc/_messages.html' %}
                         </div>
                     </div>
 

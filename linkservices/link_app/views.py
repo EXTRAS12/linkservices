@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin, UpdateView
 
-from .forms import AddLinkForm
+from .forms import AddLinkForm, ExtensionLinkForm, UpdateLinkForm
 from .models import Link
 from site_app.models import WebSite
 import datetime
@@ -82,11 +82,11 @@ class BuyLink(LoginRequiredMixin, FormMixin, DetailView):
         return super(BuyLink, self).form_valid(form)
 
 
-class UpdateLink(LoginRequiredMixin, UpdateView):
-    """Редактирование ссылки"""
-    form_class = AddLinkForm
+class ExtensionLink(LoginRequiredMixin, UpdateView):
+    """Продление ссылки"""
+    form_class = ExtensionLinkForm
     model = Link
-    template_name = 'link_app/update-link.html'
+    template_name = 'link_app/extension-link.html'
     success_url = '/my-links/'
     context_object_name = 'link'
 
@@ -139,9 +139,32 @@ class UpdateLink(LoginRequiredMixin, UpdateView):
         return super().post(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
-        """ Пользователь может редактировать только свои ссылки """
+        """ Пользователь может продлять только свои ссылки """
+        obj = self.get_object()
+        if obj.user != self.request.user.profile:
+            return redirect(obj)
+        return super(ExtensionLink, self).dispatch(request, *args, **kwargs)
+
+
+class UpdateLink(LoginRequiredMixin, UpdateView):
+    """Редактирование ссылки"""
+    model = Link
+    template_name = 'link_app/update-link.html'
+    form_class = UpdateLinkForm
+    success_url = '/my-links/'
+    context_object_name = 'link'
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.moderation = 'На проверке'
+        self.object.save(update_fields=['moderation'])
+        return super().post(request, *args, **kwargs)
+
+    def dispatch(self, request, *args, **kwargs):
+        """ Пользователь может продлять только свои ссылки """
         obj = self.get_object()
         if obj.user != self.request.user.profile:
             return redirect(obj)
         return super(UpdateLink, self).dispatch(request, *args, **kwargs)
+
 

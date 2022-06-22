@@ -30,6 +30,8 @@
     <td>{{ item.url.get_increase_price }}  RUB / Месяц</td>
 
     <td>
-        <a href="{% url 'update-link' item.id %}" class="btn btn-primary btn-sm w-md">Редактировать / Продлить</a>
+        <a href="{% url 'extension-link' item.id %}" class="btn btn-primary btn-sm w-md">Продлить</a>
+        <a href="{% url 'update-link' item.id %}" class="btn btn-primary btn-sm w-md">Редактировать</a>
     </td>
+
 </tr>

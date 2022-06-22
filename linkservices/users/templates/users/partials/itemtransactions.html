@@ -22,9 +22,28 @@
         <span class="text-success">{{ transaction.amount }} руб.</span>
     </td>
     {% endif %}
+    {% if transaction.transaction_type == 2 and transaction.status == 'В обработке' %}
+    <td>
+        <span class="badge badge-pill badge-soft-danger font-size-11">В обработке</span>
+    </td>
+    {% elif transaction.transaction_type == 2 and transaction.status == None %}
+    <td>
+        <span class="badge badge-pill badge-soft-danger font-size-11">В обработке</span>
+    </td>
+    {% elif transaction.status == 'Выполнено' %}
     <td>
         <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>
     </td>
+    {% elif transaction.status == 'Отклонено' %}
+    <td>
+        <span class="badge badge-pill badge-soft-danger font-size-11">Отклонено</span>
+    </td>
+    {% else %}
+       <td>
+        <span class="badge badge-pill badge-soft-success font-size-11">Выполнено</span>
+    </td>
+    {% endif %}
+
     {% if transaction.transaction_type == 4 %}
     <td>Куплена ссылка на сайте: {{ transaction.detail_pay }}</td>
     {% elif transaction.transaction_type == 2 %}
@@ -41,7 +60,13 @@
 
         <!-- Button trigger modal -->
         {% if transaction.transaction_type == 2 %}
+        {% if transaction.status == 'Выполнено' %}
+
+        {% elif transaction.status == 'Отклонено' %}
+
+        {% else %}
        <a href="{% url 'transactions:cancel-withdraw' pk=transaction.id %}"  type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Отменить заявку</a>
+        {% endif %}
         {% endif %}
     </td>
 </tr>

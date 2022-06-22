@@ -11,3 +11,13 @@ TRANSACTION_TYPE_CHOICES = (
     (PURCHASE, 'Покупка'),
     (EXTENSION, 'Продление'),
 )
+
+REJECTED = 'Отклонено'
+PROCESSING = 'В обработке'
+SUCCESS = 'Выполнено'
+
+STATUS_ORDER = (
+    (REJECTED, 'Отклонено'),
+    (PROCESSING, 'В обработке'),
+    (SUCCESS, 'Выполнено'),
+)
