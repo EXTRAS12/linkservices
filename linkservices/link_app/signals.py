@@ -43,7 +43,6 @@ def send_updates_status_link(sender, update_fields, instance, **kwargs):
     """Уведомляем пользователя о статусе ссылки"""
     if update_fields is not None:
         sta = 'status_verify'
-        moderation = 'moderation'
         if sta in update_fields:
             status = instance.status_verify
             link_id = instance.id
