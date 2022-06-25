@@ -41,5 +41,5 @@ def add_new_site(sender, instance, created, *args, **kwargs):
         return requests.get(url, params=params).json()
 
 
-# Соединяем с сигналом
+#  Соединяем с сигналом
 post_save.connect(send_updates_status, sender=WebSite)
