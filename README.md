@@ -1,25 +1,25 @@
 # linkservices
 
-Установить и запустить виртуальное окружение
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+1. Установить и запустить виртуальное окружение
+2. pip install -r requirements.txt
+3. python manage.py migrate
+4. python manage.py runserver
 
 Запустить celery если требуется
-celery -A config worker -l info
-celery -A config beat -l info
+1. celery -A config worker -l info
+2. celery -A config beat -l info
 
 Запустить бота если требуется
-python manage.py bot
+1. python manage.py bot
 
 
 Вход в админку http://127.0.0.1:8000/superuser/ 
-admin@admin.ru
-пароль: admin
+1. admin@admin.ru
+2. пароль: admin
 
 Пользователь
-extra-kent@mail.ru
-admin
+1. extra-kent@mail.ru
+2. admin
 
 (ПРОЕКТ не доделан )
 Основное
