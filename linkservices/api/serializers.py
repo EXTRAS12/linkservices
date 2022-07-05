@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from site_app.models import WebSite, Category
 from link_app.models import Link
-import datetime
 
 
 class CategorySerializer(serializers.ModelSerializer):

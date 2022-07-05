@@ -166,5 +166,3 @@ class UpdateLink(LoginRequiredMixin, UpdateView):
         if obj.user != self.request.user.profile:
             return redirect(obj)
         return super(UpdateLink, self).dispatch(request, *args, **kwargs)
-
-

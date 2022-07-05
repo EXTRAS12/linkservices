@@ -13,5 +13,3 @@ def send_updates_status_transaction(sender, update_fields, instance, **kwargs):
 
                 instance.account.output_balance -= int(instance.amount)
                 instance.account.save(update_fields=['output_balance'])
-
-
